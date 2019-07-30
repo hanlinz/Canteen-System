@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/common.css">
     <style>
         .mui-bar-transparent {
-            background-color: rgba(130, 200, 250, .9);
+            background-color: rgba(0, 122, 255, .8);
             color: #fff;
         }
 
@@ -20,15 +20,20 @@
 
         .back-btn {
             position: absolute;
-            height: 100%;
-            right: 0;
-            top: 0;
-            width: 4.5rem;
+            height: 30px;
+            line-height: 30px;
+            left: 7px;
+            top: 7px;
+            width: 44px;
             text-align: center;
             color: #fff;
             background-color: #007aff;
-            line-height: 44px;
             font-size: 16px;
+            border-radius: 2px;
+            border: 1px solid #0072ec;
+        }
+        .back-btn .mui-icon.mui-icon-undo{
+            padding: 3px;
         }
 
         .container {
@@ -42,6 +47,8 @@
             width: 13rem;
             height: 32px;
             line-height: 32px;
+            font-size: 14px;
+            padding: 0 10px;
         }
 
         .table-header {
@@ -55,7 +62,7 @@
         }
 
         .listContainer {
-            height: calc(100% - 606px);
+            height: calc(100% - 106px);
             width: 100%;
             border-width: 0 1px 0px;
             border-style: solid;
@@ -122,13 +129,21 @@
 
 <body>
     <header class="mui-bar mui-bar-nav mui-bar-transparent">
-        <h1 class="mui-title">Canteen System</h1>
-        <span class="back-btn"><i class="mui-icon mui-icon-undo"></i><span>Back</span></span>
+        <h1 class="mui-title" style="color: #fff;">Canteen System</h1>
+        <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
     </header>
     <div class="container">
         <p>Request for Approve</p>
-        <p style="margin-bottom: 0;"><input type="text" class="input"><button type="button"
-                class="mui-btn mui-btn-primary right-btn">Search</button></p>
+        <div class="mui-content" style="background-color: #fff;">
+            <div class="mui-row">
+                <div class="mui-col-sm-9 mui-col-xs-9">
+                    <input type="text" class="input" placeholder="Search text" style="width: 100%;">
+                </div>
+                <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
+                    <button type="button" class="mui-btn mui-btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
         <p class="table-header">
             <span class="fl width33">Request No</span>
             <span class="fl width33">Request Date</span>

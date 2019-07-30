@@ -17,3 +17,6 @@ ul, ol, li {
     list-style: none;
     font-family: 'Microsoft YaHei';
 }
+.hide{
+    display: none;
+}
