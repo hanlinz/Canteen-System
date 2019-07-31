@@ -20,3 +20,49 @@ ul, ol, li {
 .hide{
     display: none;
 }
+.width24 {
+    width: 24%;
+    height: 100%;
+}
+
+.width20 {
+    width: 20%;
+    height: 100%;
+}
+
+.width28 {
+    width: 28%;
+    height: 100%;
+}
+
+.width33 {
+    width: 33%;
+    height: 100%;
+}
+
+.mui-bar-transparent {
+    background-color: rgba(0, 122, 255, .8);
+    color: #fff;
+}
+
+.right-btn {
+    float: right;
+}
+
+.back-btn {
+    position: absolute;
+    height: 30px;
+    line-height: 30px;
+    left: 7px;
+    top: 7px;
+    width: 44px;
+    text-align: center;
+    color: #fff;
+    background-color: #007aff;
+    font-size: 16px;
+    border-radius: 2px;
+    border: 1px solid #0072ec;
+}
+.back-btn .mui-icon.mui-icon-undo {
+    padding: 3px;
+}

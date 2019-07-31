@@ -5,38 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>approve-request</title>
-    <link rel="stylesheet" href="../js/mui/css/mui.min.css">
-    <link rel="stylesheet" href="../css/common.css">
+    <title>my-request</title>
+    <link rel="stylesheet" href="../../../js/mui/css/mui.min.css">
+    <link rel="stylesheet" href="../../../css/common.css">
     <style>
-        .mui-bar-transparent {
-            background-color: rgba(0, 122, 255, .8);
-            color: #fff;
-        }
-
-        .right-btn {
-            float: right;
-        }
-
-        .back-btn {
-            position: absolute;
-            height: 30px;
-            line-height: 30px;
-            left: 7px;
-            top: 7px;
-            width: 44px;
-            text-align: center;
-            color: #fff;
-            background-color: #007aff;
-            font-size: 16px;
-            border-radius: 2px;
-            border: 1px solid #0072ec;
-        }
-
-        .back-btn .mui-icon.mui-icon-undo {
-            padding: 3px;
-        }
-
+        
         .container {
             height: 100%;
             padding: 50px 10px 0;
@@ -77,26 +50,6 @@
             text-align: center;
         }
 
-        .width24 {
-            width: 24%;
-            height: 100%;
-        }
-
-        .width20 {
-            width: 20%;
-            height: 100%;
-        }
-
-        .width28 {
-            width: 28%;
-            height: 100%;
-        }
-
-        .width33 {
-            width: 33%;
-            height: 100%;
-        }
-
         .list-item {
             width: 100%;
             height: 24px;
@@ -125,23 +78,29 @@
             padding: 1px 6px;
             margin-top: 2px;
         }
+        .width20 .mui-btn{
+            line-height: 16px;
+        }
     </style>
 </head>
 
 <body>
     <header class="mui-bar mui-bar-nav mui-bar-transparent">
-        <h1 class="mui-title" style="color: #fff;">Canteen System</h1>
+        <h1 class="mui-title" style="color: #fff;">Personal Affairs</h1>
         <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
     </header>
     <div class="container">
-        <p>Request for Approve</p>
+        <p>My Request</p>
         <div class="mui-content" style="background-color: #fff;">
             <div class="mui-row">
-                <div class="mui-col-sm-9 mui-col-xs-9">
+                <div class="mui-col-sm-6 mui-col-xs-6">
                     <input type="text" class="input" placeholder="Search text" style="width: 100%;">
                 </div>
                 <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
                     <button type="button" class="mui-btn mui-btn-primary">Search</button>
+                </div>
+                <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
+                    <button type="button" class="mui-btn mui-btn-primary">new Req</button>
                 </div>
             </div>
         </div>
@@ -159,8 +118,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
 
@@ -169,8 +127,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -178,8 +135,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -187,8 +143,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -196,8 +151,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -205,8 +159,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -214,8 +167,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -223,8 +175,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -232,8 +183,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -241,8 +191,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -250,8 +199,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -259,8 +207,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -268,8 +215,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                     <div class="list-item">
@@ -277,8 +223,7 @@
                         <span class="fl width28">20190729</span>
                         <span class="fl width24">Lunch</span>
                         <span class="fl width20">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">view</button>
                         </span>
                     </div>
                 </div>
@@ -286,7 +231,7 @@
         </div>
     </div>
 </body>
-<script src="../js/mui/js/mui.min.js"></script>
+<script src="../../../js/mui/js/mui.min.js"></script>
 <script>
     mui.init({
         pullRefresh: {
