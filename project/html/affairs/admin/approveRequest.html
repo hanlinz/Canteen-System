@@ -40,7 +40,7 @@
 
         .container {
             height: 100%;
-            padding: 60px 10px 130px;
+            padding: 60px 10px 100px;
             font-size: 14px;
         }
 
@@ -87,7 +87,7 @@
 
         .bottom {
             position: absolute;
-            height: 130px;
+            height: 100px;
             width: calc(100% - 20px);
             bottom: 0;
             left: 0;
@@ -99,17 +99,34 @@
         .container .mui-input-row .onboard {
             padding-right: 30px;
         }
-        .container .mui-input-row.textarea-row{
+
+        .container .mui-input-row.textarea-row {
             height: 120px;
         }
-        .container .mui-input-row.textarea-row label{
+
+        .container .mui-input-row.textarea-row label {
             padding: 5px 15px;
         }
-        .container .mui-input-row textarea{
+
+        .container .mui-input-row textarea {
             display: block;
             width: 100%;
             padding: 5px 15px;
             height: 90px;
+        }
+
+        .guestTypePopover {
+            max-height: 80%;
+            top: 10%;
+            left: calc(50% - 140px);
+        }
+
+        .guestTypePopover.mui-popover .mui-table-view {
+            max-height: 100%;
+        }
+
+        .guestTypePopover .mui-table-view-cell {
+            padding: 2px 15px;
         }
     </style>
 </head>
@@ -173,49 +190,111 @@
                 <button type="button" class="mui-btn" style="width: 90%;">Reject</button>
             </div>
         </div>
+        <div id="popover" class="mui-popover guestTypePopover">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Select All</label>
+                        <input name="guestType" value="all" type="checkbox" id="selectAll">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Employment Status Confirmation EN</label>
+                        <input name="guestType" value="1" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Employment Status Confirmation CN</label>
+                        <input name="guestType" value="2" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Income Confirmation EN</label>
+                        <input name="guestType" value="3" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Income Confirmation CN</label>
+                        <input name="guestType" value="4" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Invitation_Single Entry</label>
+                        <input name="guestType" value="5" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Invitation_Multiple Entries</label>
+                        <input name="guestType" value="6" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Personal Material</label>
+                        <input name="guestType" value="7" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-row" style="border: 0 none;">
+                        <div class="mui-col-sm-6 mui-col-xs-6"></div>
+                        <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
+                            <button type="button" class="mui-btn mui-btn-primary" id="guestTypeConfirm">Confirm</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </body>
+<script src="../../../js/jquery.min.js"></script>
 <script src="../../../js/mui/js/mui.min.js"></script>
 <script src="../../../js/mui/js/mui.picker.min.js"></script>
 <script>
-    var guestType = [
-        { value: '1', text: 'item1' },
-        { value: '2', text: 'item2' },
-        { value: '3', text: 'item3' },
-        { value: '4', text: 'item4' }
-    ]
-    var effectiveTime = [
-        { value: '1', text: 'One day' },
-        { value: '2', text: 'Multive days(5 days - 1 month)' }
-    ]
-    var guestPicker = new mui.PopPicker();
-    var effectiveTimePicker = new mui.PopPicker();
     var oneDatePicker = new mui.DtPicker({
         type: 'date',
         beginDate: new Date()
     });
-    var multive1Picker = new mui.DtPicker({
-        type: 'date',
-        beginDate: new Date()
-    });
-    var multive2Picker = null;
 
-    mui('.container').on('click', '.guestPicker', function () {
-        var input = this;
-        input.blur();
-        guestPicker.setData(guestType);
-        guestPicker.show(function (selectItems) {
-            console.log(selectItems[0].text);
-            console.log(selectItems[0].value);
-            input.value = selectItems[0].text;
-        })
-    }).on('click', '.onboard', function () {
+    mui('.container').on('click', '.onboard', function () {
         var input = this;
         input.blur();
         oneDatePicker.show(function (selectItems) {
             console.log(selectItems);//{text: "2016",value: 2016}
             input.value = selectItems.text;
         })
+    })
+    $('.guestPicker').on('click', function () {
+        mui('#popover').popover('show');
+    })
+    var guestType = $('#popover input[name=guestType]');
+    guestType.on('change', function () {
+        var $this = $(this)
+        if ($this.attr('id') == 'selectAll') {
+            guestType.attr('checked', 'checked');
+        }
+        if (!$this.attr('checked')) {
+            $this.removeAttr('checked');
+            $('#popover #selectAll').removeAttr('checked');
+        }
+    })
+    $('#guestTypeConfirm').on('click', function () {
+        var checked = $('#popover input[name=guestType]:checked');
+        if(checked.length){
+            var text = '';
+            checked.each(function(){
+                if($(this).attr('id') == 'selectAll') return true;
+                text += $(this).prev().text()
+            })
+            text.length > 20 ? text = text.slice(0, 20) + '...' : null;
+            $('.guestPicker').val(text)
+        }
+        mui('#popover').popover('hide');
     })
 
 </script>
