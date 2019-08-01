@@ -96,7 +96,7 @@
         }
 
         .container .mui-input-row .nationPicker,
-        .container .mui-input-row .materialPicker,
+        .container .mui-input-row .upload,
         .container .mui-input-row .destinationPicker,
         .container .mui-input-row .date {
             padding-right: 30px;
@@ -116,21 +116,6 @@
             padding: 5px 15px;
             height: 90px;
         }
-
-        .materialOptionPopover {
-            max-height: 80%;
-            top: 10%;
-            left: calc(50% - 140px);
-        }
-
-        .materialOptionPopover.mui-popover .mui-table-view {
-            max-height: 100%;
-        }
-
-        .materialOptionPopover .mui-table-view-cell {
-            padding: 2px 15px;
-        }
-
         .block-title {
             line-height: 40px;
             text-align: center;
@@ -203,7 +188,7 @@
                 </div>
             </form>
             <form class="mui-input-group">
-                <div class="mui-input-row block-title">Common Information</div>
+                <div class="mui-input-row block-title">Information</div>
                 <div class="mui-input-row">
                     <label>Purpose</label>
                     <input type="text" placeholder="Purpose">
@@ -242,7 +227,42 @@
                 <div class="mui-input-row block-title">Materials</div>
                 <div class="mui-input-row">
                     <label>ETA attachment</label>
-                    <input type="text" class="materialPicker" placeholder="ETA attachment">
+                    <input type="text" class="upload" placeholder="ETA attachment">
+                    <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+                </div>
+                <div class="mui-input-row">
+                    <label>Dispatch Letter</label>
+                    <input type="text" class="upload" placeholder="Dispatch Letter">
+                    <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+                </div>
+                <div class="mui-input-row">
+                    <label>Agenda</label>
+                    <input type="text" class="upload" placeholder="Agenda">
+                    <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+                </div>
+                <div class="mui-input-row">
+                    <label>Bussiness License_CN</label>
+                    <input type="text" class="upload" placeholder="Bussiness License_CN">
+                    <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+                </div>
+                <div class="mui-input-row">
+                    <label>Incoming_CN</label>
+                    <input type="text" class="upload" placeholder="Incoming_CN">
+                    <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+                </div>
+                <div class="mui-input-row">
+                    <label>Incoming_EN</label>
+                    <input type="text" class="upload" placeholder="Incoming_EN">
+                    <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+                </div>
+                <div class="mui-input-row">
+                    <label>Employee Status_CN</label>
+                    <input type="text" class="upload" placeholder="Employee Status_CN">
+                    <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+                </div>
+                <div class="mui-input-row">
+                    <label>Employee Status_EN</label>
+                    <input type="text" class="upload" placeholder="Employee Status_EN">
                     <span class="mui-icon mui-icon-arrowright selectIcon"></span>
                 </div>
             </form>
@@ -254,67 +274,6 @@
             <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
                 <button type="button" class="mui-btn" style="width: 90%;">Submit</button>
             </div>
-        </div>
-        <div id="popover" class="mui-popover materialOptionPopover">
-            <ul class="mui-table-view">
-                <li class="mui-table-view-cell">
-                    <div class="mui-input-row mui-checkbox mui-left">
-                        <label style="text-align: right;">Select All</label>
-                        <input name="materialOption" value="all" type="checkbox" id="selectAll">
-                    </div>
-                </li>
-                <li class="mui-table-view-cell">
-                    <div class="mui-input-row mui-checkbox mui-left">
-                        <label style="text-align: right;">Dispatch Letter</label>
-                        <input name="materialOption" value="1" type="checkbox">
-                    </div>
-                </li>
-                <li class="mui-table-view-cell">
-                    <div class="mui-input-row mui-checkbox mui-left">
-                        <label style="text-align: right;">Agenda</label>
-                        <input name="materialOption" value="2" type="checkbox">
-                    </div>
-                </li>
-                <li class="mui-table-view-cell">
-                    <div class="mui-input-row mui-checkbox mui-left">
-                        <label style="text-align: right;">Business License_CN</label>
-                        <input name="materialOption" value="3" type="checkbox">
-                    </div>
-                </li>
-                <li class="mui-table-view-cell">
-                    <div class="mui-input-row mui-checkbox mui-left">
-                        <label style="text-align: right;">Incoming_CN</label>
-                        <input name="materialOption" value="4" type="checkbox">
-                    </div>
-                </li>
-                <li class="mui-table-view-cell">
-                    <div class="mui-input-row mui-checkbox mui-left">
-                        <label style="text-align: right;">Incoming_EN</label>
-                        <input name="materialOption" value="5" type="checkbox">
-                    </div>
-                </li>
-                <li class="mui-table-view-cell">
-                    <div class="mui-input-row mui-checkbox mui-left">
-                        <label style="text-align: right;">Employee Status_CN</label>
-                        <input name="materialOption" value="6" type="checkbox">
-                    </div>
-                </li>
-                <li class="mui-table-view-cell">
-                    <div class="mui-input-row mui-checkbox mui-left">
-                        <label style="text-align: right;">EMployee Status_EN</label>
-                        <input name="materialOption" value="7" type="checkbox">
-                    </div>
-                </li>
-                <li class="mui-table-view-cell">
-                    <div class="mui-row" style="border: 0 none;">
-                        <div class="mui-col-sm-6 mui-col-xs-6"></div>
-                        <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
-                            <button type="button" class="mui-btn mui-btn-primary"
-                                id="materialOptionConfirm">Confirm</button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
         </div>
     </div>
 </body>
@@ -375,34 +334,6 @@
             input.value = selectItems[1].text;
         })
     })
-    $('.materialPicker').on('click', function () {
-        mui('#popover').popover('show');
-    })
-    var materialOption = $('#popover input[name=materialOption]');
-    materialOption.on('change', function () {
-        var $this = $(this)
-        if ($this.attr('id') == 'selectAll') {
-            materialOption.attr('checked', 'checked');
-        }
-        if (!$this.attr('checked')) {
-            $this.removeAttr('checked');
-            $('#popover #selectAll').removeAttr('checked');
-        }
-    });
-    $('#materialOptionConfirm').on('click', function () {
-        var checked = $('#popover input[name=materialOption]:checked');
-        if (checked.length) {
-            var text = '';
-            checked.each(function () {
-                if ($(this).attr('id') == 'selectAll') return true;
-                text += $(this).prev().text()
-            })
-            text.length > 20 ? text = text.slice(0, 20) + '...' : null;
-            $('.materialPicker').val(text)
-        }
-        mui('#popover').popover('hide');
-    });
-
 </script>
 
 </html>
