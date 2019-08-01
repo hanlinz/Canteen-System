@@ -20,26 +20,58 @@ ul, ol, li {
 .hide{
     display: none;
 }
-.width24 {
+.width22 {
+    width: 22%;
+    height: 100%;
+}
+.width24{
     width: 24%;
     height: 100%;
 }
-
+.width25 {
+    width: 25%;
+    height: 100%;
+}
 .width20 {
     width: 20%;
     height: 100%;
 }
 
-.width28 {
-    width: 28%;
+.width16 {
+    width: 16%;
     height: 100%;
 }
 
-.width33 {
-    width: 33%;
+.width15 {
+    width: 15%;
     height: 100%;
 }
 
+.width1{
+    width: 24%;
+    height: 100%;
+    overflow: hidden;
+}
+.width2{
+    width: 22%;
+    height: 100%;
+    overflow: hidden;
+}
+.width3{
+    width: 18%;
+    height: 100%;
+    overflow: hidden;
+}
+.width4{
+    width: 19%;
+    height: 100%;
+    overflow: hidden;
+}
+.width5{
+    width: 17%;
+    height: 100%;
+    overflow: hidden;
+}
 .mui-bar-transparent {
     background-color: rgba(0, 122, 255, .8);
     color: #fff;
@@ -65,4 +97,12 @@ ul, ol, li {
 }
 .back-btn .mui-icon.mui-icon-undo {
     padding: 3px;
+}
+.container .mui-input-group .mui-input-row{
+    min-height: 40px;
+    height: auto;
+}
+.container .mui-input-group .mui-input-row.mui-radio:after{
+    content: '';
+    display: none;
 }

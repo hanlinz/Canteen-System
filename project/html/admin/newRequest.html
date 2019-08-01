@@ -95,7 +95,7 @@
             margin-left: 10px;
         }
 
-        .container .mui-input-row .guestPicker,
+        .container .mui-input-row .materialPicker,
         .container .mui-input-row .effectiveTimePicker,
         .container .mui-input-row .oneDay,
         .container .mui-input-row .multive1,
@@ -142,8 +142,8 @@
                 </div>
             </div>
             <div class="mui-input-row">
-                <label>Guest type</label>
-                <input type="text" class="guestPicker" placeholder="Guest type">
+                <label>Material options</label>
+                <input type="text" class="materialPicker" placeholder="Material options">
                 <span class="mui-icon mui-icon-arrowright selectIcon"></span>
             </div>
             <div class="mui-input-row">
@@ -188,7 +188,7 @@
 <script src="../../js/mui/js/mui.min.js"></script>
 <script src="../../js/mui/js/mui.picker.min.js"></script>
 <script>
-    var guestType = [
+    var materialOption = [
         { value: '1', text: 'item1' },
         { value: '2', text: 'item2' },
         { value: '3', text: 'item3' },
@@ -198,7 +198,7 @@
         { value: '1', text: 'One day' },
         { value: '2', text: 'Multive days(5 days - 1 month)' }
     ]
-    var guestPicker = new mui.PopPicker();
+    var materialPicker = new mui.PopPicker();
     var effectiveTimePicker = new mui.PopPicker();
     var oneDatePicker = new mui.DtPicker({
         type: 'date',
@@ -210,11 +210,11 @@
     });
     var multive2Picker = null;
 
-    mui('.container').on('click', '.guestPicker', function () {
+    mui('.container').on('click', '.materialPicker', function () {
         var input = this;
         input.blur();
-        guestPicker.setData(guestType);
-        guestPicker.show(function (selectItems) {
+        materialPicker.setData(materialOption);
+        materialPicker.show(function (selectItems) {
             console.log(selectItems[0].text);
             console.log(selectItems[0].value);
             input.value = selectItems[0].text;

@@ -95,7 +95,7 @@
             margin-left: 10px;
         }
 
-        .container .mui-input-row .guestPicker,
+        .container .mui-input-row .materialPicker,
         .container .mui-input-row .onboard {
             padding-right: 30px;
         }
@@ -115,17 +115,17 @@
             height: 90px;
         }
 
-        .guestTypePopover {
+        .materialOptionPopover {
             max-height: 80%;
             top: 10%;
             left: calc(50% - 140px);
         }
 
-        .guestTypePopover.mui-popover .mui-table-view {
+        .materialOptionPopover.mui-popover .mui-table-view {
             max-height: 100%;
         }
 
-        .guestTypePopover .mui-table-view-cell {
+        .materialOptionPopover .mui-table-view-cell {
             padding: 2px 15px;
         }
     </style>
@@ -139,11 +139,11 @@
     <div class="container">
         <form class="mui-input-group">
             <div class="mui-input-row">
-                <label>Guest type</label>
+                <label>Material options</label>
                 <input type="text" value="张三" disabled>
             </div>
             <div class="mui-input-row">
-                <label>Guest type</label>
+                <label>Material options</label>
                 <input type="text" value="szhang" disabled>
             </div>
             <div class="mui-input-row">
@@ -173,8 +173,8 @@
                 <span class="mui-icon mui-icon-arrowright selectIcon"></span>
             </div>
             <div class="mui-input-row">
-                <label>Guest type</label>
-                <input type="text" class="guestPicker" placeholder="Guest type">
+                <label>Material options</label>
+                <input type="text" class="materialPicker" placeholder="Material options">
                 <span class="mui-icon mui-icon-arrowright selectIcon"></span>
             </div>
             <div class="mui-input-row textarea-row">
@@ -190,61 +190,61 @@
                 <button type="button" class="mui-btn" style="width: 90%;">Reject</button>
             </div>
         </div>
-        <div id="popover" class="mui-popover guestTypePopover">
+        <div id="popover" class="mui-popover materialOptionPopover">
             <ul class="mui-table-view">
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row mui-checkbox mui-left">
                         <label style="text-align: right;">Select All</label>
-                        <input name="guestType" value="all" type="checkbox" id="selectAll">
+                        <input name="materialOption" value="all" type="checkbox" id="selectAll">
                     </div>
                 </li>
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row mui-checkbox mui-left">
                         <label style="text-align: right;">Employment Status Confirmation EN</label>
-                        <input name="guestType" value="1" type="checkbox">
+                        <input name="materialOption" value="1" type="checkbox">
                     </div>
                 </li>
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row mui-checkbox mui-left">
                         <label style="text-align: right;">Employment Status Confirmation CN</label>
-                        <input name="guestType" value="2" type="checkbox">
+                        <input name="materialOption" value="2" type="checkbox">
                     </div>
                 </li>
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row mui-checkbox mui-left">
                         <label style="text-align: right;">Income Confirmation EN</label>
-                        <input name="guestType" value="3" type="checkbox">
+                        <input name="materialOption" value="3" type="checkbox">
                     </div>
                 </li>
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row mui-checkbox mui-left">
                         <label style="text-align: right;">Income Confirmation CN</label>
-                        <input name="guestType" value="4" type="checkbox">
+                        <input name="materialOption" value="4" type="checkbox">
                     </div>
                 </li>
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row mui-checkbox mui-left">
                         <label style="text-align: right;">Invitation_Single Entry</label>
-                        <input name="guestType" value="5" type="checkbox">
+                        <input name="materialOption" value="5" type="checkbox">
                     </div>
                 </li>
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row mui-checkbox mui-left">
                         <label style="text-align: right;">Invitation_Multiple Entries</label>
-                        <input name="guestType" value="6" type="checkbox">
+                        <input name="materialOption" value="6" type="checkbox">
                     </div>
                 </li>
                 <li class="mui-table-view-cell">
                     <div class="mui-input-row mui-checkbox mui-left">
                         <label style="text-align: right;">Personal Material</label>
-                        <input name="guestType" value="7" type="checkbox">
+                        <input name="materialOption" value="7" type="checkbox">
                     </div>
                 </li>
                 <li class="mui-table-view-cell">
                     <div class="mui-row" style="border: 0 none;">
                         <div class="mui-col-sm-6 mui-col-xs-6"></div>
                         <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
-                            <button type="button" class="mui-btn mui-btn-primary" id="guestTypeConfirm">Confirm</button>
+                            <button type="button" class="mui-btn mui-btn-primary" id="materialOptionConfirm">Confirm</button>
                         </div>
                     </div>
                 </li>
@@ -269,22 +269,22 @@
             input.value = selectItems.text;
         })
     })
-    $('.guestPicker').on('click', function () {
+    $('.materialPicker').on('click', function () {
         mui('#popover').popover('show');
     })
-    var guestType = $('#popover input[name=guestType]');
-    guestType.on('change', function () {
+    var materialOption = $('#popover input[name=materialOption]');
+    materialOption.on('change', function () {
         var $this = $(this)
         if ($this.attr('id') == 'selectAll') {
-            guestType.attr('checked', 'checked');
+            materialOption.attr('checked', 'checked');
         }
         if (!$this.attr('checked')) {
             $this.removeAttr('checked');
             $('#popover #selectAll').removeAttr('checked');
         }
     })
-    $('#guestTypeConfirm').on('click', function () {
-        var checked = $('#popover input[name=guestType]:checked');
+    $('#materialOptionConfirm').on('click', function () {
+        var checked = $('#popover input[name=materialOption]:checked');
         if(checked.length){
             var text = '';
             checked.each(function(){
@@ -292,7 +292,7 @@
                 text += $(this).prev().text()
             })
             text.length > 20 ? text = text.slice(0, 20) + '...' : null;
-            $('.guestPicker').val(text)
+            $('.materialPicker').val(text)
         }
         mui('#popover').popover('hide');
     })
