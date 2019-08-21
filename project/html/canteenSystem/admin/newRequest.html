@@ -133,11 +133,11 @@
                 <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
                     <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
                         <label>Lunch</label>
-                        <input name="meal" type="radio">
+                        <input name="meal" class="meal" data-val="1" type="radio">
                     </div>
                     <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
                         <label>Dinner</label>
-                        <input name="meal" type="radio">
+                        <input name="meal" class="meal" data-val="2" type="radio">
                     </div>
                 </div>
             </div>
@@ -148,11 +148,11 @@
             </div>
             <div class="mui-input-row">
                 <label>Quality</label>
-                <input type="number" class="" placeholder="Quality ( num only )">
+                <input type="number" class="qty" placeholder="Quality ( num only )">
             </div>
             <div class="mui-input-row textarea-row">
                 <label>Comments</label>
-                <textarea placeholder="Comments....."></textarea>
+                <textarea class="comment" placeholder="Comments....."></textarea>
             </div>
             <div class="mui-input-row">
                 <label>Effective time</label>
@@ -177,7 +177,7 @@
         </form>
         <div class="mui-row bottom" style="margin-top: 30px;">
             <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
-                <button type="button" class="mui-btn mui-btn-primary" style="width: 90%;">Save</button>
+                <button type="button" class="mui-btn mui-btn-primary save" style="width: 90%;">Save</button>
             </div>
             <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
                 <button type="button" class="mui-btn" style="width: 90%;">Submit</button>
@@ -187,12 +187,15 @@
 </body>
 <script src="../../../js/mui/js/mui.min.js"></script>
 <script src="../../../js/mui/js/mui.picker.min.js"></script>
+<script src="../../../js/jquery.min.js"></script>
 <script>
     var materialOption = [
-        { value: '1', text: 'item1' },
-        { value: '2', text: 'item2' },
-        { value: '3', text: 'item3' },
-        { value: '4', text: 'item4' }
+        { value: '1', text: 'ZF Other Site Colleague' },
+        { value: '2', text: 'STC OT Dinner' },
+        { value: '3', text: 'Customer' },
+        { value: '4', text: 'Supplier' },
+        { value: '4', text: 'Contractor' },
+        { value: '4', text: 'Intern' },
     ]
     var effectiveTime = [
         { value: '1', text: 'One day' },
@@ -215,8 +218,8 @@
         input.blur();
         materialPicker.setData(materialOption);
         materialPicker.show(function (selectItems) {
-            console.log(selectItems[0].text);
-            console.log(selectItems[0].value);
+            // console.log(selectItems[0].text);
+            // console.log(selectItems[0].value);
             input.value = selectItems[0].text;
         })
     }).on('click', '.effectiveTimePicker', function () {
@@ -224,8 +227,8 @@
         input.blur();
         effectiveTimePicker.setData(effectiveTime);
         effectiveTimePicker.show(function (selectItems) {
-            console.log(selectItems[0].text);
-            console.log(selectItems[0].value);
+            // console.log(selectItems[0].text);
+            // console.log(selectItems[0].value);
             input.value = selectItems[0].text.slice(0, 12);
             if (selectItems[0].value == '1') {
                 var arr = document.querySelectorAll('.multiveTime');
@@ -244,14 +247,14 @@
         var input = this;
         input.blur();
         oneDatePicker.show(function (selectItems) {
-            console.log(selectItems);//{text: "2016",value: 2016}
+            // console.log(selectItems);//{text: "2016",value: 2016}
             input.value = selectItems.text;
         })
     }).on('click', '.multive1', function () {
         var input = this;
         input.blur();
         multive1Picker.show(function (selectItems) {
-            console.log(selectItems);//{text: "2016",value: 2016}
+            // console.log(selectItems);//{text: "2016",value: 2016}
             input.value = selectItems.text;
             multive2Picker = null;
             document.querySelector('.container .multive2').value = '';
@@ -268,12 +271,54 @@
                 endDate: new Date(date.getTime() + 1000 * 60 * 60 * 24 * 30)
             });
             multive2Picker.show(function (selectItems) {
-                console.log(selectItems);//{text: "2016",value: 2016}
+                // console.log(selectItems);//{text: "2016",value: 2016}
                 input.value = selectItems.text;
             })
         } else {
             return false;
         }
+    })
+    $('.save').on('click', function () {
+        var meal = $('.meal:checked').attr('data-val');
+        var guestType = $('.materialPicker').val();
+        var qty = $('.qty').val();
+        var comment = $('.comment').val();
+        var effectiveType = $('.effectiveTimePicker').val();
+        var onedate = $('.oneDay').val();
+        var sdate = $('.multive1').val();
+        var edate = $('.multive2').val();
+        var data = {
+            type: meal,
+            user: '1',
+            guestType,
+            qty,
+            comment
+        }
+        var qtyNum = parseInt(qty);
+        for (var i = 0; i < qtyNum; i++) {
+            data['company' + i] = '';
+            data['customerName' + i] = '';
+        }
+        if (effectiveType == 'One day') {
+            data.isLong = '1'
+            data.onedate = onedate
+        }
+        else {
+            data.isLong = '2'
+            data.sdate = sdate
+            data.edate = edate
+        }
+        console.log(data)
+        $.ajax({
+            type: 'POST',
+            timeout: 600000,
+            url: 'http://139.217.97.220:80/canteen/application/saveTemp?method=post&userid=ChengY2',
+            data: data,
+            // contentType: 'application/json',
+            success: function(res){
+                console.log(res)
+            }
+        })
     })
 
 </script>
