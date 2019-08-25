@@ -133,7 +133,7 @@
                 <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
                     <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
                         <label>Lunch</label>
-                        <input name="meal" class="meal" data-val="1" type="radio">
+                        <input name="meal" class="meal" data-val="1" checked="checked" type="radio">
                     </div>
                     <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
                         <label>Dinner</label>
@@ -177,10 +177,10 @@
         </form>
         <div class="mui-row bottom" style="margin-top: 30px;">
             <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
-                <button type="button" class="mui-btn mui-btn-primary save" style="width: 90%;">Save</button>
+                <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
             </div>
             <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
-                <button type="button" class="mui-btn" style="width: 90%;">Submit</button>
+                <button type="button" class="mui-btn" style="width: 90%;" id="submit">Submit</button>
             </div>
         </div>
     </div>
@@ -189,138 +189,195 @@
 <script src="../../../js/mui/js/mui.picker.min.js"></script>
 <script src="../../../js/jquery.min.js"></script>
 <script>
-    var materialOption = [
-        { value: '1', text: 'ZF Other Site Colleague' },
-        { value: '2', text: 'STC OT Dinner' },
-        { value: '3', text: 'Customer' },
-        { value: '4', text: 'Supplier' },
-        { value: '4', text: 'Contractor' },
-        { value: '4', text: 'Intern' },
-    ]
-    var effectiveTime = [
-        { value: '1', text: 'One day' },
-        { value: '2', text: 'Multive days(5 days - 1 month)' }
-    ]
-    var materialPicker = new mui.PopPicker();
-    var effectiveTimePicker = new mui.PopPicker();
-    var oneDatePicker = new mui.DtPicker({
-        type: 'date',
-        beginDate: new Date()
-    });
-    var multive1Picker = new mui.DtPicker({
-        type: 'date',
-        beginDate: new Date()
-    });
-    var multive2Picker = null;
+    $(function () {
+        var userid = 'Guest';
+        var materialOption = [
+            { value: '1', text: 'ZF Other Site Colleague' },
+            { value: '2', text: 'STC OT Dinner' },
+            { value: '3', text: 'Customer' },
+            { value: '4', text: 'Supplier' },
+            { value: '4', text: 'Contractor' },
+            { value: '4', text: 'Intern' },
+        ]
+        var effectiveTime = [
+            { value: '1', text: 'One day' },
+            { value: '2', text: 'Multive days(5 days - 1 month)' }
+        ]
+        var materialPicker = new mui.PopPicker();
+        var effectiveTimePicker = new mui.PopPicker();
+        var oneDatePicker = new mui.DtPicker({
+            type: 'date',
+            beginDate: new Date()
+        });
+        var multive1Picker = new mui.DtPicker({
+            type: 'date',
+            beginDate: new Date()
+        });
+        var multive2Picker = null;
 
-    mui('.container').on('click', '.materialPicker', function () {
-        var input = this;
-        input.blur();
-        materialPicker.setData(materialOption);
-        materialPicker.show(function (selectItems) {
-            // console.log(selectItems[0].text);
-            // console.log(selectItems[0].value);
-            input.value = selectItems[0].text;
-        })
-    }).on('click', '.effectiveTimePicker', function () {
-        var input = this;
-        input.blur();
-        effectiveTimePicker.setData(effectiveTime);
-        effectiveTimePicker.show(function (selectItems) {
-            // console.log(selectItems[0].text);
-            // console.log(selectItems[0].value);
-            input.value = selectItems[0].text.slice(0, 12);
-            if (selectItems[0].value == '1') {
-                var arr = document.querySelectorAll('.multiveTime');
-                arr[0].classList.add('hide')
-                arr[1].classList.add('hide')
-                document.querySelector('.singleTime').classList.remove('hide');
-            }
-            if (selectItems[0].value == '2') {
-                var arr = document.querySelectorAll('.multiveTime');
-                arr[0].classList.remove('hide')
-                arr[1].classList.remove('hide')
-                document.querySelector('.singleTime').classList.add('hide');
-            }
-        })
-    }).on('click', '.oneDay', function () {
-        var input = this;
-        input.blur();
-        oneDatePicker.show(function (selectItems) {
-            // console.log(selectItems);//{text: "2016",value: 2016}
-            input.value = selectItems.text;
-        })
-    }).on('click', '.multive1', function () {
-        var input = this;
-        input.blur();
-        multive1Picker.show(function (selectItems) {
-            // console.log(selectItems);//{text: "2016",value: 2016}
-            input.value = selectItems.text;
-            multive2Picker = null;
-            document.querySelector('.container .multive2').value = '';
-        })
-    }).on('click', '.multive2', function () {
-        var input = this;
-        input.blur();
-        var multive1 = document.querySelector('.container .multive1').value;
-        if (multive1) {
-            var date = new Date(multive1);
-            var multive2Picker = new mui.DtPicker({
-                type: 'date',
-                beginDate: new Date(date.getTime() + 1000 * 60 * 60 * 24 * 5),
-                endDate: new Date(date.getTime() + 1000 * 60 * 60 * 24 * 30)
-            });
-            multive2Picker.show(function (selectItems) {
+        mui('.container').on('click', '.materialPicker', function () {
+            var input = this;
+            input.blur();
+            materialPicker.setData(materialOption);
+            materialPicker.show(function (selectItems) {
+                // console.log(selectItems[0].text);
+                // console.log(selectItems[0].value);
+                input.value = selectItems[0].text;
+            })
+        }).on('click', '.effectiveTimePicker', function () {
+            var input = this;
+            input.blur();
+            effectiveTimePicker.setData(effectiveTime);
+            effectiveTimePicker.show(function (selectItems) {
+                // console.log(selectItems[0].text);
+                // console.log(selectItems[0].value);
+                input.value = selectItems[0].text.slice(0, 12);
+                if (selectItems[0].value == '1') {
+                    var arr = document.querySelectorAll('.multiveTime');
+                    arr[0].classList.add('hide')
+                    arr[1].classList.add('hide')
+                    document.querySelector('.singleTime').classList.remove('hide');
+                }
+                if (selectItems[0].value == '2') {
+                    var arr = document.querySelectorAll('.multiveTime');
+                    arr[0].classList.remove('hide')
+                    arr[1].classList.remove('hide')
+                    document.querySelector('.singleTime').classList.add('hide');
+                }
+            })
+        }).on('click', '.oneDay', function () {
+            var input = this;
+            input.blur();
+            oneDatePicker.show(function (selectItems) {
                 // console.log(selectItems);//{text: "2016",value: 2016}
                 input.value = selectItems.text;
             })
-        } else {
-            return false;
-        }
-    })
-    $('.save').on('click', function () {
-        var meal = $('.meal:checked').attr('data-val');
-        var guestType = $('.materialPicker').val();
-        var qty = $('.qty').val();
-        var comment = $('.comment').val();
-        var effectiveType = $('.effectiveTimePicker').val();
-        var onedate = $('.oneDay').val();
-        var sdate = $('.multive1').val();
-        var edate = $('.multive2').val();
-        var data = {
-            type: meal,
-            user: '1',
-            guestType,
-            qty,
-            comment
-        }
-        var qtyNum = parseInt(qty);
-        for (var i = 0; i < qtyNum; i++) {
-            data['company' + i] = '';
-            data['customerName' + i] = '';
-        }
-        if (effectiveType == 'One day') {
-            data.isLong = '1'
-            data.onedate = onedate
-        }
-        else {
-            data.isLong = '2'
-            data.sdate = sdate
-            data.edate = edate
-        }
-        console.log(data)
-        $.ajax({
-            type: 'POST',
-            timeout: 600000,
-            url: 'http://139.217.97.220:80/canteen/application/saveTemp?method=post&userid=ChengY2',
-            data: data,
-            // contentType: 'application/json',
-            success: function(res){
-                console.log(res)
+        }).on('click', '.multive1', function () {
+            var input = this;
+            input.blur();
+            multive1Picker.show(function (selectItems) {
+                // console.log(selectItems);//{text: "2016",value: 2016}
+                input.value = selectItems.text;
+                multive2Picker = null;
+                document.querySelector('.container .multive2').value = '';
+            })
+        }).on('click', '.multive2', function () {
+            var input = this;
+            input.blur();
+            var multive1 = document.querySelector('.container .multive1').value;
+            if (multive1) {
+                var date = new Date(multive1);
+                var multive2Picker = new mui.DtPicker({
+                    type: 'date',
+                    beginDate: new Date(date.getTime() + 1000 * 60 * 60 * 24 * 5),
+                    endDate: new Date(date.getTime() + 1000 * 60 * 60 * 24 * 30)
+                });
+                multive2Picker.show(function (selectItems) {
+                    // console.log(selectItems);//{text: "2016",value: 2016}
+                    input.value = selectItems.text;
+                })
+            } else {
+                return false;
             }
         })
-    })
+        $('.effectiveTimePicker').val('one Day');
+        $('#save, #submit').on('click', function () {
+            var meal = $.trim($('.meal:checked').attr('data-val'));
+            var guestType = $.trim($('.materialPicker').val());
+            var qty = $.trim($('.qty').val());
+            var comment = $.trim($('.comment').val());
+            var effectiveType = $.trim($('.effectiveTimePicker').val());
+            var onedate = $.trim($('.oneDay').val());
+            var sdate = $.trim($('.multive1').val());
+            var edate = $.trim($('.multive2').val());
+            var data = {
+                type: meal,
+                user: '1',
+                guestType,
+                qty,
+                comment
+            }
+            if (!qty) {
+                mui.alert('Quality is required', 'warning', 'Yes', function () {
+                    //
+                })
+                return false;
+            }
+            if (!comment) {
+                mui.alert('Comment is required', 'warning', 'Yes', function () {
+                    //
+                })
+                return false;
+            }
+            var qtyNum = parseInt(qty);
+            for (var i = 0; i < qtyNum; i++) {
+                data['company' + i] = '';
+                data['customerName' + i] = '';
+            }
+            if (effectiveType == 'One day') {
+                data.isLong = '1'
+                data.onedate = onedate
+            }
+            else {
+                data.isLong = '2'
+                data.sdate = sdate
+                data.edate = edate
+            }
+            send(data, $(this).attr('id'));
+        })
 
+        function send(data, type) {
+            var url = 'http://127.0.0.1:80/cc/canteen/application/saveTemp?method=post&userid=' + userid
+            if (type == 'submit') url = 'http://127.0.0.1:80/cc/canteen/application/save?method=post&userid=' + userid
+            $.ajax({
+                type: 'POST',
+                timeout: 600000,
+                url: url,
+                data: data,
+                // contentType: 'application/json',
+                success: function (res) {
+                    if (res.success === true) {
+                        mui.alert(res.msg, 'success', 'Yes', function () {
+                            window.location.href = window.location.href
+                        })
+                    } else {
+                        mui.alert(res.msg, 'warning', 'Yes', function () {
+                            //
+                        })
+                    }
+                },
+                error: function (res) {
+                    console.log(res)
+                }
+            })
+        }
+        function date2str(date) {
+            if(!date) return '';
+            return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + date.getDate();
+        }
+        if (window.location.search.indexOf('isView=1') > -1) {
+            var data = JSON.parse(sessionStorage.getItem('data') || '{}');
+            $('.meal').each(function () {
+                var $this = $(this);
+                if ($this.attr('data-val') == data.type) {
+                    $this.attr('checked', 'checked');
+                }
+            });
+            $('.materialPicker').val($.trim(data.guestType));
+            $('.qty').val(parseInt($.trim(data.qty)) || '');
+            $('.comment').val($.trim(data.comment));
+            if (data.isLong == '1') {
+                $('.effectiveTimePicker').val('One day');
+                $('.oneDay').val(date2str($.trim(data.onedate)));
+            } else if (data.isLong == '2') {
+                $('.effectiveTimePicker').val('Multive days(5 days - 1 month)');
+                $('.singleTime').addClass('hide');
+                $('.multiveTime').removeClass('hide');
+                $('.multive1').val(date2str($.trim(data.startDate)));
+                $('.multive2').val(date2str($.trim(data.endDate)));
+            }
+        }
+    })
 </script>
 
 </html>

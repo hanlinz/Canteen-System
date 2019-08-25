@@ -90,10 +90,10 @@
         <div class="mui-content" style="background-color: #fff;">
             <div class="mui-row">
                 <div class="mui-col-sm-9 mui-col-xs-9">
-                    <input type="text" class="input" placeholder="Search text" style="width: 100%;">
+                    <input type="text" class="input search" placeholder="Search text" style="width: 100%;">
                 </div>
                 <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
-                    <button type="button" class="mui-btn mui-btn-primary">Search</button>
+                    <button type="button" class="mui-btn mui-btn-primary searchBtn">Search</button>
                 </div>
             </div>
         </div>
@@ -106,123 +106,128 @@
         </p>
         <div class="listContainer">
             <div class="mui-scroll-wrapper">
-                <div class="mui-scroll" id="scroll">
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Lunch</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Lunch</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Lunch</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Lunch</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Lunch</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Lunch</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Lunch</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Lunch</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                </div>
+                <div class="mui-scroll" id="scroll"></div>
             </div>
         </div>
     </div>
 </body>
 <script src="../../../js/mui/js/mui.min.js"></script>
+<script src="../../../js/jquery.min.js"></script>
 <script>
-    mui.init({
-        pullRefresh: {
-            container: '.mui-scroll-wrapper',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
-            up: {
-                height: 50,//可选.默认50.触发上拉加载拖动距离
-                auto: false,//可选,默认false.自动上拉加载一次
-                contentrefresh: "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
-                contentnomore: '没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
-                callback: function () {
-                    console.log(12312313)
-                    setTimeout((function (that) {
-                        return function () {
-                            that.endPullupToRefresh(true | false);
-                        }
-                    })(this), 2000);
-                } //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+    $(function () {
+        var start = 0;
+        var list = [];
+        var userid = 'Guest';
+        mui.init({
+            pullRefresh: {
+                container: '.mui-scroll-wrapper',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+                up: {
+                    height: 50,//可选.默认50.触发上拉加载拖动距离
+                    auto: false,//可选,默认false.自动上拉加载一次
+                    contentrefresh: "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+                    contentnomore: '没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+                    callback: function () {
+                        // console.log(12312313)
+                        // setTimeout((function (that) {
+                        //     return function () {
+                        //         that.endPullupToRefresh(true | false);
+                        //     }
+                        // })(this), 2000);
+                        start++;
+                        getList(this);
+                    } //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+                }
             }
-        }
-    });
-    mui('.mui-scroll-wrapper').scroll({
-        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-    });
-    mui('.list-item').on('click', '.mui-icon-checkmarkempty', function () {
-        mui.confirm('Sure to Approve?', 'Tips', ['Yes', 'No'], function (obj) {
-            console.log(obj)
+        });
+        mui('.mui-scroll-wrapper').scroll({
+            deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+        mui('.list-item').on('click', '.mui-icon-checkmarkempty', function () {
+            mui.confirm('Sure to Approve?', 'Tips', ['Yes', 'No'], function (obj) {
+                console.log(obj)
+            })
+        }).on('click', '.mui-icon-closeempty', function () {
+            mui.confirm('Sure to Reject?', 'Tips', ['Yes', 'No'], function (obj) {
+                console.log(obj)
+            })
         })
-    }).on('click', '.mui-icon-closeempty', function () {
-        mui.confirm('Sure to Reject?', 'Tips', ['Yes', 'No'], function (obj) {
-            console.log(obj)
+        function getList(that) {
+            var url = 'http://127.0.0.1:80/cc/canteen/application/listApproved'
+            $.ajax({
+                type: 'GET',
+                timeout: 600000,
+                url: url,
+                data: {
+                    _dc: Date.now(),
+                    applicant: '',
+                    userid: userid,
+                    page: '1',
+                    start: start,
+                    limit: '50'
+                },
+                success: function (res) {
+                    if (res.data && res.data.length) {
+                        var str = '';
+                        res.data.forEach(function (item) {
+                            list.push(item)
+                            str += `<div class="list-item">
+                                <span class="fl width1">${item.id}</span>
+                                <span class="fl width2">${item.date}</span>
+                                <span class="fl width3">${item.type == 1 ? 'Lunch' : 'Dinner'}</span>
+                                <span class="fl width4">${item.applicant}</span>
+                                <span class="fl width5">
+                                    <i class="mui-icon mui-icon-checkmarkempty yes"></i>
+                                    <i class="mui-icon mui-icon-closeempty no"></i>
+                                </span>
+                            </div>`;
+                        })
+                        $('.listContainer #scroll').append(str)
+                    } else {
+                        if (that) {
+                            that.endPullupToRefresh(true);
+                        }
+                    }
+                },
+                error: function (res) {
+                    console.log(res)
+                    that.endPullupToRefresh(true);
+                }
+            })
+        }
+        getList();
+        $('.searchBtn').on('click', function(){
+            start = 0;
+            searchApplicant = $('.search').val();
+            getList()
+        });
+        $('.listContainer #scroll').on('click', '.yes, .no', function () {
+            var type = 'yes';
+            var url = '';
+            var $this = $(this);
+            if ($this.attr('class').indexOf('yes') > -1) type = 'yes';
+            else type = 'no';
+            if (type = 'yes') url = 'approve';
+            else url = 'reject';
+            var id = $this.parents('.list-item').find('.width1').text();
+            mui.confirm(`Sure to ${url} this request?`, 'Tip', ['Yes', 'No'], function () {
+                $.ajax({
+                    type: 'GET',
+                    timeout: 600000,
+                    url: 'http://127.0.0.1:80/cc/canteen/application/' + url,
+                    data: {
+                        userid: userid,
+                        id: id
+                    },
+                    success: function (res) {
+                        if(res.success === true){
+                            mui.alert(res.msg, 'success', 'Yes', function(){})
+                        } 
+                    },
+                    error: function (res) {
+                        mui.alert(res.msg, 'success', 'Yes', function(){})
+                    }
+                })
+            })
         })
     })
 </script>
