@@ -140,11 +140,11 @@
 </body>
 <script src="../../../js/mui/js/mui.min.js"></script>
 <script src="../../../js/jquery.min.js"></script>
+<script src="../../../js/config.js"></script>
 <script>
     $(function(){
         var start = 0;
         var list = [];
-        var userid = 'Guest';
         var searchApplicant = '';
         mui.init({
             pullRefresh: {
@@ -174,7 +174,7 @@
             })
         })
         function getList(that){
-            var url = 'http://127.0.0.1:80/cc/canteen/application/listUnapproved'
+            var url = baseURL + '/canteen/application/listUnapproved'
             $.ajax({
                 type: 'GET',
                 timeout: 600000,

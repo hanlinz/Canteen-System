@@ -188,9 +188,9 @@
 <script src="../../../js/mui/js/mui.min.js"></script>
 <script src="../../../js/mui/js/mui.picker.min.js"></script>
 <script src="../../../js/jquery.min.js"></script>
+<script src="../../../js/config.js"></script>
 <script>
     $(function () {
-        var userid = 'Guest';
         var materialOption = [
             { value: '1', text: 'ZF Other Site Colleague' },
             { value: '2', text: 'STC OT Dinner' },
@@ -327,8 +327,8 @@
         })
 
         function send(data, type) {
-            var url = 'http://127.0.0.1:80/cc/canteen/application/saveTemp?method=post&userid=' + userid
-            if (type == 'submit') url = 'http://127.0.0.1:80/cc/canteen/application/save?method=post&userid=' + userid
+            var url = baseURL + '/canteen/application/saveTemp?method=post&userid=' + userid
+            if (type == 'submit') url = baseURL + '/canteen/application/save?method=post&userid=' + userid
             $.ajax({
                 type: 'POST',
                 timeout: 600000,

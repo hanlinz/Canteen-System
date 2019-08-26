@@ -113,11 +113,11 @@
 </body>
 <script src="../../../js/mui/js/mui.min.js"></script>
 <script src="../../../js/jquery.min.js"></script>
+<script src="../../../js/config.js"></script>
 <script>
     $(function () {
         var start = 0;
         var list = [];
-        var userid = 'Guest';
         mui.init({
             pullRefresh: {
                 container: '.mui-scroll-wrapper',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -152,7 +152,7 @@
             })
         })
         function getList(that) {
-            var url = 'http://127.0.0.1:80/cc/canteen/application/listApproved'
+            var url = baseURl + '/canteen/application/listApproved'
             $.ajax({
                 type: 'GET',
                 timeout: 600000,
@@ -213,7 +213,7 @@
                 $.ajax({
                     type: 'GET',
                     timeout: 600000,
-                    url: 'http://127.0.0.1:80/cc/canteen/application/' + url,
+                    url: baseURl + '/canteen/application/' + url,
                     data: {
                         userid: userid,
                         id: id
