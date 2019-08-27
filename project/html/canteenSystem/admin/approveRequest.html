@@ -152,7 +152,7 @@
             })
         })
         function getList(that) {
-            var url = baseURl + '/canteen/application/listApproved'
+            var url = baseURL + '/canteen/application/listApproved'
             $.ajax({
                 type: 'GET',
                 timeout: 600000,
@@ -213,7 +213,7 @@
                 $.ajax({
                     type: 'GET',
                     timeout: 600000,
-                    url: baseURl + '/canteen/application/' + url,
+                    url: baseURL + '/canteen/application/' + url,
                     data: {
                         userid: userid,
                         id: id
