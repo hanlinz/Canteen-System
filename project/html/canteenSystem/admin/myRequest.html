@@ -196,6 +196,8 @@
                 success: function (res) {
                     if (res.datas && res.datas.length) {
                         var str = '';
+                        list = [];
+                        $('.listContainer #scroll .list-item').remove();
                         res.datas.forEach(function(item){
                             list.push(item);
                             str += `<div class="list-item">
@@ -209,15 +211,12 @@
                             </div>`;
                         })
                         $(str).insertBefore('.listContainer #scroll .mui-pull-bottom-pocket');
-                    } else {
-                        if(that){
-                            that.endPullupToRefresh(true);
-                        }
                     }
+                    that && that.endPullupToRefresh(true);
                 },
                 error: function (res) {
                     console.log(res)
-                    that.endPullupToRefresh(true);
+                    that && that.endPullupToRefresh(true);
                 }
             })
         }
