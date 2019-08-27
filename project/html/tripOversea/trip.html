@@ -40,7 +40,7 @@
 
         .container {
             height: 100%;
-            padding: 45px 0 100px;
+            padding: 45px 0 0px;
             font-size: 14px;
             background-color: #f8f8f8;
         }
@@ -86,13 +86,9 @@
         }
 
         .bottom {
-            position: absolute;
             height: 100px;
             width: calc(100% - 20px);
-            bottom: 0;
-            left: 0;
             padding-top: 30px;
-            margin-left: 10px;
         }
 
         .container .mui-input-row .nationPicker,
@@ -132,9 +128,7 @@
         }
 
         .container .bottom {
-            margin: 30px 0 0;
             background-color: #fff;
-            right: 0;
             width: 100%;
             box-sizing: border-box;
             padding-top: 30px;
@@ -149,8 +143,8 @@
         <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
     </header>
     <div class="container">
-        <div style="height: 100%;overflow: auto;">
-            <form class="mui-input-group">
+        <div style="height: calc(100% - 100px);overflow: auto;" class="main-form">
+            <form class="mui-input-group .main-form">
                 <div class="mui-input-row block-title">Common Information</div>
                 <div class="mui-input-row">
                     <label>Name</label>
@@ -280,58 +274,71 @@
 <script src="../../js/jquery.min.js"></script>
 <script src="../../js/mui/js/mui.min.js"></script>
 <script src="../../js/mui/js/mui.picker.min.js"></script>
+<script src="../../js/jquery.min.js"></script>
 <script>
-    var datePicker = new mui.DtPicker({
-        type: 'date',
-        beginDate: new Date()
-    });
+    $(function(){
+        var screenHeight = $(window).height();
+        $(window).on('resize', function(){
+            if($(document).height() < screenHeight - 10) {
+                $('.bottom').hide();
+                $('.main-form').css('height', '100%');
+            } else {
+                $('.bottom').show();
+                $('.main-form').css('height', 'calc(100% - 100px)');
+            }
+        });
+        var datePicker = new mui.DtPicker({
+            type: 'date',
+            beginDate: new Date()
+        });
 
-    var nationData = [
-        { value: '1', text: 'China' },
-        { value: '2', text: 'country1' }
-    ]
-    var destinationData = [
-        {
-            value: '1',
-            text: 'China',
-            children: [
-                { value: '1-1', text: 'ShangHai' }
-            ]
-        },
-        {
-            value: '2',
-            text: 'country1',
-            children: [
-                { value: '2-1', text: 'city1' }
-            ]
-        }
-    ]
-    var nationPicker = new mui.PopPicker();
-    var destinationPicker = new mui.PopPicker({ layer: 2 });
+        var nationData = [
+            { value: '1', text: 'China' },
+            { value: '2', text: 'country1' }
+        ]
+        var destinationData = [
+            {
+                value: '1',
+                text: 'China',
+                children: [
+                    { value: '1-1', text: 'ShangHai' }
+                ]
+            },
+            {
+                value: '2',
+                text: 'country1',
+                children: [
+                    { value: '2-1', text: 'city1' }
+                ]
+            }
+        ]
+        var nationPicker = new mui.PopPicker();
+        var destinationPicker = new mui.PopPicker({ layer: 2 });
 
-    mui('.container').on('click', '.date', function () {
-        var input = this;
-        input.blur();
-        datePicker.show(function (selectItems) {
-            console.log(selectItems);//{text: "2016",value: 2016}
-            input.value = selectItems.text;
-        })
-    }).on('click', '.nationPicker', function () {
-        var input = this;
-        input.blur();
-        nationPicker.setData(nationData);
-        nationPicker.show(function (selectItems) {
-            console.log(selectItems);//{text: "2016",value: 2016}
-            input.value = selectItems[0].text;
-        })
-    }).on('click', '.destinationPicker', function () {
-        var input = this;
-        input.blur();
-        destinationPicker.setData(destinationData);
-        destinationPicker.show(function (selectItems) {
-            console.log(selectItems);//{text: "2016",value: 2016}
-            // input.value = selectItems[0].text + ' / ' + selectItems[1].text;
-            input.value = selectItems[1].text;
+        mui('.container').on('click', '.date', function () {
+            var input = this;
+            input.blur();
+            datePicker.show(function (selectItems) {
+                console.log(selectItems);//{text: "2016",value: 2016}
+                input.value = selectItems.text;
+            })
+        }).on('click', '.nationPicker', function () {
+            var input = this;
+            input.blur();
+            nationPicker.setData(nationData);
+            nationPicker.show(function (selectItems) {
+                console.log(selectItems);//{text: "2016",value: 2016}
+                input.value = selectItems[0].text;
+            })
+        }).on('click', '.destinationPicker', function () {
+            var input = this;
+            input.blur();
+            destinationPicker.setData(destinationData);
+            destinationPicker.show(function (selectItems) {
+                console.log(selectItems);//{text: "2016",value: 2016}
+                // input.value = selectItems[0].text + ' / ' + selectItems[1].text;
+                input.value = selectItems[1].text;
+            })
         })
     })
 </script>

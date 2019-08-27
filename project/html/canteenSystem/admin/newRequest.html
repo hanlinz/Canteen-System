@@ -40,7 +40,7 @@
 
         .container {
             height: 100%;
-            padding: 60px 10px 130px;
+            padding: 60px 10px 0px;
             font-size: 14px;
         }
 
@@ -85,12 +85,13 @@
             font-size: 20px;
         }
 
-        .bottom {
-            position: absolute;
+        .main-form{
+            min-height: calc(100% - 130px);
+        }
+
+        .container .bottom {
             height: 130px;
             width: calc(100% - 20px);
-            bottom: 0;
-            left: 0;
             padding-top: 30px;
             margin-left: 10px;
         }
@@ -127,7 +128,7 @@
         <span class="back-btn" onclick="window.history.go(-1)"><i class="mui-icon mui-icon-undo"></i></span>
     </header>
     <div class="container">
-        <form class="mui-input-group">
+        <form class="mui-input-group main-form">
             <div class="mui-input-row">
                 <label>Meal to order</label>
                 <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
@@ -175,7 +176,7 @@
                 <span class="mui-icon mui-icon-arrowright selectIcon"></span>
             </div>
         </form>
-        <div class="mui-row bottom" style="margin-top: 30px;">
+        <div class="mui-row bottom">
             <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
                 <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
             </div>
@@ -352,8 +353,8 @@
             })
         }
         function date2str(date) {
-            if(!date) return '';
-            if(/^\d+-\d+-\d+/.test(date)) return date;
+            if (!date) return '';
+            if (/^\d+-\d+-\d+/.test(date)) return date;
             date = new Date(date);
             return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + date.getDate();
         }

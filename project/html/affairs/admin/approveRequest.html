@@ -40,7 +40,7 @@
 
         .container {
             height: 100%;
-            padding: 60px 10px 100px;
+            padding: 60px 10px 0px;
             font-size: 14px;
         }
 
@@ -84,13 +84,16 @@
             color: #999;
             font-size: 20px;
         }
+        .main-form{
+            min-height: calc(100% - 100px);
+        }
+        .main-form::after {
+            display: none;
+        }
 
         .bottom {
-            position: absolute;
             height: 100px;
             width: calc(100% - 20px);
-            bottom: 0;
-            left: 0;
             padding-top: 30px;
             margin-left: 10px;
         }
@@ -137,7 +140,7 @@
         <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
     </header>
     <div class="container">
-        <form class="mui-input-group">
+        <form class="mui-input-group main-form">
             <div class="mui-input-row">
                 <label>Material options</label>
                 <input type="text" value="张三" disabled>
@@ -182,7 +185,7 @@
                 <textarea placeholder="Comments....."></textarea>
             </div>
         </form>
-        <div class="mui-row bottom" style="margin-top: 30px;">
+        <div class="mui-row bottom">
             <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
                 <button type="button" class="mui-btn mui-btn-primary" style="width: 90%;">Approve</button>
             </div>
