@@ -181,7 +181,7 @@
                                 </span>
                             </div>`;
                         })
-                        $('.listContainer #scroll').append(str)
+                        $(str).insertBefore('.listContainer #scroll .mui-pull-bottom-pocket');
                     } else {
                         if (that) {
                             that.endPullupToRefresh(true);

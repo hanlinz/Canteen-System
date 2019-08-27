@@ -202,7 +202,7 @@
                                 </span>
                             </div>`;
                         })
-                        $('.listContainer #scroll').append(str)
+                        $(str).insertBefore('.listContainer #scroll .mui-pull-bottom-pocket');
                     } else {
                         if(that){
                             that.endPullupToRefresh(true);
@@ -217,7 +217,7 @@
         }
         getList();
         $('.listContainer #scroll').on('click', '.view', function(){
-            var index = $.index(this);
+            var index = $(this).index;
             sessionStorage.setItem('data', JSON.stringify(list[index]));
             window.location.href = './newRequest.html?isView=1';
         });
