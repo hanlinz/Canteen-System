@@ -217,7 +217,7 @@
         }
         getList();
         $('.listContainer #scroll').on('click', '.view', function(){
-            var index = $(this).index;
+            var index = $(this).index();
             sessionStorage.setItem('data', JSON.stringify(list[index]));
             window.location.href = './newRequest.html?isView=1';
         });
