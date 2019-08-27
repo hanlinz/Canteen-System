@@ -142,7 +142,7 @@
 <script src="../../../js/jquery.min.js"></script>
 <script src="../../../js/config.js"></script>
 <script>
-    $(function(){
+    $(function () {
         var start = 0;
         var list = [];
         var searchApplicant = '';
@@ -174,12 +174,12 @@
             })
         })
         function date2str(date) {
-            if(!date) return '';
-            if(/^\d+-\d+-\d+/.test(date)) return date;
+            if (!date) return '';
+            if (/^\d+-\d+-\d+/.test(date)) return date;
             date = new Date(date);
             return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + date.getDate();
         }
-        function getList(that){
+        function getList(that) {
             var url = baseURL + '/canteen/application/listUnapproved'
             $.ajax({
                 type: 'GET',
@@ -196,9 +196,9 @@
                 success: function (res) {
                     if (res.datas && res.datas.length) {
                         var str = '';
-                        list = [];
-                        $('.listContainer #scroll .list-item').remove();
-                        res.datas.forEach(function(item){
+                        // list = [];
+                        // $('.listContainer #scroll .list-item').remove();
+                        res.datas.forEach(function (item) {
                             list.push(item);
                             str += `<div class="list-item">
                                 <span class="fl width1">${item.id}</span>
@@ -221,18 +221,20 @@
             })
         }
         getList();
-        $('.listContainer #scroll').on('click', '.view', function(){
+        $('.listContainer #scroll').on('click', '.view', function () {
             var index = $(this).index();
             sessionStorage.setItem('data', JSON.stringify(list[index]));
             window.location.href = './newRequest.html?isView=1';
         });
-        $('.searchBtn').on('click', function(){
+        $('.searchBtn').on('click', function () {
             start = 0;
             searchApplicant = $('.search').val();
+            list = [];
+            $('.listContainer #scroll .list-item').remove();
             getList()
         });
     })
-    function opennew(){
+    function opennew() {
         window.location.href = 'newRequest.html';
     }
 </script>

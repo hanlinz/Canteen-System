@@ -152,8 +152,8 @@
             })
         })
         function date2str(date) {
-            if(!date) return '';
-            if(/^\d+-\d+-\d+/.test(date)) return date;
+            if (!date) return '';
+            if (/^\d+-\d+-\d+/.test(date)) return date;
             date = new Date(date);
             return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + date.getDate();
         }
@@ -174,8 +174,8 @@
                 success: function (res) {
                     if (res.data && res.data.length) {
                         var str = '';
-                        list = [];
-                        $('.listContainer #scroll .list-item').remove();
+                        // list = [];
+                        // $('.listContainer #scroll .list-item').remove();
                         res.data.forEach(function (item) {
                             list.push(item)
                             str += `<div class="list-item">
@@ -200,9 +200,11 @@
             })
         }
         getList();
-        $('.searchBtn').on('click', function(){
+        $('.searchBtn').on('click', function () {
             start = 0;
             searchApplicant = $('.search').val();
+            list = [];
+            $('.listContainer #scroll .list-item').remove();
             getList()
         });
         $('.listContainer #scroll').on('click', '.yes, .no', function () {
@@ -224,12 +226,12 @@
                         id: id
                     },
                     success: function (res) {
-                        if(res.success === true){
-                            mui.alert(res.msg, 'success', 'Yes', function(){})
-                        } 
+                        if (res.success === true) {
+                            mui.alert(res.msg, 'success', 'Yes', function () { })
+                        }
                     },
                     error: function (res) {
-                        mui.alert(res.msg, 'success', 'Yes', function(){})
+                        mui.alert(res.msg, 'success', 'Yes', function () { })
                     }
                 })
             })
