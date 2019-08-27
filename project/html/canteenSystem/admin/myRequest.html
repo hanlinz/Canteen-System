@@ -120,7 +120,7 @@
                     <button type="button" class="mui-btn mui-btn-primary .searchBtn">Search</button>
                 </div>
                 <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
-                    <button type="button" class="mui-btn mui-btn-primary">new Req</button>
+                    <button type="button" class="mui-btn mui-btn-primary" onclick="opennew();">new Req</button>
                 </div>
             </div>
         </div>
@@ -188,9 +188,9 @@
                     limit: '50'
                 },
                 success: function (res) {
-                    if (res.data && res.data.length) {
+                    if (res.datas && res.datas.length) {
                         var str = '';
-                        res.data.forEach(function(item){
+                        res.datas.forEach(function(item){
                             list.push(item);
                             str += `<div class="list-item">
                                 <span class="fl width1">${item.id}</span>
@@ -227,6 +227,9 @@
             getList()
         });
     })
+    function opennew(){
+        window.location.href = 'newRequest.html';
+    }
 </script>
 
 </html>
