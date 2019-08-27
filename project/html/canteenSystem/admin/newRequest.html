@@ -353,6 +353,8 @@
         }
         function date2str(date) {
             if(!date) return '';
+            if(/^\d+-\d+-\d+/.test(date)) return date;
+            date = new Date(date);
             return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + date.getDate();
         }
         if (window.location.search.indexOf('isView=1') > -1) {

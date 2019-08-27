@@ -151,6 +151,12 @@
                 console.log(obj)
             })
         })
+        function date2str(date) {
+            if(!date) return '';
+            if(/^\d+-\d+-\d+/.test(date)) return date;
+            date = new Date(date);
+            return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + date.getDate();
+        }
         function getList(that) {
             var url = baseURL + '/canteen/application/listApproved'
             $.ajax({
@@ -172,7 +178,7 @@
                             list.push(item)
                             str += `<div class="list-item">
                                 <span class="fl width1">${item.id}</span>
-                                <span class="fl width2">${item.date}</span>
+                                <span class="fl width2">${date2str(item.date)}</span>
                                 <span class="fl width3">${item.type == 1 ? 'Lunch' : 'Dinner'}</span>
                                 <span class="fl width4">${item.applicant}</span>
                                 <span class="fl width5">
