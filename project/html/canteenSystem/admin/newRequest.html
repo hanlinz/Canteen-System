@@ -198,6 +198,7 @@
 <script src="../../../js/config.js"></script>
 <script>
     $(function () {
+        var id = ''
         var materialOption = [
             { value: '1', text: 'ZF Other Site Colleague' },
             { value: '2', text: 'STC OT Dinner' },
@@ -372,7 +373,6 @@
             else type = 'no';
             if (type = 'yes') url = 'approve';
             else url = 'reject';
-            var id = $this.parents('.list-item').find('.width1').text();
             mui.confirm(`Sure to ${url} this request?`, 'Tip', ['Yes', 'No'], function () {
                 $.ajax({
                     type: 'GET',
@@ -396,6 +396,7 @@
         if (window.location.search.indexOf('isView=1') > -1) {
             $('.bottom .request').hide();
             var data = JSON.parse(sessionStorage.getItem('data') || '{}');
+            id = data.id
             if(data.isMine == '2' && data.isApproved != '1' && data.isApproved != '2') {
                 $('.bottom .approve').show();
             }
