@@ -281,7 +281,7 @@
                 return false;
             }
         })
-        $('.effectiveTimePicker').val('one Day');
+        $('.effectiveTimePicker').val('One Day');
         $('#save, #submit').on('click', function () {
             var meal = $.trim($('.meal:checked').attr('data-val'));
             var guestType = $.trim($('.materialPicker').val());
@@ -371,7 +371,7 @@
             $('.comment').val($.trim(data.comment));
             if (data.isLong == '1') {
                 $('.effectiveTimePicker').val('One day');
-                $('.oneDay').val(date2str($.trim(data.onedate)));
+                $('.oneDay').val(date2str($.trim(data.startDate)));
             } else if (data.isLong == '2') {
                 $('.effectiveTimePicker').val('Multive days(5 days - 1 month)');
                 $('.singleTime').addClass('hide');
