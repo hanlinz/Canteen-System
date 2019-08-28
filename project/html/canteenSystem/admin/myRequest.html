@@ -35,7 +35,7 @@
         }
 
         .listContainer {
-            height: calc(100% - 106px);
+            height: calc(100% - 111px);
             width: 100%;
             border-width: 0 1px 0px;
             border-style: solid;
@@ -101,6 +101,11 @@
         .width5 .mui-btn {
             line-height: 16px;
         }
+        .container .top-type{
+            border-radius: 17px;
+            padding: 3px 6px;
+            margin-right: 6px;
+        }
     </style>
 </head>
 
@@ -110,7 +115,11 @@
         <span class="back-btn" onclick="window.history.go(-1)"><i class="mui-icon mui-icon-undo"></i></span>
     </header>
     <div class="container">
-        <p>Request for Approve</p>
+        <p class="top-btn-area">
+            <button type="button" class="mui-btn mui-btn-primary top-type" data-id="listUnapproved">onprocess</button>
+            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined top-type" data-id="listApproved">approved</button>
+            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined top-type" data-id="listRejected">rejected</button>
+        </p>
         <div class="mui-content" style="background-color: #fff;">
             <div class="mui-row">
                 <div class="mui-col-sm-6 mui-col-xs-6">
@@ -148,6 +157,7 @@
         var page = 1;
         var list = [];
         var searchApplicant = '';
+        var api = 'listUnapproved';
         mui.init({
             pullRefresh: {
                 container: '.mui-scroll-wrapper',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -183,7 +193,7 @@
             return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getDate();
         }
         function getList(that) {
-            var url = baseURL + '/canteen/application/listUnapproved'
+            var url = baseURL + '/canteen/application/' + api;
             $.ajax({
                 type: 'GET',
                 timeout: 600000,
@@ -236,6 +246,11 @@
             $('.listContainer #scroll .list-item').remove();
             getList()
         });
+        $('.top-btn-area .top-type').on('click', function(){
+            $(this).removeClass('mui-btn-outlined').siblings().addClass('mui-btn-outlined');
+            api = $(this).attr('data-id');
+            getList();
+        })
     })
     function opennew() {
         window.location.href = 'newRequest.html';

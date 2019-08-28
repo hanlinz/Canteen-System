@@ -85,7 +85,7 @@
             font-size: 20px;
         }
 
-        .main-form{
+        .main-form {
             min-height: calc(100% - 130px);
         }
 
@@ -177,11 +177,17 @@
             </div>
         </form>
         <div class="mui-row bottom">
-            <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
+            <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;display: none;">
                 <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
             </div>
-            <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
+            <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;display: none;">
                 <button type="button" class="mui-btn" style="width: 90%;" id="submit">Submit</button>
+            </div>
+            <div class="mui-col-sm-6 mui-col-xs-6 approve" style="text-align: center;display: none;">
+                <button type="button" class="mui-btn mui-btn-primary" id="approve" style="width: 90%;">approve</button>
+            </div>
+            <div class="mui-col-sm-6 mui-col-xs-6 approve" style="text-align: center;display: none;">
+                <button type="button" class="mui-btn" style="width: 90%;" id="reject">reject</button>
             </div>
         </div>
     </div>
@@ -358,8 +364,41 @@
             date = new Date(date);
             return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + date.getDate();
         }
+        $('#approve, #reject').on('click', function () {
+            var type = 'yes';
+            var url = '';
+            var $this = $(this);
+            if ($this.attr('id').indexOf('approve') > -1) type = 'yes';
+            else type = 'no';
+            if (type = 'yes') url = 'approve';
+            else url = 'reject';
+            var id = $this.parents('.list-item').find('.width1').text();
+            mui.confirm(`Sure to ${url} this request?`, 'Tip', ['Yes', 'No'], function () {
+                $.ajax({
+                    type: 'GET',
+                    timeout: 600000,
+                    url: baseURL + '/canteen/application/' + url,
+                    data: {
+                        userid: userid,
+                        id: id
+                    },
+                    success: function (res) {
+                        if (res.success === true) {
+                            mui.alert(res.msg, 'success', 'Yes', function () { })
+                        }
+                    },
+                    error: function (res) {
+                        mui.alert(res.msg, 'success', 'Yes', function () { })
+                    }
+                })
+            })
+        })
         if (window.location.search.indexOf('isView=1') > -1) {
+            $('.bottom .request').hide();
             var data = JSON.parse(sessionStorage.getItem('data') || '{}');
+            if(data.isMine == '2' && data.isApproved != '1' && data.isApproved != '2') {
+                $('.bottom .approve').show();
+            }
             $('.meal').each(function () {
                 var $this = $(this);
                 if ($this.attr('data-val') == data.type) {
@@ -379,7 +418,7 @@
                 $('.multive1').val(date2str($.trim(data.startDate)));
                 $('.multive2').val(date2str($.trim(data.endDate)));
             }
-        }
+        } else $('.bottom .request').show();
     })
 </script>
 
