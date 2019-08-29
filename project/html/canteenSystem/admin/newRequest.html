@@ -123,74 +123,74 @@
 </head>
 
 <body>
-    <header class="mui-bar mui-bar-nav mui-bar-transparent">
-        <h1 class="mui-title" style="color: #fff;">Canteen System</h1>
-        <span class="back-btn" onclick="window.history.go(-1)"><i class="mui-icon mui-icon-undo"></i></span>
-    </header>
-    <div class="container">
-        <form class="mui-input-group main-form">
-            <div class="mui-input-row">
-                <label>Meal to order</label>
-                <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
-                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
-                        <label>Lunch</label>
-                        <input name="meal" class="meal" data-val="1" checked="checked" type="radio">
-                    </div>
-                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
-                        <label>Dinner</label>
-                        <input name="meal" class="meal" data-val="2" type="radio">
-                    </div>
+<header class="mui-bar mui-bar-nav mui-bar-transparent">
+    <h1 class="mui-title" style="color: #fff;">Canteen System</h1>
+    <span class="back-btn" onclick="window.history.go(-1)"><i class="mui-icon mui-icon-undo"></i></span>
+</header>
+<div class="container">
+    <form class="mui-input-group main-form">
+        <div class="mui-input-row">
+            <label>Meal to order</label>
+            <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
+                <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                    <label>Lunch</label>
+                    <input name="meal" class="meal" data-val="1" checked="checked" type="radio">
+                </div>
+                <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                    <label>Dinner</label>
+                    <input name="meal" class="meal" data-val="2" type="radio">
                 </div>
             </div>
-            <div class="mui-input-row">
-                <label>Material options</label>
-                <input type="text" class="materialPicker" placeholder="Material options">
-                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-            </div>
-            <div class="mui-input-row">
-                <label>Quality</label>
-                <input type="number" class="qty" placeholder="Quality ( num only )">
-            </div>
-            <div class="mui-input-row textarea-row">
-                <label>Comments</label>
-                <textarea class="comment" placeholder="Comments....."></textarea>
-            </div>
-            <div class="mui-input-row">
-                <label>Effective time</label>
-                <input type="text" class="effectiveTimePicker" placeholder="Effective time" value="One day">
-                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-            </div>
-            <div class="mui-input-row singleTime">
-                <label>Select time</label>
-                <input type="text" class="oneDay" placeholder="Select time">
-                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-            </div>
-            <div class="mui-input-row hide multiveTime">
-                <label>Begin time</label>
-                <input type="text" class="multive1" placeholder="Begin time">
-                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-            </div>
-            <div class="mui-input-row hide multiveTime">
-                <label>End time</label>
-                <input type="text" class="multive2" placeholder="End time">
-                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-            </div>
-        </form>
-        <div class="mui-row bottom">
-            <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;display: none;">
-                <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
-            </div>
-            <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;display: none;">
-                <button type="button" class="mui-btn" style="width: 90%;" id="submit">Submit</button>
-            </div>
-            <div class="mui-col-sm-6 mui-col-xs-6 approve" style="text-align: center;display: none;">
-                <button type="button" class="mui-btn mui-btn-primary" id="approve" style="width: 90%;">approve</button>
-            </div>
-            <div class="mui-col-sm-6 mui-col-xs-6 approve" style="text-align: center;display: none;">
-                <button type="button" class="mui-btn" style="width: 90%;" id="reject">reject</button>
-            </div>
+        </div>
+        <div class="mui-input-row">
+            <label>Material options</label>
+            <input type="text" class="materialPicker" placeholder="Material options">
+            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+        </div>
+        <div class="mui-input-row">
+            <label>Quality</label>
+            <input type="number" class="qty" placeholder="Quality ( num only )">
+        </div>
+        <div class="mui-input-row textarea-row">
+            <label>Comments</label>
+            <textarea class="comment" placeholder="Comments....."></textarea>
+        </div>
+        <div class="mui-input-row">
+            <label>Effective time</label>
+            <input type="text" class="effectiveTimePicker" placeholder="Effective time" value="One day">
+            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+        </div>
+        <div class="mui-input-row singleTime">
+            <label>Select time</label>
+            <input type="text" class="oneDay" placeholder="Select time">
+            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+        </div>
+        <div class="mui-input-row hide multiveTime">
+            <label>Begin time</label>
+            <input type="text" class="multive1" placeholder="Begin time">
+            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+        </div>
+        <div class="mui-input-row hide multiveTime">
+            <label>End time</label>
+            <input type="text" class="multive2" placeholder="End time">
+            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+        </div>
+    </form>
+    <div class="mui-row bottom">
+        <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;display: none;">
+            <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
+        </div>
+        <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;display: none;">
+            <button type="button" class="mui-btn" style="width: 90%;" id="submit">Submit</button>
+        </div>
+        <div class="mui-col-sm-6 mui-col-xs-6 approve" style="text-align: center;display: none;">
+            <button type="button" class="mui-btn mui-btn-primary" id="approve" style="width: 90%;">approve</button>
+        </div>
+        <div class="mui-col-sm-6 mui-col-xs-6 approve" style="text-align: center;display: none;">
+            <button type="button" class="mui-btn" style="width: 90%;" id="reject">reject</button>
         </div>
     </div>
+</div>
 </body>
 <script src="../../../js/mui/js/mui.min.js"></script>
 <script src="../../../js/mui/js/mui.picker.min.js"></script>
@@ -200,16 +200,16 @@
     $(function () {
         var id = ''
         var materialOption = [
-            { value: '1', text: 'ZF Other Site Colleague' },
-            { value: '2', text: 'STC OT Dinner' },
-            { value: '3', text: 'Customer' },
-            { value: '4', text: 'Supplier' },
-            { value: '4', text: 'Contractor' },
-            { value: '4', text: 'Intern' },
+            {value: '1', text: 'ZF Other Site Colleague'},
+            {value: '2', text: 'STC OT Dinner'},
+            {value: '3', text: 'Customer'},
+            {value: '4', text: 'Supplier'},
+            {value: '4', text: 'Contractor'},
+            {value: '4', text: 'Intern'},
         ]
         var effectiveTime = [
-            { value: '1', text: 'One day' },
-            { value: '2', text: 'Multive days(5 days - 1 month)' }
+            {value: '1', text: 'One day'},
+            {value: '2', text: 'Multive days(5 days - 1 month)'}
         ]
         var materialPicker = new mui.PopPicker();
         var effectiveTimePicker = new mui.PopPicker();
@@ -325,8 +325,7 @@
             if (effectiveType == 'One day') {
                 data.isLong = '1'
                 data.onedate = onedate
-            }
-            else {
+            } else {
                 data.isLong = '2'
                 data.sdate = sdate
                 data.edate = edate
@@ -359,12 +358,14 @@
                 }
             })
         }
+
         function date2str(date) {
             if (!date) return '';
             if (/^\d+-\d+-\d+/.test(date)) return date;
             date = new Date(date);
             return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + date.getDate();
         }
+
         $('#approve, #reject').on('click', function () {
             var type = 'yes';
             var url = '';
@@ -384,11 +385,13 @@
                     },
                     success: function (res) {
                         if (res.success === true) {
-                            mui.alert(res.msg, 'success', 'Yes', function () { })
+                            mui.alert(res.msg, 'success', 'Yes', function () {
+                            })
                         }
                     },
                     error: function (res) {
-                        mui.alert(res.msg, 'success', 'Yes', function () { })
+                        mui.alert(res.msg, 'success', 'Yes', function () {
+                        })
                     }
                 })
             })
@@ -396,10 +399,39 @@
         if (window.location.search.indexOf('isView=1') > -1) {
             $('.bottom .request').hide();
             var data = JSON.parse(sessionStorage.getItem('data') || '{}');
-            id = data.id
-            if(data.isMine == '2' && data.isApproved != '1' && data.isApproved != '2') {
+            if (data.isMine == '2' && data.isApproved != '1' && data.isApproved != '2') {
                 $('.bottom .approve').show();
             }
+            parsingData(data);
+        } else {
+            $('.bottom .request').show();
+            $('.bottom .approve').hide();
+            getTempParams();
+        }
+
+        function getTempParams() {
+            $.ajax({
+                type: 'GET',
+                timeout: 600000,
+                url: baseURL + '/canteen/application/getTemp',
+                data: {
+                    userid: userid
+                },
+                success: function (res) {
+                    if (res.success === true) {
+                        var data = res.data;
+                        parsingData(data);
+                    }
+                },
+                error: function (res) {
+                    mui.alert(res.msg, 'success', 'Yes', function () {
+                    })
+                }
+            })
+        }
+
+        function parsingData(data) {
+            id = data.id
             $('.meal').each(function () {
                 var $this = $(this);
                 if ($this.attr('data-val') == data.type) {
@@ -419,7 +451,7 @@
                 $('.multive1').val(date2str($.trim(data.startDate)));
                 $('.multive2').val(date2str($.trim(data.endDate)));
             }
-        } else $('.bottom .request').show();
+        }
     })
 </script>
 
