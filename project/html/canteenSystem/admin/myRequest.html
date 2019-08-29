@@ -244,6 +244,7 @@
         getList();
         $('.listContainer #scroll').on('click', '.view', function () {
             var index = $(this).index();
+            if($('.top-btn-area .top-type[data-id="listApproved"]').hasClass('mui-btn-outlined') == false) list[index].viewApproved = true;
             sessionStorage.setItem('data', JSON.stringify(list[index]));
             window.location.href = './newRequest.html?isView=1';
         });
