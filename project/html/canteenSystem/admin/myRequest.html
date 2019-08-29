@@ -258,6 +258,7 @@
                 page = 1;
                 $('.listContainer #scroll .list-item').remove();
                 getList()
+                $('#scroll').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
             }
         });
         $('.top-btn-area .top-type').on('click', function () {
@@ -274,6 +275,7 @@
                 page = 1;
                 api = newapi;
                 getList();
+                $('#scroll').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
             }
         })
     })
