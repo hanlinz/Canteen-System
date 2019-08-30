@@ -179,9 +179,9 @@
                 }
             }
         });
-        mui('.mui-scroll-wrapper').scroll({
-            deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-        });
+        // mui('.mui-scroll-wrapper').scroll({
+        //     deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        // });
         mui('.list-item').on('click', '.mui-icon-checkmarkempty', function () {
             mui.confirm('Sure to Approve?', 'Tips', ['Yes', 'No'], function (obj) {
                 console.log(obj)
@@ -264,6 +264,7 @@
         });
         $('.top-btn-area .top-type').on('click', function () {
             $(this).removeClass('mui-btn-outlined').siblings().addClass('mui-btn-outlined');
+            mui('.mui-scroll-wrapper').pullRefresh().refresh(true);
             var newapi = $(this).attr('data-id');
             if (api == newapi) {
             } else {
