@@ -128,7 +128,7 @@
 <body>
 <header class="mui-bar mui-bar-nav mui-bar-transparent">
     <h1 class="mui-title" style="color: #fff;">Canteen System</h1>
-    <span class="back-btn" onclick="window.history.go(-1)"><i class="mui-icon mui-icon-undo"></i></span>
+    <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
 </header>
 <div class="container">
     <form class="mui-input-group main-form">
@@ -338,6 +338,11 @@
             send(data, $(this).attr('id'));
         })
 
+        
+
+        $('.back-btn').on('click', function(){
+            window.history.go(-1);
+        })
         function send(data, type) {
             var url = baseURL + '/canteen/application/saveTemp?method=post&userid=' + userid
             if (type == 'submit') url = baseURL + '/canteen/application/save?method=post&userid=' + userid

@@ -162,7 +162,8 @@
         var page = 1;
         var list = [];
         var searchApplicant = '';
-        var api = 'listUnapproved';
+        var api = getUrlParam('type') || 'listUnapproved';
+        $('.top-btn-area .top-type[data-id='+api+']').removeClass('mui-btn-outlined').siblings().addClass('mui-btn-outlined');
         mui.init({
             pullRefresh: {
                 container: '.mui-scroll-wrapper',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -244,7 +245,8 @@
         getList();
         $('.listContainer #scroll').on('click', '.view', function () {
             var index = $(this).index();
-            if($('.top-btn-area .top-type[data-id="listApproved"]').hasClass('mui-btn-outlined') == false) list[index].viewApproved = true;
+            var data_id = $('.top-btn-area .top-type').not('.mui-btn-outlined').attr('data-id');
+            if(data_id == "listApproved") list[index].viewApproved = true;
             sessionStorage.setItem('data', JSON.stringify(list[index]));
             window.location.href = './newRequest.html?isView=1';
         });
@@ -263,22 +265,23 @@
             }
         });
         $('.top-btn-area .top-type').on('click', function () {
-            $(this).removeClass('mui-btn-outlined').siblings().addClass('mui-btn-outlined');
-            mui('.mui-scroll-wrapper').pullRefresh().refresh(true);
-            var newapi = $(this).attr('data-id');
-            if (api == newapi) {
-            } else {
-                //将必要的一些参数清空，分页参数，查询条件，list等
-                $('.listContainer #scroll .list-item').remove();
-                $('.search').val("");
-                list = [];
-                start = 0;
-                limit = 50;
-                page = 1;
-                api = newapi;
-                getList();
-                $('#scroll').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
-            }
+            // $(this).removeClass('mui-btn-outlined').siblings().addClass('mui-btn-outlined');
+            // mui('.mui-scroll-wrapper').pullRefresh().refresh(true);
+            // var newapi = $(this).attr('data-id');
+            // if (api == newapi) {
+            // } else {
+            //     //将必要的一些参数清空，分页参数，查询条件，list等
+            //     $('.listContainer #scroll .list-item').remove();
+            //     $('.search').val("");
+            //     list = [];
+            //     start = 0;
+            //     limit = 50;
+            //     page = 1;
+            //     api = newapi;
+            //     getList();
+            //     $('#scroll').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
+            // }
+            window.location.replace(window.location.origin + window.location.pathname + '?type=' + $(this).attr('data-id'));
         })
     })
 
