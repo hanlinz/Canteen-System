@@ -125,8 +125,8 @@
             </div>
         </div>
         <p class="table-header">
-            <span class="fl width1">Request ID</span>
-            <span class="fl width2">Request Time</span>
+            <span class="fl width1">Requestid</span>
+            <span class="fl width2">Requesttime</span>
             <span class="fl width3">Commonents</span>
             <span class="fl width4"></span>
             <span class="fl width5"></span>
@@ -198,6 +198,8 @@
         }
 
         function getList(that) {
+            var filter = searchApplicant;
+            if(filter) 'requestNo lk ' + filter;
             $.ajax({
                 type: 'GET',
                 timeout: 600000,
@@ -206,6 +208,8 @@
                     _dc: Date.now(),
                     pagesize: pagesize,
                     start: start,
+                    userid: userid,
+                    filter: filter,
                     limit: limit
                 },
                 success: function (res) {
@@ -236,6 +240,10 @@
             })
         }
 
+        $.ajax({
+            url: baseURL + '/sso?email=yun.fu@trw.com',
+        })
+
         // getUser();
         getList();
         $('.listContainer #scroll').on('click', '.view', function () {
@@ -243,7 +251,7 @@
             var data_id = $('.top-btn-area .top-type').not('.mui-btn-outlined').attr('data-id');
             if(data_id == "listApproved") list[index].viewApproved = true;
             sessionStorage.setItem('data', JSON.stringify(list[index]));
-            window.location.href = './newRequest.html?isView=1';
+            window.location.href = './requestDetail.html';
         });
         $('.searchBtn').on('click', function () {
             start = 0;
@@ -254,6 +262,7 @@
                 start = 0;
                 limit = 50;
                 pagesize = 1;
+                searchApplicant = newsearchApplicant;
                 $('.listContainer #scroll .list-item').remove();
                 getList()
                 $('#scroll').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
