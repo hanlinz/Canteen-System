@@ -617,21 +617,17 @@
             getDefaultData(key);
         }
         function send(data) {
-            // var formdata = new FormData();
-            // for(var key in data){
-            //     formdata.append(key, data[key]);
-            // }
-            // $('.option-form:visible').each(function(){
-            //     formdata.append('templateIds', $(this).attr('class').replace(/[^\d]/g, ''));
-            // });
-            console.log(123)
+            var formdata = new FormData();
+            for(var key in data){
+                formdata.append(key, data[key]);
+            }
             $.ajax({
                 type: 'POST',
                 timeout: 600000,
-                url: baseURL + '/requests/personal/save?userid=' + affairsUserId,
-                contentType: 'multipart/form-data',
-                data: data,
-                // contentType: 'application/json',
+                url: baseURL + '/requests/personal/save',
+                contentType: false,
+                processData: false,
+                data: formdata,
                 success: function (res) {
                     console.log(res)
                 },
