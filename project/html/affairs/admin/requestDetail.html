@@ -87,6 +87,15 @@
             display: none;
         }
 
+        .options{
+            padding-left: 15px;
+        }
+
+        .options-title {
+            height: 50px;
+            line-height: 50px;
+            font-size: 20px;
+        }
     </style>
 </head>
 
@@ -117,9 +126,7 @@
                 <label>Comments</label>
                 <input type="text" disabled class="comments">
             </div>
-            <div class="options">
-
-            </div>
+            <div class="options"></div>
         </form>
     </div>
 </body>
@@ -138,7 +145,8 @@
                 timeout: 600000,
                 url: baseURL + '/requests/get',
                 data: {
-                    id: 1,
+                    userid: affairsUserId,
+                    id: id,
                     _dc: Date.now()
                 },
                 success: function (res) {
@@ -160,13 +168,17 @@
             $('.status').val(data.statusName || '');
             $('.time').val(data.createtime || '');
             $('.comments').val(data.comments || '');
-            // if(data.templates && data.templates.length) {
-            //     var str = '';
-            //     data.templates.forEach(function(item){
-            //         str += `<div class="option-title">${item.templateName}</div>
-            //         `
-            //     })
-            // }
+            if (data.templates && data.templates.length) {
+                var str = '';
+                data.templates.forEach(function (item) {
+                    str += `<div class="options-title">${item.templateName}</div>
+                    <div class="options-item-title">content</div><div class="content-box">${item.content}</div>`;
+                    if (item.attachmentName && item.attachmentUrl) {
+                        str += `<div class="options-item-title">attachment</div><div class="content-box"><a href="${item.attachmentUrl}">${item.attachmentName}</a></div>`
+                    }
+                });
+                $('.options').html(str);
+            }
         }
     })
 

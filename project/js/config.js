@@ -1,5 +1,6 @@
 var baseURL = 'http://139.217.97.220:80'
 var userid = 'yum3';
+var affairsUserId = '43'
 
 // 获取url参数的公共方法
 function getUrlParam(name) {//封装方法

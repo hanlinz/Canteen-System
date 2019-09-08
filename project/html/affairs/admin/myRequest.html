@@ -114,13 +114,13 @@
         <div class="mui-content" style="background-color: #fff;">
             <div class="mui-row">
                 <div class="mui-col-sm-6 mui-col-xs-6">
-                    <input type="text" class="input search" placeholder="Search text" style="width: 100%;">
+                    <input type="text" class="input search" placeholder="Request No" style="width: 100%;">
                 </div>
                 <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
                     <button type="button" class="mui-btn mui-btn-primary searchBtn">Search</button>
                 </div>
                 <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
-                    <button type="button" class="mui-btn mui-btn-primary" onclick="opennew();">new Req</button>
+                    <button type="button" class="mui-btn mui-btn-primary newReq">new Req</button>
                 </div>
             </div>
         </div>
@@ -190,9 +190,15 @@
             $.ajax({
                 type: 'GET',
                 timeout: 600000,
-                url: baseURL + '/user/get?_=' + Date.now(),
+                url: baseURL + '/user/get',
+                data: {
+                    _dc: Date.now(),
+                    userid: affairsUserId
+                },
                 success: function(res){
-                    console.log(res)
+                    if(res.success){
+                        sessionStorage.setItem('affairsUser', JSON.stringify(res.obj))
+                    }
                 }
             })
         }
@@ -208,7 +214,7 @@
                     _dc: Date.now(),
                     pagesize: pagesize,
                     start: start,
-                    userid: userid,
+                    userid: affairsUserId,
                     filter: filter,
                     limit: limit
                 },
@@ -220,10 +226,10 @@
                         res.data.forEach(function (item) {
                             list.push(item);
                             str += `<div class="list-item">
-                                <span class="fl width1">${item.requestNo}</span>
-                                <span class="fl width2">${date2str(item.createtime)}</span>
-                                <span class="fl width3">${item.comments}</span>
-                                <span class="fl width4">${item.requestor}</span>
+                                <span class="fl width1">${item.requestNo || ''}</span>
+                                <span class="fl width2">${date2str(item.createtime || '')}</span>
+                                <span class="fl width3">${item.comments || ''}</span>
+                                <span class="fl width4">${item.requestor || ''}</span>
                                 <span class="fl width5">
                                     <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined view">view</button>
                                 </span>
@@ -240,11 +246,7 @@
             })
         }
 
-        $.ajax({
-            url: baseURL + '/sso?email=yun.fu@trw.com',
-        })
-
-        // getUser();
+        getUser();
         getList();
         $('.listContainer #scroll').on('click', '.view', function () {
             var index = $(this).index();
@@ -268,11 +270,10 @@
                 $('#scroll').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
             }
         });
+        $('.newReq').on('click', function(){
+            window.location.href = './newRequest.html';
+        })
     })
-
-    function opennew() {
-        window.location.href = 'newRequest.html';
-    }
 </script>
 
 </html>

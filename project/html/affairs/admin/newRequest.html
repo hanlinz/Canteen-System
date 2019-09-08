@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>new-request</title>
+    <link rel="stylesheet" href="../../../js/mui/css/mui.min.css">
+    <link rel="stylesheet" href="../../../js/mui/css/mui.picker.min.css">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+        .mui-bar-transparent {
+            background-color: rgba(0, 122, 255, .8);
+            color: #fff;
+        }
+
+        .mui-input-group:after {
+            display: none;
+        }
+
+        .mui-content {
+            background-color: #fff;
+        }
+
+        .back-btn {
+            position: absolute;
+            height: 30px;
+            line-height: 30px;
+            left: 7px;
+            top: 7px;
+            width: 44px;
+            text-align: center;
+            color: #fff;
+            background-color: #007aff;
+            font-size: 16px;
+            border-radius: 2px;
+            border: 1px solid #0072ec;
+        }
+
+        .back-btn .mui-icon.mui-icon-undo {
+            padding: 3px;
+        }
+
+        .container {
+            height: 100%;
+            padding: 60px 10px 0px;
+            font-size: 14px;
+        }
+
+        .container input,
+        .container textarea {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .container .input {
+            padding: 0 1rem;
+            width: 100%;
+            height: 26px;
+            line-height: 26px;
+            margin-top: 5px;
+            margin-bottom: 0;
+        }
+
+        .container .mui-radio.mui-left label {
+            padding-left: 35px;
+        }
+
+        .container .mui-radio.mui-left input {
+            left: 0;
+        }
+
+        .container .mui-row {
+            border-bottom: 1px solid #ccc;
+            padding: 5px 0;
+        }
+
+        .container .mui-input-row input {
+            text-align: right;
+
+        }
+
+        .container .selectIcon {
+            position: absolute;
+            right: 0;
+            top: 10px;
+            color: #999;
+            font-size: 20px;
+        }
+
+        .main-form {
+            min-height: calc(100% - 130px);
+        }
+
+        .container .bottom {
+            height: 130px;
+            width: calc(100% - 20px);
+            padding-top: 30px;
+            margin-left: 10px;
+        }
+
+        .container .mui-input-row .materialPicker,
+        .container .mui-input-row .effectiveTimePicker,
+        .container .mui-input-row .oneDay,
+        .container .mui-input-row .multive1,
+        .container .mui-input-row .multive2,
+        .container .mui-input-row .genderPicker {
+            padding-right: 30px;
+        }
+
+        .container .mui-input-row.textarea-row {
+            height: 120px;
+        }
+
+        .container .mui-input-row.textarea-row label {
+            padding: 5px 15px;
+        }
+
+        .container .mui-input-row textarea {
+            display: block;
+            width: 100%;
+            padding: 5px 15px;
+            height: 90px;
+        }
+
+        .container .mui-input-group.noAfter::after {
+            display: none;
+        }
+
+        .materialOptionPopover {
+            max-height: 80%;
+            top: 10%;
+            left: calc(50% - 140px);
+        }
+
+        .materialOptionPopover.mui-popover .mui-table-view {
+            max-height: 100%;
+        }
+
+        .materialOptionPopover .mui-table-view-cell {
+            padding: 2px 15px;
+        }
+
+        .material-option-title {
+            padding-left: 15px;
+            font-size: 20px;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .file-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            opacity: 0;
+        }
+
+        .option-form {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-transparent">
+        <h1 class="mui-title" style="color: #fff;">Canteen System</h1>
+        <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
+    </header>
+    <div class="container">
+        <form class="mui-input-group main-form">
+            <div class="mui-input-row">
+                <label>Name</label>
+                <input type="text" class="name" disabled>
+            </div>
+            <div class="mui-input-row">
+                <label>UserID</label>
+                <input type="text" class="userid" disabled>
+            </div>
+            <div class="mui-input-row">
+                <label>Gender</label>
+                <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
+                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                        <label>male</label>
+                        <input name="gender" class="gender" data-val="male" checked="checked" type="radio">
+                    </div>
+                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                        <label>female</label>
+                        <input name="gender" class="gender" data-val="female" type="radio">
+                    </div>
+                </div>
+            </div>
+            <div class="mui-input-row">
+                <label>Department</label>
+                <input type="text" class="department" placeholder="Department">
+            </div>
+            <div class="mui-input-row">
+                <label>Department(CN)</label>
+                <input type="text" class="departmentcn" placeholder="Department(CN)">
+            </div>
+            <div class="mui-input-row">
+                <label>Position</label>
+                <input type="text" class="position" placeholder="Position">
+            </div>
+            <div class="mui-input-row">
+                <label>Position(CN)</label>
+                <input type="text" class="positioncn" placeholder="Position(CN)">
+            </div>
+            <div class="mui-input-row singleTime">
+                <label>Onboard Time</label>
+                <input type="text" class="oneDay" placeholder="Onboard Time">
+                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+            </div>
+            <div class="mui-input-row">
+                <label>Material options</label>
+                <input type="text" class="materialPicker" placeholder="Material options">
+                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+            </div>
+            <div class="mui-input-row textarea-row">
+                <label>Comments</label>
+                <textarea class="comment" placeholder="Comments....."></textarea>
+            </div>
+
+            <div class="option-form option8">
+                <div class="material-option-title">Personal Material</div>
+                <div class="mui-input-row">
+                    <label>Material File</label>
+                    <input type="text" class="file" placeholder="Material File" disabled>
+                    <input type="file" class="file-input" id="8_file">
+                </div>
+            </div>
+
+            <div class="option-form option7">
+                <div class="material-option-title">Intivation Multiple Entries</div>
+                <div class="mui-input-row">
+                    <label>Destination</label>
+                    <input type="text" class="option-input" id="7_customfields_Destination" placeholder="Destination">
+                </div>
+                <div class="mui-input-row">
+                    <label>Invitee</label>
+                    <input type="text" class="option-input" id="7_customfields_Invitee" placeholder="Invitee">
+                </div>
+                <div class="mui-input-row">
+                    <label>Purpose</label>
+                    <input type="text" class="option-input" id="7_customfields_Purpose" placeholder="Purpose">
+                </div>
+                <div class="mui-input-row">
+                    <label>Invitee Name</label>
+                    <input type="text" class="option-input" id="7_customfields_Invitee_Name" placeholder="Invitee Name">
+                </div>
+                <div class="mui-input-row">
+                    <label>Invitee Job Title</label>
+                    <input type="text" class="option-input" id="7_customfields_Invitee_Job_Title"
+                        placeholder="Invitee Job Title">
+                </div>
+                <div class="mui-input-row">
+                    <label>Invitee Nationality</label>
+                    <input type="text" class="option-input" id="7_customfields_Invitee_Nationality"
+                        placeholder="Invitee Nationality">
+                </div>
+                <div class="mui-input-row">
+                    <label>Invitee Birthday</label>
+                    <input type="text" class="option-input" id="7_customfields_Invitee_Birthday"
+                        placeholder="Invitee Birthday">
+                </div>
+                <div class="mui-input-row">
+                    <label>Invitee Passport</label>
+                    <input type="text" class="option-input" id="7_customfields_Invitee_Passport"
+                        placeholder="Invitee Passport">
+                </div>
+                <div class="mui-input-row">
+                    <label>Start Time</label>
+                    <input type="text" class="option-input" id="7_customfields_Start_Time" placeholder="Start Time">
+                </div>
+                <div class="mui-input-row">
+                    <label>End Time</label>
+                    <input type="text" class="option-input" id="7_customfields_End_Time" placeholder="End Time">
+                </div>
+                <div class="mui-input-row">
+                    <label>Passport Start Time</label>
+                    <input type="text" class="option-input" id="7_customfields_Passport_Start_Time"
+                        placeholder="Passport Start Time">
+                </div>
+                <div class="mui-input-row">
+                    <label>Passport End Time</label>
+                    <input type="text" class="option-input" id="7_customfields_Passwort_Start_Time"
+                        placeholder="Passport End Time">
+                </div>
+                <div class="mui-input-row">
+                    <label>Inviter</label>
+                    <input type="text" class="option-input" id="7_customfields_Inviter" placeholder="Inviter">
+                </div>
+            </div>
+
+            <div class="option-form option6">
+                <div class="material-option-title">Intivation Single Entry</div>
+                <div class="mui-input-row">
+                    <label>Destination</label>
+                    <input type="text" class="option-input" id="6_customfields_Destination" placeholder="Destination">
+                </div>
+                <div class="mui-input-row">
+                    <label>Invitee</label>
+                    <input type="text" class="option-input" id="6_customfields_Invitee" placeholder="Invitee">
+                </div>
+                <div class="mui-input-row">
+                    <label>Purpose</label>
+                    <input type="text" class="option-input" id="6_customfields_Purpose" placeholder="Purpose">
+                </div>
+                <div class="mui-input-row">
+                    <label>Invitee Name</label>
+                    <input type="text" class="option-input" id="6_customfields_Invitee_Name" placeholder="Invitee Name">
+                </div>
+                <div class="mui-input-row">
+                    <label>Invitee Job Title</label>
+                    <input type="text" class="option-input" id="6_customfields_Invitee_Job_Title"
+                        placeholder="Invitee Job Title">
+                </div>
+                <div class="mui-input-row">
+                    <label>Invitee Passport</label>
+                    <input type="text" class="option-input" id="6_customfields_Invitee_Passport"
+                        placeholder="Invitee Passport">
+                </div>
+                <div class="mui-input-row">
+                    <label>Start Time</label>
+                    <input type="text" class="option-input" id="6_customfields_Start_Time" placeholder="Start Time">
+                </div>
+                <div class="mui-input-row">
+                    <label>End Time</label>
+                    <input type="text" class="option-input" id="6_customfields_End_Time" placeholder="End Time">
+                </div>
+                <div class="mui-input-row">
+                    <label>Inviter</label>
+                    <input type="text" class="option-input" id="6_customfields_Inviter" placeholder="Inviter">
+                </div>
+            </div>
+
+            <div class="option-form option5">
+                <div class="material-option-title">Incoming Confirmation(CN)</div>
+                <div class="mui-input-row">
+                    <label>ID Card</label>
+                    <input type="text" class="option-input" id="5_customfields_ID_Card" placeholder="ID Card">
+                </div>
+                <div class="mui-input-row">
+                    <label>Month Salary</label>
+                    <input type="text" class="option-input" id="5_customfields_Month_Salary" placeholder="Month Salary">
+                </div>
+                <div class="mui-input-row">
+                    <label>Purpose</label>
+                    <input type="text" class="option-input" id="5_customfields_Purpose" placeholder="Purpose">
+                </div>
+            </div>
+
+            <div class="option-form option4">
+                <div class="material-option-title">Incoming Confirmation(EN)</div>
+                <div class="mui-input-row">
+                    <label>Month Salary</label>
+                    <input type="text" class="option-input" id="4_customfields_Month_Salary" placeholder="Month Salary">
+                </div>
+            </div>
+
+            <div class="option-form option3">
+                <div class="material-option-title">Employee Status Confirmation(CN)</div>
+            </div>
+
+            <div class="option-form option1">
+                <div class="material-option-title">Employee Status Confirmation(EN)</div>
+            </div>
+        </form>
+        <div class="mui-row bottom">
+            <!-- <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;">
+                <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
+            </div>
+            <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;">
+                <button type="button" class="mui-btn" style="width: 90%;" id="submit">Submit</button>
+            </div> -->
+            <div class="mui-col-sm-12 mui-col-xs-12 request" style="text-align: center;">
+                <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
+            </div>
+        </div>
+        <div id="popover" class="mui-popover materialOptionPopover">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Select All</label>
+                        <input name="materialOption" value="all" type="checkbox" id="selectAll">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Personal Material</label>
+                        <input name="materialOption" value="8" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Intivation Multiple Entries</label>
+                        <input name="materialOption" value="7" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Intivation Single Entry</label>
+                        <input name="materialOption" value="6" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Income Confirmation(CN)</label>
+                        <input name="materialOption" value="5" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Income Confirmation(EN)</label>
+                        <input name="materialOption" value="4" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Employee Status Confirmation(CN)</label>
+                        <input name="materialOption" value="3" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label style="text-align: right;">Employee Status Confirmation(EN)</label>
+                        <input name="materialOption" value="1" type="checkbox">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-row" style="border: 0 none;">
+                        <div class="mui-col-sm-6 mui-col-xs-6"></div>
+                        <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
+                            <button type="button" class="mui-btn mui-btn-primary"
+                                id="materialOptionConfirm">Confirm</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="../../../js/mui/js/mui.min.js"></script>
+<script src="../../../js/mui/js/mui.picker.min.js"></script>
+<script src="../../../js/jquery.min.js"></script>
+<script src="../../../js/config.js"></script>
+<script>
+    $(function () {
+        var user = JSON.parse(sessionStorage.getItem('affairsUser') || '{}');
+        var optionData = {
+            '1': null,
+            '3': null,
+            '4': null,
+            '5': null,
+            '6': null,
+            '7': null,
+            '8': null,
+        }
+        $('.name').val(user.ename);
+        $('.userid').val(user.userid);
+        var oneDatePicker = new mui.DtPicker({
+            type: 'date'
+            /*beginDate: new Date(2017, 12, 12)*/
+        });
+
+        mui('.container').on('click', '.oneDay', function () {
+            var input = this;
+            input.blur();
+            oneDatePicker.show(function (selectItems) {
+                // console.log(selectItems);//{text: "2016",value: 2016}
+                input.value = selectItems.text;
+            })
+        })
+        $('.materialPicker').on('click', function () {
+            mui('#popover').popover('show');
+        })
+        var materialOption = $('#popover input[name=materialOption]');
+        materialOption.on('change', function () {
+            var $this = $(this)
+            if ($this.attr('id') == 'selectAll') {
+                materialOption.attr('checked', 'checked');
+            }
+            if (!$this.attr('checked')) {
+                $this.removeAttr('checked');
+                $('#popover #selectAll').removeAttr('checked');
+            }
+        })
+        $('#materialOptionConfirm').on('click', function () {
+            var checked = $('#popover input[name=materialOption]:checked');
+            $('#popover input[name=materialOption]:not(checked)').each(function () {
+                $('.option' + $(this).val()).hide();
+            });
+            if (checked.length) {
+                var text = '';
+                checked.each(function () {
+                    var $this = $(this);
+                    if ($this.attr('id') == 'selectAll') return true;
+                    text += $this.prev().text();
+                    $('.option' + $this.val()).show();
+                })
+                text.length > 20 ? text = text.slice(0, 20) + '...' : null;
+                $('.materialPicker').val(text);
+            }
+            mui('#popover').popover('hide');
+        })
+
+        $('#save, #submit').on('click', function () {
+            var name = $.trim($('.name').val());
+            var userid = $.trim($('.userid').val());
+            var sex = $.trim($('.gender:checked').attr('data-val'));
+            var comment = $.trim($('.comment').val());
+            var onedate = $.trim($('.oneDay').val());
+            var department = $.trim($('.department').val());
+            var departmentcn = $.trim($('.departmentcn').val());
+            var position = $.trim($('.position').val());
+            var positioncn = $.trim($('.positioncn').val());
+            var data = {
+                name: name,
+                userid: userid,
+                sex: sex,
+                department: department,
+                departmentcn: departmentcn,
+                position: position,
+                positioncn: positioncn,
+                onboardtime: onedate,
+                comment: comment
+            }
+            if (!name) {
+                mui.alert('Name is required', 'warning', 'Yes');
+                return false;
+            }
+            if (!userid) {
+                mui.alert('User ID is required', 'warning', 'Yes');
+                return false;
+            }
+            if (!sex) {
+                mui.alert('Gender is required', 'warning', 'Yes');
+                return false;
+            }
+            if (!onedate) {
+                mui.alert('Onboard Time is required', 'warning', 'Yes');
+                return false;
+            }
+            if (!department) {
+                mui.alert('Department is required', 'warning', 'Yes');
+                return false;
+            }
+            if (!departmentcn) {
+                mui.alert('Department(CN) is required', 'warning', 'Yes');
+                return false;
+            }
+            if (!position) {
+                mui.alert('Position is required', 'warning', 'Yes');
+                return false;
+            }
+            if (!positioncn) {
+                mui.alert('Position(CN) is required', 'warning', 'Yes');
+                return false;
+            }
+            var flag = false;
+            $('.option-form:visible').each(function(){
+                var $this = $(this);
+                if($this.hasClass('option8')){
+                    if($('#8_file')[0].files.length == 0){
+                        mui.alert('Personal Material File is required', 'warning', 'Yes');
+                        flag = true;
+                        return false;
+                    } else data['8_file'] = $('#8_file')[0].files[0];
+                } else {
+                    var breakEach = true;
+                    $this.find('.option-input').each(function(){
+                        var $this2 = $(this);
+                        if(!$.trim($this2.val())){
+                            flag = true;
+                            breakEach = false;
+                            mui.alert($this.find('.material-option-title').text() +
+                            ' ' + $this2.prev().text() +
+                            ' is required', 'warning', 'Yes');
+                            return false;
+                        } else {
+                            data[$this2.attr('id')] = $this2.val();
+                        }
+                    });
+                    return breakEach;
+                }
+            })
+            if(flag) return false;
+            data.userid = affairsUserId;
+            send(data);
+        })
+
+        $('.back-btn').on('click', function () {
+            window.history.go(-1);
+        })
+
+        function getDefaultData(id) {
+            $.ajax({
+                type: 'GET',
+                url: baseURL + '/templates/getcustomfields',
+                data: {
+                    _dc: '' + Math.random() + Date.now(),
+                    id: id,
+                    userid: affairsUserId
+                },
+                success: function (res) {
+                    if (res.success) optionData[id] = res.obj;
+                    res.obj.forEach(function (item) {
+                        $('.' + item.name).val(item.value || '');
+                    })
+                }
+            })
+        }
+
+        for (var key in optionData) {
+            getDefaultData(key);
+        }
+        function send(data) {
+            // var formdata = new FormData();
+            // for(var key in data){
+            //     formdata.append(key, data[key]);
+            // }
+            // $('.option-form:visible').each(function(){
+            //     formdata.append('templateIds', $(this).attr('class').replace(/[^\d]/g, ''));
+            // });
+            console.log(123)
+            $.ajax({
+                type: 'POST',
+                timeout: 600000,
+                url: baseURL + '/requests/personal/save?userid=' + affairsUserId,
+                contentType: 'multipart/form-data',
+                data: data,
+                // contentType: 'application/json',
+                success: function (res) {
+                    console.log(res)
+                },
+                error: function (res) {
+                    console.log(res)
+                }
+            })
+        }
+
+        $('.file-input').on('change', function () {
+            if (this.files.length == 0) return false;
+            $(this).prev().val(this.files[0].name);
+        });
+    })
+</script>
+
+</html>
