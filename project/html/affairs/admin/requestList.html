@@ -239,7 +239,7 @@
             if (data_id == "listApproved") {
                 list[index].viewApproved = true;
             }
-            sessionStorage.setItem('data', JSON.stringify(list[index]));
+            sessionStorage.setItem('affairsdata', JSON.stringify(list[index]));
             window.location.href = './requestDetail.html?approve=1';
         });
 

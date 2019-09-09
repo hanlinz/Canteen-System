@@ -150,7 +150,7 @@
 <script src="../../../js/config.js"></script>
 <script>
     $(function () {
-        var data = JSON.parse(sessionStorage.getItem('data') || '{}');
+        var data = JSON.parse(sessionStorage.getItem('affairsdata') || '{}');
         var user = JSON.parse(sessionStorage.getItem('affairsUser') || '{}');
         var isApprove = getUrlParam('approve');
         if(isApprove == '1') $('.bottom').show();
