@@ -205,7 +205,9 @@
 
         function getList(that) {
             var filter = searchApplicant;
-            if(filter) 'requestNo lk ' + filter;
+            if(filter){
+                filter = 'requestNo lk ' + filter;
+            }
             $.ajax({
                 type: 'GET',
                 timeout: 600000,
