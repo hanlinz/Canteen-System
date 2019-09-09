@@ -217,7 +217,8 @@
             if (type = 'yes') url = 'approve';
             else url = 'reject';
             var id = $this.parents('.list-item').find('.width1').text();
-            mui.confirm(`Sure to ${url} this request?`, 'Tip', ['Yes', 'No'], function () {
+            mui.confirm(`Sure to ${url} this request?`, 'Tip', ['Yes', 'No'], function (e) {
+                if(e.index == 1) return false;
                 $.ajax({
                     type: 'GET',
                     timeout: 600000,

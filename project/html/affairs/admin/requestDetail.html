@@ -96,6 +96,12 @@
             line-height: 50px;
             font-size: 20px;
         }
+        .container .bottom {
+            height: 100px;
+            width: calc(100% - 20px);
+            padding-top: 30px;
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -128,6 +134,14 @@
         </div>
         <div class="options"></div>
     </form>
+    <div class="mui-row bottom" style="display: none;">
+        <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;">
+            <button type="button" class="mui-btn mui-btn-primary" data-val="2" style="width: 90%;">approve</button>
+        </div>
+        <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;">
+            <button type="button" class="mui-btn" style="width: 90%;" data-val="3">reject</button>
+        </div>
+    </div>
 </div>
 </body>
 <script src="../../../js/jquery.min.js"></script>
@@ -138,8 +152,13 @@
     $(function () {
         var data = JSON.parse(sessionStorage.getItem('data') || '{}');
         var user = JSON.parse(sessionStorage.getItem('affairsUser') || '{}');
+        var isApprove = getUrlParam('approve');
+        if(isApprove == '1') $('.bottom').show();
+        else $('.bottom').hide();
+        
         getData(data.id);
-        var isAdmin = user.isAdmin;
+        // var isAdmin = user.isAdmin;
+        var isAdmin = true;
 
         function getData(id) {
             $.ajax({
@@ -205,18 +224,27 @@
                 },
                 success: function (res) {
                     if (res.success && res.success == true) {
-                        mui.alert('Approval Success', 'warning', 'Yes');
+                        mui.alert('Approval Success', 'success', 'Yes');
                     } else {
                         mui.alert(res.message, 'warning', 'Yes');
                     }
-                    that && that.endPullupToRefresh(true);
+                    window.location.replace('./requestList.html');
                 },
                 error: function (res) {
-                    console.log(res)
-                    that && that.endPullupToRefresh(true);
+                    // console.log(res)
+                    mui.alert('Approval Failed', 'Error', 'Yes');
+                    window.location.replace('./requestList.html');
                 }
             })
         }
+
+        $('.bottom button').on('click', function(){
+            var $this = $(this);
+            mui.confirm(`Sure to ${$this.text()} this request?`, 'Tip', ['Yes', 'No'], function (e) {
+                if(e.index == 0) changestatus(data.id, $this.attr('data-val'));
+            })
+            
+        })
     })
 
 </script>

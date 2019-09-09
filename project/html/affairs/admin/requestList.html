@@ -240,7 +240,7 @@
                 list[index].viewApproved = true;
             }
             sessionStorage.setItem('data', JSON.stringify(list[index]));
-            window.location.href = './requestDetail.html';
+            window.location.href = './requestDetail.html?approve=1';
         });
 
         $('.searchBtn').on('click', function () {
