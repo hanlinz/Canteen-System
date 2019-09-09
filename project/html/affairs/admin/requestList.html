@@ -81,109 +81,227 @@
 </head>
 
 <body>
-    <header class="mui-bar mui-bar-nav mui-bar-transparent">
-        <h1 class="mui-title" style="color: #fff;">Personal Affairs</h1>
-        <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
-    </header>
-    <div class="container">
-        <p>Request for Approve</p>
-        <div class="mui-content" style="background-color: #fff;">
-            <div class="mui-row">
-                <div class="mui-col-sm-9 mui-col-xs-9">
-                    <input type="text" class="input" placeholder="Search text" style="width: 100%;">
-                </div>
-                <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
-                    <button type="button" class="mui-btn mui-btn-primary">Search</button>
-                </div>
+<header class="mui-bar mui-bar-nav mui-bar-transparent">
+    <h1 class="mui-title" style="color: #fff;">Personal Affairs</h1>
+    <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
+</header>
+<div class="container">
+    <p>Request for Approve</p>
+    <div class="mui-content" style="background-color: #fff;">
+        <div class="mui-row">
+            <div class="mui-col-sm-9 mui-col-xs-9">
+                <input type="text" class="input" placeholder="Search text" style="width: 100%;">
             </div>
-        </div>
-        <p class="table-header">
-            <span class="fl width1">Request No</span>
-            <span class="fl width2">Request Date</span>
-            <span class="fl width3">Category</span>
-            <span class="fl width4">Applicant</span>
-            <span class="fl width5"></span>
-        </p>
-        <div class="listContainer">
-            <div class="mui-scroll-wrapper">
-                <div class="mui-scroll" id="scroll">
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Incoming</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Incoming</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Incoming</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                    <div class="list-item">
-                        <span class="fl width1">230482-234</span>
-                        <span class="fl width2">20190729</span>
-                        <span class="fl width3">Incoming</span>
-                        <span class="fl width4">Jim</span>
-                        <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty"></i>
-                            <i class="mui-icon mui-icon-closeempty"></i>
-                        </span>
-                    </div>
-                </div>
+            <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
+                <button type="button" class="mui-btn mui-btn-primary">Search</button>
             </div>
         </div>
     </div>
+    <p class="table-header">
+        <span class="fl width1">Request No</span>
+        <span class="fl width2">Request Date</span>
+        <span class="fl width3">Category</span>
+        <span class="fl width4">Applicant</span>
+        <span class="fl width5"></span>
+    </p>
+    <div class="listContainer">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll" id="scroll">
+                <!--
+                <div class="list-item">
+                    <span class="fl width1">230482-234</span>
+                    <span class="fl width2">20190729</span>
+                    <span class="fl width3">Incoming</span>
+                    <span class="fl width4">Jim</span>
+                    <span class="fl width5">
+                            <i class="mui-icon mui-icon-checkmarkempty approve"></i>
+                            <i class="mui-icon mui-icon-closeempty reject"></i>
+                        </span>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script src="../../../js/mui/js/mui.min.js"></script>
+<script src="../../../js/jquery.min.js"></script>
+<script src="../../../js/config.js"></script>
 <script>
-    mui.init({
-        pullRefresh: {
-            container: '.mui-scroll-wrapper',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
-            up: {
-                height: 50,//可选.默认50.触发上拉加载拖动距离
-                auto: false,//可选,默认false.自动上拉加载一次
-                contentrefresh: "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
-                contentnomore: '没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
-                callback: function () {
-                    console.log(12312313)
-                    setTimeout((function (that) {
-                        return function () {
-                            that.endPullupToRefresh(true | false);
-                        }
-                    })(this), 2000);
-                } //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+    $(function () {
+        var start = 0;
+        var isAdmin = false;
+        var limit = 50;
+        var pagesize = 1;
+        var list = [];
+        var searchApplicant = '';
+        var api = getUrlParam('type') || 'listUnapproved';
+        $('.top-btn-area .top-type[data-id=' + api + ']').removeClass('mui-btn-outlined').siblings().addClass('mui-btn-outlined');
+        mui.init({
+            pullRefresh: {
+                container: '.mui-scroll-wrapper',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+                up: {
+                    height: 50,//可选.默认50.触发上拉加载拖动距离
+                    auto: false,//可选,默认false.自动上拉加载一次
+                    contentrefresh: "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+                    contentnomore: '没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+                    callback: function () {
+                        start = start + limit;
+                        pagesize++;
+                        getList(this);
+                    } //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+                }
             }
+        });
+        mui('.list-item').on('click', '.mui-icon-checkmarkempty', function () {
+            mui.confirm('Sure to Approve?', 'Tips', ['Yes', 'No'], function (obj) {
+                console.log(obj)
+            })
+        }).on('click', '.mui-icon-closeempty', function () {
+            mui.confirm('Sure to Reject?', 'Tips', ['Yes', 'No'], function (obj) {
+                console.log(obj)
+            })
+        })
+
+        function date2str(date) {
+            if (!date) return '';
+            if (/^\d+-\d+-\d+/.test(date)) return date;
+            date = new Date(date);
+            return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getDate();
         }
-    });
-    mui('.mui-scroll-wrapper').scroll({
-        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-    });
-    mui('.list-item').on('click', '.mui-icon-checkmarkempty', function () {
-        mui.confirm('Sure to Approve?', 'Tips', ['Yes', 'No'], function (obj) {
-            console.log(obj)
+
+        function getUser() {
+            $.ajax({
+                type: 'GET',
+                timeout: 600000,
+                url: baseURL + '/user/get',
+                data: {
+                    _dc: Date.now(),
+                    userid: affairsUserId
+                },
+                success: function (res) {
+                    if (res.success) {
+                        sessionStorage.setItem('affairsUser', JSON.stringify(res.obj));
+                        isAdmin = res.obj.isAdmin;
+                    }
+                }
+            })
+        }
+
+        function getList(that) {
+            var filter = searchApplicant;
+            if (filter) 'requestNo lk ' + filter;
+            $.ajax({
+                type: 'GET',
+                timeout: 600000,
+                url: baseURL + '/requests/list',
+                data: {
+                    _dc: Date.now(),
+                    pagesize: pagesize,
+                    start: start,
+                    userid: affairsUserId,
+                    filter: filter,
+                    limit: limit
+                },
+                success: function (res) {
+                    if (res.data && res.data.length) {
+                        var str = '';
+                        // list = [];
+                        // $('.listContainer #scroll .list-item').remove();
+                        res.data.forEach(function (item) {
+                            list.push(item);
+                            str += `<div class="list-item">
+                                <span class="fl width1">${item.requestNo || ''}</span>
+                                <span class="fl width2">${date2str(item.createtime || '')}</span>
+                                <span class="fl width3">${item.comments || ''}</span>
+                                <span class="fl width4">${item.requestor || ''}</span>
+                                <span class="fl width5">
+                                    <i class="mui-icon mui-icon-checkmarkempty approve"></i>
+                                    <i class="mui-icon mui-icon-closeempty reject"></i>
+                                </span>
+                            </div>`;
+                        })
+                        $(str).insertBefore('.listContainer #scroll .mui-pull-bottom-pocket');
+                    }
+                    that && that.endPullupToRefresh(true);
+                },
+                error: function (res) {
+                    console.log(res)
+                    that && that.endPullupToRefresh(true);
+                }
+            })
+        }
+
+        getUser();
+        getList();
+
+        $('.listContainer #scroll').on('click', '.approve', function () {
+            var index = $(this).index();
+            var data_id = $('.top-btn-area .top-type').not('.mui-btn-outlined').attr('data-id');
+            if (data_id == "listApproved") {
+                list[index].viewApproved = true;
+            }
+            changestatus(list[index].id, 2);
+        });
+
+        $('.listContainer #scroll').on('click', '.reject', function () {
+            var index = $(this).index();
+            var data_id = $('.top-btn-area .top-type').not('.mui-btn-outlined').attr('data-id');
+            if (data_id == "listApproved") {
+                list[index].viewApproved = true;
+            }
+            changestatus(list[index].id, 3);
+        });
+
+        $('.searchBtn').on('click', function () {
+            start = 0;
+            var newsearchApplicant = $('.search').val();
+            if (searchApplicant == newsearchApplicant) {
+            } else {
+                list = [];
+                start = 0;
+                limit = 50;
+                pagesize = 1;
+                searchApplicant = newsearchApplicant;
+                $('.listContainer #scroll .list-item').remove();
+                getList()
+                $('#scroll').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
+            }
+        });
+
+        $('.back-btn').on('click', function () {
+            window.history.go(-1);
         })
-    }).on('click', '.mui-icon-closeempty', function () {
-        mui.confirm('Sure to Reject?', 'Tips', ['Yes', 'No'], function (obj) {
-            console.log(obj)
-        })
+
+        function changestatus(id, status) {
+            if (isAdmin == false) {
+                mui.alert('Only Administrators Can Approve ', 'warning', 'Yes');
+                return;
+            }
+            $.ajax({
+                type: 'GET',
+                timeout: 600000,
+                url: baseURL + '/requests/changestatus',
+                data: {
+                    _dc: Date.now(),
+                    id: id,
+                    status: status,
+                    userid: affairsUserId,
+                },
+                success: function (res) {
+                    if (res.success && res.success == true) {
+                        mui.alert('Approval Success', 'warning', 'Yes');
+                    } else {
+                        mui.alert(res.message, 'warning', 'Yes');
+                    }
+                    that && that.endPullupToRefresh(true);
+                },
+                error: function (res) {
+                    console.log(res)
+                    that && that.endPullupToRefresh(true);
+                }
+            })
+        }
     })
 </script>
 

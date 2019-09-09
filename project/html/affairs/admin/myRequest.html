@@ -125,10 +125,10 @@
             </div>
         </div>
         <p class="table-header">
-            <span class="fl width1">Requestid</span>
+            <span class="fl width1">RequestNo</span>
             <span class="fl width2">Requesttime</span>
             <span class="fl width3">Commonents</span>
-            <span class="fl width4"></span>
+            <span class="fl width4">Requestor</span>
             <span class="fl width5"></span>
         </p>
         <div class="listContainer">
@@ -272,6 +272,9 @@
         });
         $('.newReq').on('click', function(){
             window.location.href = './newRequest.html';
+        })
+        $('.back-btn').on('click', function(){
+            window.history.go(-1);
         })
     })
 </script>
