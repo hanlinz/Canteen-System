@@ -87,7 +87,7 @@
             display: none;
         }
 
-        .options{
+        .options {
             padding-left: 15px;
         }
 
@@ -100,35 +100,35 @@
 </head>
 
 <body>
-    <header class="mui-bar mui-bar-nav mui-bar-transparent">
-        <h1 class="mui-title" style="color: #fff;">Online Cerification System</h1>
-        <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
-    </header>
-    <div class="container">
-        <form class="mui-input-group main-form">
-            <div class="mui-input-row">
-                <label>Name</label>
-                <input type="text" disabled class="name">
-            </div>
-            <div class="mui-input-row">
-                <label>Request No</label>
-                <input type="text" disabled class="requestno">
-            </div>
-            <div class="mui-input-row">
-                <label>Status</label>
-                <input type="text" disabled class="status">
-            </div>
-            <div class="mui-input-row">
-                <label>Request Time</label>
-                <input type="text" disabled class="time">
-            </div>
-            <div class="mui-input-row">
-                <label>Comments</label>
-                <input type="text" disabled class="comments">
-            </div>
-            <div class="options"></div>
-        </form>
-    </div>
+<header class="mui-bar mui-bar-nav mui-bar-transparent">
+    <h1 class="mui-title" style="color: #fff;">Online Cerification System</h1>
+    <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
+</header>
+<div class="container">
+    <form class="mui-input-group main-form">
+        <div class="mui-input-row">
+            <label>Name</label>
+            <input type="text" disabled class="name">
+        </div>
+        <div class="mui-input-row">
+            <label>Request No</label>
+            <input type="text" disabled class="requestno">
+        </div>
+        <div class="mui-input-row">
+            <label>Status</label>
+            <input type="text" disabled class="status">
+        </div>
+        <div class="mui-input-row">
+            <label>Request Time</label>
+            <input type="text" disabled class="time">
+        </div>
+        <div class="mui-input-row">
+            <label>Comments</label>
+            <input type="text" disabled class="comments">
+        </div>
+        <div class="options"></div>
+    </form>
+</div>
 </body>
 <script src="../../../js/jquery.min.js"></script>
 <script src="../../../js/mui/js/mui.min.js"></script>
@@ -137,7 +137,9 @@
 <script>
     $(function () {
         var data = JSON.parse(sessionStorage.getItem('data') || '{}');
+        var user = JSON.parse(sessionStorage.getItem('affairsUser') || '{}');
         getData(data.id);
+        var isAdmin = user.isAdmin;
 
         function getData(id) {
             $.ajax({
@@ -180,9 +182,41 @@
                 $('.options').html(str);
             }
         }
-        $('.back-btn').on('click', function(){
+
+        $('.back-btn').on('click', function () {
             window.history.go(-1);
         })
+
+        function changestatus(id, status) {
+            //approve时status=2,reject时为 3
+            if (isAdmin == false) {
+                mui.alert('Only Administrators Can Approve ', 'warning', 'Yes');
+                return;
+            }
+            $.ajax({
+                type: 'GET',
+                timeout: 600000,
+                url: baseURL + '/requests/changestatus',
+                data: {
+                    _dc: Date.now(),
+                    id: id,
+                    status: status,
+                    userid: affairsUserId,
+                },
+                success: function (res) {
+                    if (res.success && res.success == true) {
+                        mui.alert('Approval Success', 'warning', 'Yes');
+                    } else {
+                        mui.alert(res.message, 'warning', 'Yes');
+                    }
+                    that && that.endPullupToRefresh(true);
+                },
+                error: function (res) {
+                    console.log(res)
+                    that && that.endPullupToRefresh(true);
+                }
+            })
+        }
     })
 
 </script>

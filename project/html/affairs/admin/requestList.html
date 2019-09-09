@@ -114,8 +114,7 @@
                     <span class="fl width3">Incoming</span>
                     <span class="fl width4">Jim</span>
                     <span class="fl width5">
-                            <i class="mui-icon mui-icon-checkmarkempty approve"></i>
-                            <i class="mui-icon mui-icon-closeempty reject"></i>
+                            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined view">view</button>
                         </span>
                 </div>
                 -->
@@ -130,7 +129,6 @@
 <script>
     $(function () {
         var start = 0;
-        var isAdmin = false;
         var limit = 50;
         var pagesize = 1;
         var list = [];
@@ -182,7 +180,6 @@
                 success: function (res) {
                     if (res.success) {
                         sessionStorage.setItem('affairsUser', JSON.stringify(res.obj));
-                        isAdmin = res.obj.isAdmin;
                     }
                 }
             })
@@ -218,8 +215,7 @@
                                 <span class="fl width3">${item.comments || ''}</span>
                                 <span class="fl width4">${item.requestor || ''}</span>
                                 <span class="fl width5">
-                                    <i class="mui-icon mui-icon-checkmarkempty approve"></i>
-                                    <i class="mui-icon mui-icon-closeempty reject"></i>
+                                    <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined view">view</button>
                                 </span>
                             </div>`;
                         })
@@ -237,22 +233,14 @@
         getUser();
         getList();
 
-        $('.listContainer #scroll').on('click', '.approve', function () {
+        $('.listContainer #scroll').on('click', '.view', function () {
             var index = $(this).index();
             var data_id = $('.top-btn-area .top-type').not('.mui-btn-outlined').attr('data-id');
             if (data_id == "listApproved") {
                 list[index].viewApproved = true;
             }
-            changestatus(list[index].id, 2);
-        });
-
-        $('.listContainer #scroll').on('click', '.reject', function () {
-            var index = $(this).index();
-            var data_id = $('.top-btn-area .top-type').not('.mui-btn-outlined').attr('data-id');
-            if (data_id == "listApproved") {
-                list[index].viewApproved = true;
-            }
-            changestatus(list[index].id, 3);
+            sessionStorage.setItem('data', JSON.stringify(list[index]));
+            window.location.href = './requestDetail.html';
         });
 
         $('.searchBtn').on('click', function () {
@@ -275,35 +263,6 @@
             window.history.go(-1);
         })
 
-        function changestatus(id, status) {
-            if (isAdmin == false) {
-                mui.alert('Only Administrators Can Approve ', 'warning', 'Yes');
-                return;
-            }
-            $.ajax({
-                type: 'GET',
-                timeout: 600000,
-                url: baseURL + '/requests/changestatus',
-                data: {
-                    _dc: Date.now(),
-                    id: id,
-                    status: status,
-                    userid: affairsUserId,
-                },
-                success: function (res) {
-                    if (res.success && res.success == true) {
-                        mui.alert('Approval Success', 'warning', 'Yes');
-                    } else {
-                        mui.alert(res.message, 'warning', 'Yes');
-                    }
-                    that && that.endPullupToRefresh(true);
-                },
-                error: function (res) {
-                    console.log(res)
-                    that && that.endPullupToRefresh(true);
-                }
-            })
-        }
     })
 </script>
 
