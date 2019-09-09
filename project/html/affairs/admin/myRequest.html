@@ -254,7 +254,7 @@
             var index = $(this).index();
             var data_id = $('.top-btn-area .top-type').not('.mui-btn-outlined').attr('data-id');
             if(data_id == "listApproved") list[index].viewApproved = true;
-            sessionStorage.setItem('data', JSON.stringify(list[index]));
+            sessionStorage.setItem('affairsdata', JSON.stringify(list[index]));
             window.location.href = './requestDetail.html';
         });
         $('.searchBtn').on('click', function () {

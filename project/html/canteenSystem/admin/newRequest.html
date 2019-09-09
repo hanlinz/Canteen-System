@@ -409,7 +409,7 @@
         })
         if (window.location.search.indexOf('isView=1') > -1) {
             $('.bottom .request').hide();
-            var data = JSON.parse(sessionStorage.getItem('data') || '{}');
+            var data = JSON.parse(sessionStorage.getItem('csdata') || '{}');
             if (data.isMine == '2' && data.isApproved != '1' && data.isApproved != '2') {
                 $('.bottom .approve').show();
             } else {
