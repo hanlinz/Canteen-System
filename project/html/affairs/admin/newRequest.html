@@ -188,33 +188,33 @@
                 <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
                     <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
                         <label>male</label>
-                        <input name="gender" class="gender" data-val="male" type="radio" disabled>
+                        <input name="gender" class="gender" data-val="male" type="radio">
                     </div>
                     <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
                         <label>female</label>
-                        <input name="gender" class="gender" data-val="female" type="radio" disabled>
+                        <input name="gender" class="gender" data-val="female" type="radio">
                     </div>
                 </div>
             </div>
             <div class="mui-input-row">
                 <label>Department</label>
-                <input type="text" class="department" placeholder="Department" disabled>
+                <input type="text" class="department" placeholder="Department">
             </div>
             <div class="mui-input-row">
                 <label>Department(CN)</label>
-                <input type="text" class="departmentcn" placeholder="Department(CN)" disabled>
+                <input type="text" class="departmentcn" placeholder="Department(CN)">
             </div>
             <div class="mui-input-row">
                 <label>Position</label>
-                <input type="text" class="position" placeholder="Position" disabled>
+                <input type="text" class="position" placeholder="Position">
             </div>
             <div class="mui-input-row">
                 <label>Position(CN)</label>
-                <input type="text" class="positioncn" placeholder="Position(CN)" disabled>
+                <input type="text" class="positioncn" placeholder="Position(CN)">
             </div>
             <div class="mui-input-row singleTime">
                 <label>Onboard Time</label>
-                <input type="text" class="oneDay" placeholder="Onboard Time" disabled>
+                <input type="text" class="oneDay" placeholder="Onboard Time">
                 <span class="mui-icon mui-icon-arrowright selectIcon"></span>
             </div>
             <div class="mui-input-row">
@@ -465,7 +465,7 @@
         $('.name').val(user.ename);
         $('.userid').val(user.userid);
         $('.department').val(user.deparment);
-        $('.departmentcn').val(user.deparmentcn);
+        $('.departmentcn').val(user.departmentcn);
         $('.position').val(user.position);
         $('.positioncn').val(user.positioncn);
         $('input[data-val=' + user.sex + ']').attr('checked', 'true');
