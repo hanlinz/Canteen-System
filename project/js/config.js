@@ -1,5 +1,5 @@
 var baseURL = 'http://139.217.97.220:80'
-var userid = 'yum3';
+var userid = sessionStorage.getItem('userid') || '' //'yum3';
 var affairsUserId = '43'
 
 // 获取url参数的公共方法
@@ -9,3 +9,46 @@ function getUrlParam(name) {//封装方法
     if (r != null) return unescape(r[2]);
     return null; //返回参数值
 }
+$(function(){
+    var code = getUrlParam('code');
+    var state = getUrlParam('state');
+    if(!userid) {
+        $.ajax({
+            type: 'POST',
+            url: baseURL + '/login/with/company/wechat',
+            data: {
+                code: code,
+                state: state
+            },
+            success: function(res){
+                if(typeof res == 'string') {
+                    res = JSON.parse(res);
+                }
+                if(res.success){
+                    userid = (res.data || '').trim();
+                    if(userid) {
+                        sessionStorage.setItem('userid', userid);
+                    }
+                } else {
+                    mui.alert(res.msg || 'cannot get userid', 'warning', 'Yes');
+                    sessionStorage.setItem('userid', '');
+                }
+            },
+            error: function(){
+                userid = '';
+                mui.alert('get userid failed', 'warning', 'Yes');
+                sessionStorage.setItem('userid', '');
+            }
+        });
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, obj){
+            if(obj.url.indexOf('/login/with/company/wechat') == -1){
+                if(!userid){
+                    xhr.abort();
+                }
+            }
+        }
+    })
+
+})
