@@ -14,7 +14,7 @@ $(function(){
     var state = getUrlParam('state');
     if(!userid) {
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: baseURL + '/login/with/company/wechat',
             data: {
                 code: code,
