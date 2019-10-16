@@ -1,4 +1,4 @@
-var baseURL = 'http://http://vac.zfatcchina.com'
+var baseURL = 'http://vac.zfatcchina.com'
 var userid = sessionStorage.getItem('userid') || '' //'yum3';
 var affairsUserId = '43'
 
