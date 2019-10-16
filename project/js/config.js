@@ -16,6 +16,7 @@ $(function(){
         $.ajax({
             type: 'GET',
             url: baseURL + '/login/with/company/wechat',
+            async: false,
             data: {
                 code: code,
                 state: state
