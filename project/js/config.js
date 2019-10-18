@@ -15,7 +15,7 @@ $(function(){
     if(!userid) {
         $.ajax({
             type: 'GET',
-            url: baseURL + '/login/with/company/wechat',
+            url: baseURL + '/login/with/company/mini',
             async: false,
             data: {
                 code: code,
@@ -44,7 +44,7 @@ $(function(){
     }
     $.ajaxSetup({
         beforeSend: function(xhr, obj){
-            if(obj.url.indexOf('/login/with/company/wechat') == -1){
+            if(obj.url.indexOf('/login/with/company/mini') == -1){
                 if(!userid){
                     xhr.abort();
                 }
