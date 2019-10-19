@@ -179,6 +179,7 @@
             <span class="mui-icon mui-icon-arrowright selectIcon"></span>
         </div>
         <div id="qrcode" style="width: 100px;height: 100px;margin: 30px auto 0px;"></div>
+        <div class="qr-text" style="text-align: center;display: none;">uniqueCode</div>
     </form>
     <div class="mui-row bottom">
         <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;display: none;">
@@ -422,6 +423,7 @@
                     height : 100
                 });
                 qrcode.makeCode(data.barcode || 'no content');
+                $('.qr-text').show();
             }
         } else {
             $('.bottom .request').show();
