@@ -423,7 +423,7 @@
                     height : 100
                 });
                 qrcode.makeCode(data.barcode || 'no content');
-                $('.qr-text').show();
+                $('.qr-text').text(data.uniqueCode).show();
             }
         } else {
             $('.bottom .request').show();
