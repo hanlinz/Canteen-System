@@ -1,5 +1,5 @@
-var baseURL = 'http://vac.zfatcchina.com'
-var userid = sessionStorage.getItem('userid') || '' //'yum3';
+var baseURL = 'http://vac.zfatcchina.com:8002'
+var userid = sessionStorage.getItem('userid') || '43' //'yum3';
 var affairsUserId = '43'
 
 // 获取url参数的公共方法

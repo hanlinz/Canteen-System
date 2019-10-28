@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-store">
+    <title>request</title>
+    <link rel="stylesheet" href="../../js/mui/css/mui.min.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <style>
+        .container {
+            height: 100%;
+            padding: 50px 6px 0;
+            font-size: 17px;
+        }
+
+        .container .input {
+            padding: 0 .2rem;
+            width: 13rem;
+            height: 32px;
+            line-height: 32px;
+            font-size: 14px;
+            padding: 0 10px;
+        }
+
+        .table-header {
+            color: #000;
+            font-size: 12px;
+            height: 26px;
+            line-height: 26px;
+            margin: 0;
+            border: 1px solid #ccc;
+            font-weight: 700;
+        }
+
+        .listContainer {
+            height: calc(100% - 111px);
+            width: 100%;
+            border-width: 0 1px 0px;
+            border-style: solid;
+            border-color: #ccc;
+            color: #333;
+            position: relative;
+        }
+
+        .table-header span,
+        .listContainer span {
+            text-align: center;
+        }
+
+        .list-item {
+            width: 100%;
+            height: 24px;
+            line-height: 24px;
+            font-size: 12px;
+            overflow: hidden;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .list-item .mui-icon {
+            vertical-align: top;
+        }
+
+        .list-item .mui-icon-checkmarkempty {
+            color: #4cd964;
+        }
+
+        .list-item .mui-icon-closeempty {
+            color: red;
+        }
+
+        .list-item .mui-btn {
+            height: 20px;
+            line-height: 20px;
+            font-size: 12px;
+            padding: 1px 6px;
+            margin-top: 2px;
+        }
+
+        .width1 {
+            width: 25%;
+        }
+
+        .width2 {
+            width: 23%;
+        }
+
+        .width3 {
+            width: 18%;
+        }
+
+        .width4 {
+            width: 20%;
+        }
+
+        .width5 {
+            width: 14%;
+        }
+
+        .width5 .mui-btn {
+            line-height: 16px;
+        }
+
+        .container .top-type {
+            border-radius: 17px;
+            padding: 3px 6px;
+            margin-right: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-transparent">
+        <h1 class="mui-title" style="color: #fff;">Request Business</h1>
+        <span class="back-btn" onclick="window.history.go(-1)"><i class="mui-icon mui-icon-undo"></i></span>
+    </header>
+    <div class="container">
+        <p class="top-btn-area">
+            <button type="button" class="mui-btn mui-btn-primary top-type" data-id="my">mine</button>
+            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined top-type" data-id="listneedapprove">
+                approve
+            </button>
+        </p>
+        <div class="mui-content" style="background-color: #fff;">
+            <div class="mui-row">
+                <div class="mui-col-sm-6 mui-col-xs-6">
+                    <input type="text" class="input search" placeholder="Search text" style="width: 100%;">
+                </div>
+                <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
+                    <button type="button" class="mui-btn mui-btn-primary searchBtn">Search</button>
+                </div>
+                <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
+                    <button type="button" class="mui-btn mui-btn-primary" onclick="opennew();">new Req</button>
+                </div>
+            </div>
+        </div>
+        <p class="table-header">
+            <span class="fl width1">Request No</span>
+            <span class="fl width2">RequestTime</span>
+            <span class="fl width3">Requestor</span>
+            <span class="fl width4">Status</span>
+            <span class="fl width5"></span>
+        </p>
+        <div class="listContainer">
+            <div class="mui-scroll-wrapper">
+                <div class="mui-scroll" id="scroll"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../js/mui/js/mui.min.js"></script>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/config.js"></script>
+<script>
+    $(function () {
+        var start = 0;
+        var limit = 50;
+        var page = 0;
+        var list = [];
+        var searchApplicant = '';
+        var api = getUrlParam('type') || 'my';
+        $('.top-btn-area .top-type[data-id=' + api + ']').removeClass('mui-btn-outlined').siblings().addClass('mui-btn-outlined');
+        mui.init({
+            pullRefresh: {
+                container: '.mui-scroll-wrapper',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+                up: {
+                    height: 50,//可选.默认50.触发上拉加载拖动距离
+                    auto: false,//可选,默认false.自动上拉加载一次
+                    contentrefresh: "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+                    contentnomore: '没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+                    callback: function () {
+                        page++;
+                        start = page * limit;
+                        getList(this);
+                    } //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+                }
+            }
+        });
+        // mui('.mui-scroll-wrapper').scroll({
+        //     deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        // });
+        mui('.list-item').on('click', '.mui-icon-checkmarkempty', function () {
+            mui.confirm('Sure to Approve?', 'Tips', ['Yes', 'No'], function (obj) {
+                console.log(obj)
+            })
+        }).on('click', '.mui-icon-closeempty', function () {
+            mui.confirm('Sure to Reject?', 'Tips', ['Yes', 'No'], function (obj) {
+                console.log(obj)
+            })
+        })
+
+        function date2str(date) {
+            if (!date) return '';
+            if (/^\d+-\d+-\d+/.test(date)) return date;
+            date = new Date(date);
+            return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getDate();
+        }
+
+        function getList(that) {
+            var url = baseURL + '/requests/' + api;
+            $.ajax({
+                type: 'GET',
+                timeout: 600000,
+                url: url,
+                data: {
+                    _dc: Date.now(),
+                    search: searchApplicant,
+                    userid: userid,
+                    start: start,
+                    length: limit
+                },
+                success: function (res) {
+                    if (res.datas && res.datas.length) {
+                        var str = '';
+                        // list = [];
+                        // $('.listContainer #scroll .list-item').remove();
+                        res.datas.forEach(function (item) {
+                            list.push(item);
+                            str += `<div class="list-item">
+                                <span class="fl width1">${item.requestNo}</span>
+                                <span class="fl width2">${date2str(item.createTime)}</span>
+                                <span class="fl width3">${item.requestor}</span>
+                                <span class="fl width4">${item.status}</span>
+                                <span class="fl width5">
+                                    <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined view">view</button>
+                                </span>
+                            </div>`;
+                        })
+                        $(str).insertBefore('.listContainer #scroll .mui-pull-bottom-pocket');
+                    }
+                    that && that.endPullupToRefresh(true);
+                },
+                error: function (res) {
+                    console.log(res)
+                    that && that.endPullupToRefresh(true);
+                }
+            })
+        }
+
+        getList();
+        $('.listContainer #scroll').on('click', '.view', function () {
+            var index = $(this).parents('.list-item').index();
+            var data_id = $('.top-btn-area .top-type').not('.mui-btn-outlined').attr('data-id');
+            if (data_id == "listApproved") list[index].viewApproved = true;
+            sessionStorage.setItem('csdata', JSON.stringify(list[index]));
+            window.location.href = './newRequest.html?isView=1';
+        });
+        $('.searchBtn').on('click', function () {
+            start = 0;
+            var newsearchApplicant = $('.search').val();
+            if (searchApplicant == newsearchApplicant) {
+            } else {
+                list = [];
+                start = 0;
+                limit = 50;
+                page = 0;
+                $('.listContainer #scroll .list-item').remove();
+                getList()
+                $('#scroll').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
+            }
+        });
+        $('.top-btn-area .top-type').on('click', function () {
+            // $(this).removeClass('mui-btn-outlined').siblings().addClass('mui-btn-outlined');
+            // mui('.mui-scroll-wrapper').pullRefresh().refresh(true);
+            // var newapi = $(this).attr('data-id');
+            // if (api == newapi) {
+            // } else {
+            //     //将必要的一些参数清空，分页参数，查询条件，list等
+            //     $('.listContainer #scroll .list-item').remove();
+            //     $('.search').val("");
+            //     list = [];
+            //     start = 0;
+            //     limit = 50;
+            //     page = 1;
+            //     api = newapi;
+            //     getList();
+            //     $('#scroll').css('transform', 'translate3d(0px, 0px, 0px) translateZ(0px)');
+            // }
+            window.location.replace(window.location.origin + window.location.pathname + '?type=' + $(this).attr('data-id'));
+        })
+    })
+
+    function opennew() {
+        window.location.href = 'newRequest.html';
+    }
+</script>
+
+</html>
