@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <META CONTENT="no-store" HTTP-EQUIV="Pragma">
+    <script src="../js/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            overflow: hidden;
+            background-color: rgba(61, 158, 247, 1);
+            padding-top: 0px;
+        }
+
+        .login-box {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0);
+            border-radius: 8px;
+            position: absolute;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+        }
+
+        .title {
+            position: static;
+            height: 80px;
+            width: 100%;
+            line-height: 80px;
+            font-size: 21px;
+            text-align: center;
+            color: #409bdc;
+            font-weight: 700;
+        }
+
+        .container {
+            position: relative;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 1);
+            border-radius: 10px;
+            vertical-align: middle;
+            width: 98%;
+            margin-left: 1%;
+        }
+
+        #info-container .form {
+            box-sizing: border-box;
+            height: 100%;
+
+        }
+
+        .form-item {
+            height: 40px;
+            line-height: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-title,
+        .form-content {
+            display: inline-block;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .form-title {
+            width: 40%;
+            text-align: right;
+        }
+
+        .form-content {
+            width: 50%;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .form-content input {
+            width: 160px;
+            height: 32px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding-left: 10px;
+        }
+
+        .form-item .login-btn {
+            width: 300px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: #409bdc;
+            color: #fff;
+            text-align: center;
+            display: inline-block;
+
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="login-box">
+
+    <div class="container" id="info-container">
+        <div class="title">绑定邮箱</div>
+        <div class="form">
+            <div class="form-item">
+                <div class="form-title">Email：</div>
+                <div class="form-content"><input type="text" placeholder="Email" id="email"/></div>
+            </div>
+            <div class="form-item detailuser">
+                <div class="form-title">userId：</div>
+                <div id="userid" class="form-content" style="padding-left: 10px;"></div>
+            </div>
+            <div class="form-item detailuser">
+                <div class="form-title">Ename：</div>
+                <div id="ename" class="form-content" style="padding-left: 10px;"></div>
+            </div>
+            <div class="form-item detailuser">
+                <div class="form-title">name：</div>
+                <div id="name" class="form-content" style="padding-left: 10px;"></div>
+            </div>
+            <div class="form-item">
+                <div id="submitemail" class="login-btn" onclick="submitEmail()">Submit MEmail</div>
+            </div>
+            <div id="bindemail" class="form-item">
+                <div class="login-btn" onclick="bindEmail()">Bind MEmail</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+    var companyUserid;
+
+    function getQueryString(name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    }
+
+    jQuery(function ($) {
+        $(".detailuser").hide();
+        // 初始化内容
+        var code = getQueryString('code')
+        if (code == null) {
+            $("#submitemail").hide();
+            $("#bindemail").hide();
+            alert("Sorry, joining the enterprise failed, please contact the administrator to operate.");
+        } else {
+            $("#bindemail").hide();
+            submitCode();
+        }
+    });
+
+    function submitEmail() {
+        var email = document.getElementById("email").value;
+        $.ajax({
+            async: true,
+            url: "/user/email/login",
+            type: 'get',//请求的方式
+            data: "unionid=union123" + "&email=" + email,//请求的数据
+            success: function (backdata) {//请求成功后返回的数据会封装在回调函数的第一个参数中
+                //通过backdata来获取所需要的数据
+                var success = backdata.success;
+                if (success == true) {
+                    var data = backdata.values;
+                    $('#email').attr("readonly", true);
+                    $("#userid").innerText = data.id;
+                    $("#ename").innerText = data.ename;
+                    $("#name").innerText = data.name;
+                    $("#bindemail").show();
+                    $(".detailuser").show();
+                    $("#submitemail").hide();
+                } else {
+                    alert(backdata.msg);
+                }
+            },
+            error: function () {//响应不成功时返回的函数
+                alert("submit email fail ,Please try again later!!!");
+                $("#submit_email").hide();
+            },
+            dataType: 'json'//设置返回的数据类型
+        })
+    }
+
+    function bindEmail() {
+        var email = $("#email").val();
+        var code = getQueryString('code')
+        $.ajax({
+            async: true,
+            url: "/company/mini/bind",
+            type: 'POST',//请求的方式
+            data: {"companyUserid": companyUserid, "email": email, "code": code},//请求的数据
+            dataType: 'json',//设置返回的数据类型
+            success: function (backdata) {//请求成功后返回的数据会封装在回调函数的第一个参数中
+                //通过backdata来获取所需要的数据
+                var success = backdata.success;
+                if (success == true) {
+                    $("#bindemail").hide();
+                    alert("You have successfully submitted the vac cloud account registration, please check the email to activate your account.");
+                } else {
+                    $("#bindemail").hide();
+                    alert(backdata.msg);
+                }
+            },
+            error: function () {//响应不成功时返回的函数
+                alert("Failed to bind mailbox ,Please try again later!!!");
+            }
+        })
+    }
+
+    function submitCode() {
+        var code = getQueryString("code");
+        $.ajax({
+            async: true,
+            url: "/company/mini/getuser",
+            type: 'GET',//请求的方式
+            data: "code=" + code + "&index=1",//请求的数据
+            success: function (backdata) {//请求成功后返回的数据会封装在回调函数的第一个参数中
+                //通过backdata来获取所需要的数据
+                var success = backdata.success;
+                if (success == true) {
+                    companyUserid = backdata.data
+                } else {
+                    $("#bind_email").hide();
+                    alert(backdata.msg);
+                }
+            },
+            error: function () {//响应不成功时返回的函数
+                alert("Failed to bind mailbox ,Please try again later!!!");
+            },
+            dataType: 'json'//设置返回的数据类型
+        })
+    }
+</script>
+
+</html>
