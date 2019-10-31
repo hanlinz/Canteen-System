@@ -386,7 +386,7 @@
             else type = 'no';
             if (type = 'yes') url = 'approve';
             else url = 'reject';
-            mui.confirm(`Sure to ${url} this request?`, 'Tip', ['Yes', 'No'], function (e) {
+            mui.confirm(`${url}`, 'Tip', ['Yes', 'No'], function (e) {
                 if(e.index == 1) return false;
                 $.ajax({
                     type: 'GET',
@@ -399,7 +399,8 @@
                     success: function (res) {
                         if (res.success === true) {
                             mui.alert(res.msg, 'success', 'Yes', function () {
-                            })
+                            });
+                            window.history.go(-1);
                         }
                     },
                     error: function (res) {
