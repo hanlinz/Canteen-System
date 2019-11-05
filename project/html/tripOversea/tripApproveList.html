@@ -212,17 +212,17 @@
                     length: limit
                 },
                 success: function (res) {
-                    if (res.datas && res.datas.length) {
+                    if (res.data && res.data.length) {
                         var str = '';
                         // list = [];
                         // $('.listContainer #scroll .list-item').remove();
-                        res.datas.forEach(function (item) {
+                        res.data.forEach(function (item) {
                             list.push(item);
                             str += `<div class="list-item">
                                 <span class="fl width1">${item.requestNo}</span>
                                 <span class="fl width2">${date2str(item.createTime)}</span>
                                 <span class="fl width3">${item.requestor}</span>
-                                <span class="fl width4">${item.status}</span>
+                                <span class="fl width4">${item.statusName}</span>
                                 <span class="fl width5">
                                     <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined view">view</button>
                                 </span>
