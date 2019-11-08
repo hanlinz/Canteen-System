@@ -120,7 +120,8 @@
             padding: 5px 15px;
             height: 90px;
         }
-        .container .mui-input-group.noAfter::after{
+
+        .container .mui-input-group.noAfter::after {
             display: none;
         }
     </style>
@@ -340,11 +341,11 @@
             send(data, $(this).attr('id'));
         })
 
-        
 
-        $('.back-btn').on('click', function(){
+        $('.back-btn').on('click', function () {
             window.history.go(-1);
         })
+
         function send(data, type) {
             var url = baseURL + '/canteen/application/saveTemp?method=post&userid=' + userid
             if (type == 'submit') url = baseURL + '/canteen/application/save?method=post&userid=' + userid
@@ -382,32 +383,40 @@
             var type = 'yes';
             var url = '';
             var $this = $(this);
-            if ($this.attr('id').indexOf('approve') > -1) type = 'yes';
-            else type = 'no';
-            if (type = 'yes') url = 'approve';
-            else url = 'reject';
-            mui.confirm(`${url}`, 'Tip', ['Yes', 'No'], function (e) {
-                if(e.index == 1) return false;
-                $.ajax({
-                    type: 'GET',
-                    timeout: 600000,
-                    url: baseURL + '/canteen/application/' + url,
-                    data: {
-                        userid: userid,
-                        id: id
-                    },
-                    success: function (res) {
-                        if (res.success === true) {
-                            mui.alert(res.msg, 'success', 'Yes', function () {
-                            });
+            if ($this.attr('id').indexOf('approve') > -1) {
+                type = 'yes';
+            } else {
+                type = 'no';
+            }
+            if (type == 'yes') {
+                url = 'approve';
+            } else {
+                url = 'reject';
+            }
+            mui.confirm(`Sure to ${url} this request`, 'Tip', ['Yes', 'No'], function (e) {
+                if (e.index == 0) {
+                    $.ajax({
+                        type: 'GET',
+                        timeout: 600000,
+                        url: baseURL + '/canteen/application/' + url,
+                        data: {
+                            userid: userid,
+                            id: id
+                        },
+                        success: function (res) {
+                            if (res.success === true) {
+                                mui.alert(res.msg, 'success', 'Yes', function () {
+                                });
+                                window.location.href = 'myRequest.html';
+                            }
+                        },
+                        error: function (res) {
+                            mui.alert(res.msg, 'warning', 'Yes', function () {
+                            })
                             window.history.go(-1);
                         }
-                    },
-                    error: function (res) {
-                        mui.alert(res.msg, 'success', 'Yes', function () {
-                        })
-                    }
-                })
+                    })
+                }
             })
         })
         if (window.location.search.indexOf('isView=1') > -1) {
@@ -419,10 +428,10 @@
                 $('.container .mui-input-group').addClass('noAfter');
             }
             parsingData(data);
-            if(data.viewApproved){
+            if (data.viewApproved) {
                 var qrcode = new QRCode(document.getElementById("qrcode"), {
-                    width : 100,
-                    height : 100
+                    width: 100,
+                    height: 100
                 });
                 qrcode.makeCode(data.barcode || 'no content');
                 $('.qr-text').text(data.uniqueCode).show();
