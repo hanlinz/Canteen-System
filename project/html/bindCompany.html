@@ -188,8 +188,10 @@
                     var data = backdata.values;
                     $('#email').attr("readonly", true);
                     //$("#userid").innerText = data.id;
-                    $("#ename").innerText = data.ename;
-                    $("#name").innerText = data.name;
+                    //$("#ename").innerText = data.ename;
+                    $('#ename').text(data.ename).show();
+                    $('#name').text(data.name).show();
+                    //$("#name").innerText = data.name;
                     $("#bindemail").show();
                     $(".detailuser").show();
                     $("#submitemail").hide();
