@@ -511,7 +511,7 @@
             var nationality = $.trim($('.nationality').val());
             var passport = $.trim($('.passport').val());
 
-            var etaattachment = ($('#8_file')[0].files && $('#8_file')[0].files[0]) || null;
+            var etaattachment = $('#8_file')[0].files ? $('#8_file')[0].files[0] : null;
             var dispatchletter = $('#8_file')[0].files[0];
             var agenda = $('#8_file')[0].files[0];
             var businesslicensecn = $('#8_file')[0].files[0];
