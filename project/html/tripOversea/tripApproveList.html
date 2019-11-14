@@ -63,14 +63,6 @@
             vertical-align: top;
         }
 
-        .list-item .mui-icon-checkmarkempty {
-            color: #4cd964;
-        }
-
-        .list-item .mui-icon-closeempty {
-            color: red;
-        }
-
         .list-item .mui-btn {
             height: 20px;
             line-height: 20px;
@@ -112,43 +104,43 @@
 </head>
 
 <body>
-    <header class="mui-bar mui-bar-nav mui-bar-transparent">
-        <h1 class="mui-title" style="color: #fff;">Request Business</h1>
-        <span class="back-btn" onclick="window.history.go(-1)"><i class="mui-icon mui-icon-undo"></i></span>
-    </header>
-    <div class="container">
-        <p class="top-btn-area">
-            <button type="button" class="mui-btn mui-btn-primary top-type" data-id="my">mine</button>
-            <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined top-type" data-id="listneedapprove">
-                approve
-            </button>
-        </p>
-        <div class="mui-content" style="background-color: #fff;">
-            <div class="mui-row">
-                <div class="mui-col-sm-6 mui-col-xs-6">
-                    <input type="text" class="input search" placeholder="Search text" style="width: 100%;">
-                </div>
-                <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
-                    <button type="button" class="mui-btn mui-btn-primary searchBtn">Search</button>
-                </div>
-                <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
-                    <button type="button" class="mui-btn mui-btn-primary" onclick="opennew();">new Req</button>
-                </div>
+<header class="mui-bar mui-bar-nav mui-bar-transparent">
+    <h1 class="mui-title" style="color: #fff;">Request Business</h1>
+    <span class="back-btn" onclick="window.history.go(-1)"><i class="mui-icon mui-icon-undo"></i></span>
+</header>
+<div class="container">
+    <p class="top-btn-area">
+        <button type="button" class="mui-btn mui-btn-primary top-type" data-id="my">mine</button>
+        <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined top-type" data-id="listneedapprove">
+            approve
+        </button>
+    </p>
+    <div class="mui-content" style="background-color: #fff;">
+        <div class="mui-row">
+            <div class="mui-col-sm-6 mui-col-xs-6">
+                <input type="text" class="input search" placeholder="Search text" style="width: 100%;">
             </div>
-        </div>
-        <p class="table-header">
-            <span class="fl width1">Request No</span>
-            <span class="fl width2">RequestTime</span>
-            <span class="fl width3">Requestor</span>
-            <span class="fl width4">Status</span>
-            <span class="fl width5"></span>
-        </p>
-        <div class="listContainer">
-            <div class="mui-scroll-wrapper">
-                <div class="mui-scroll" id="scroll"></div>
+            <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
+                <button type="button" class="mui-btn mui-btn-primary searchBtn">Search</button>
+            </div>
+            <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center;">
+                <button type="button" class="mui-btn mui-btn-primary" onclick="opennew();">New Req</button>
             </div>
         </div>
     </div>
+    <p class="table-header">
+        <span class="fl width1">Request No</span>
+        <span class="fl width2">RequestTime</span>
+        <span class="fl width3">Requestor</span>
+        <span class="fl width4">Status</span>
+        <span class="fl width5"></span>
+    </p>
+    <div class="listContainer">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll" id="scroll"></div>
+        </div>
+    </div>
+</div>
 </body>
 <script src="../../js/mui/js/mui.min.js"></script>
 <script src="../../js/jquery.min.js"></script>
@@ -181,15 +173,6 @@
         // mui('.mui-scroll-wrapper').scroll({
         //     deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
         // });
-        mui('.list-item').on('click', '.mui-icon-checkmarkempty', function () {
-            mui.confirm('Sure to Approve?', 'Tips', ['Yes', 'No'], function (obj) {
-                console.log(obj)
-            })
-        }).on('click', '.mui-icon-closeempty', function () {
-            mui.confirm('Sure to Reject?', 'Tips', ['Yes', 'No'], function (obj) {
-                console.log(obj)
-            })
-        })
 
         function date2str(date) {
             if (!date) return '';
@@ -220,7 +203,7 @@
                             list.push(item);
                             str += `<div class="list-item">
                                 <span class="fl width1">${item.requestNo}</span>
-                                <span class="fl width2">${date2str(item.createTime)}</span>
+                                <span class="fl width2">${date2str(item.createtime)}</span>
                                 <span class="fl width3">${item.requestor}</span>
                                 <span class="fl width4">${item.statusName}</span>
                                 <span class="fl width5">
@@ -243,9 +226,9 @@
         $('.listContainer #scroll').on('click', '.view', function () {
             var index = $(this).parents('.list-item').index();
             var data_id = $('.top-btn-area .top-type').not('.mui-btn-outlined').attr('data-id');
-            if (data_id == "listApproved") list[index].viewApproved = true;
-            sessionStorage.setItem('csdata', JSON.stringify(list[index]));
-            window.location.href = './newRequest.html?isView=1';
+            if (data_id == "listneedapprove") list[index].viewApproved = true;
+            sessionStorage.setItem('tripdata', JSON.stringify(list[index]));
+            window.location.href = './tripRequest.html?isView=1';
         });
         $('.searchBtn').on('click', function () {
             start = 0;
@@ -280,10 +263,28 @@
             // }
             window.location.replace(window.location.origin + window.location.pathname + '?type=' + $(this).attr('data-id'));
         })
+        getUser();
+
+        function getUser() {
+            $.ajax({
+                type: 'GET',
+                timeout: 600000,
+                url: baseURL + '/user/get',
+                data: {
+                    _dc: Date.now(),
+                    userid: userid
+                },
+                success: function (res) {
+                    if (res.success) {
+                        sessionStorage.setItem('tripuser', res.obj);
+                    }
+                }
+            })
+        }
     })
 
     function opennew() {
-        window.location.href = 'newRequest.html';
+        window.location.href = 'tripRequest.html';
     }
 </script>
 
