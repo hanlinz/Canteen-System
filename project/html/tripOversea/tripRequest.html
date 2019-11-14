@@ -139,173 +139,240 @@
         .step9 {
             display: none;
         }
+
+        .modal-container {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, .3);
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+        }
+
+        .reject-dialog {
+            width: 80%;
+            margin-left: 10%;
+            height: auto;
+            padding: 20px 0px 20px 20px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        .reject-dialog-title {
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin-right: 20px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .reject-dialog-bottom {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            padding-right: 20px;
+            padding-top: 20px;
+        }
     </style>
 </head>
 
 <body>
-<header class="mui-bar mui-bar-nav mui-bar-transparent">
-    <h1 class="mui-title" style="color: #fff;">Canteen System</h1>
-    <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
-</header>
-<div class="container">
-    <form class="mui-input-group main-form">
-        <div class="mui-input-row">
-            <label>Gender</label>
-            <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
-                <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
-                    <label>Trip</label>
-                    <input name="type" class="type" data-val="2" type="radio" checked="checked">
-                </div>
-                <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
-                    <label>Traning</label>
-                    <input name="type" class="type" data-val="3" type="radio">
-                </div>
-            </div>
-        </div>
-        <div class="mui-input-row">
-            <label>Name</label>
-            <input type="text" class="name" disabled>
-        </div>
-        <div class="mui-input-row">
-            <label>UserID</label>
-            <input type="text" class="userid" disabled>
-        </div>
-        <div class="mui-input-row">
-            <label>Gender</label>
-            <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
-                <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
-                    <label>male</label>
-                    <input name="gender" class="gender" data-val="male" type="radio" checked="checked">
-                </div>
-                <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
-                    <label>female</label>
-                    <input name="gender" class="gender" data-val="female" type="radio">
+    <header class="mui-bar mui-bar-nav mui-bar-transparent">
+        <h1 class="mui-title" style="color: #fff;">Canteen System</h1>
+        <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
+    </header>
+    <div class="container">
+        <form class="mui-input-group main-form">
+            <div class="mui-input-row">
+                <label>Gender</label>
+                <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
+                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                        <label>Trip</label>
+                        <input name="type" class="type" data-val="2" type="radio" checked="checked">
+                    </div>
+                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                        <label>Traning</label>
+                        <input name="type" class="type" data-val="3" type="radio">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="mui-input-row">
-            <label>Department</label>
-            <input type="text" class="department" placeholder="Department">
-        </div>
-        <div class="mui-input-row">
-            <label>Department(CN)</label>
-            <input type="text" class="departmentcn" placeholder="Department(CN)">
-        </div>
-        <div class="mui-input-row">
-            <label>Position</label>
-            <input type="text" class="position" placeholder="Position">
-        </div>
-        <div class="mui-input-row">
-            <label>Position(CN)</label>
-            <input type="text" class="positioncn" placeholder="Position(CN)">
-        </div>
-        <div class="mui-input-row singleTime">
-            <label>Onboard Time</label>
-            <input type="text" class="onboardtime oneDay" placeholder="Onboard Time">
-            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-        </div>
-        <div class="mui-input-row textarea-row">
-            <label>Comments</label>
-            <textarea class="comments" placeholder="Comments....."></textarea>
-        </div>
-        <div class="mui-input-row">
-            <label>Purpose</label>
-            <input type="text" class="purpose" placeholder="Purpose">
-        </div>
-        <div class="mui-input-row">
-            <label>Destination</label>
-            <input type="text" class="destination" placeholder="Destination">
-        </div>
-        <div class="mui-input-row singleTime">
-            <label>Start Time</label>
-            <input type="text" class="starttime oneDay" placeholder="Start Time">
-            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-        </div>
-        <div class="mui-input-row singleTime">
-            <label>End Time</label>
-            <input type="text" class="endtime oneDay" placeholder="End Time">
-            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-        </div>
-        <div class="mui-input-row singleTime">
-            <label>Date of Birth</label>
-            <input type="text" class="dateofbirth oneDay" placeholder="Date of Birth">
-            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-        </div>
-        <div class="mui-input-row">
-            <label>Nationality</label>
-            <input type="text" class="nationality" placeholder="Nationality">
-        </div>
-        <div class="mui-input-row">
-            <label>Passport No</label>
-            <input type="text" class="passportno" placeholder="Passport No">
-        </div>
-        <div class="mui-input-row">
-            <label>ETA Attachment</label>
-            <input type="file" class="etaattachment" placeholder="Passport No">
-        </div>
-        <div class="mui-input-row">
-            <label>Dispatch Letter</label>
-            <input type="file" class="dispatchletter" placeholder="Passport No">
-        </div>
-        <div class="mui-input-row">
-            <label>Agenda</label>
-            <input type="file" class="agenda" placeholder="Passport No">
-        </div>
-        <div class="mui-input-row">
-            <label>Business License(CN)</label>
-            <input type="file" class="licensecn" placeholder="Passport No">
-        </div>
-        <div class="mui-input-row">
-            <label>Incoming Conformation(EN)</label>
-            <input type="file" class="incomingconformationen" placeholder="Passport No">
-        </div>
-        <div class="mui-input-row">
-            <label>Incoming Conformation(CN)</label>
-            <input type="file" class="incomingconformationcn" placeholder="Passport No">
-        </div>
-        <div class="mui-input-row">
-            <label>Employee Status Confirmation(EN)</label>
-            <input type="file" class="employeestatusen" placeholder="Passport No">
-        </div>
-        <div class="mui-input-row">
-            <label>Employee Status Confirmation(CN)</label>
-            <input type="file" class="employeestatuscn" placeholder="Passport No">
-        </div>
-        <div class="mui-input-row step9">
-            <label>Employee Status Confirmation(CN)</label>
-            <input type="file" class="agreement step9" placeholder="agreement">
-        </div>
-        <div class="mui-input-row step9">
-            <label>Employee Status Confirmation(CN)</label>
-            <input type="file" class="nominationform step9" placeholder="nominationform">
-        </div>
-        <div class="mui-input-row step9">
-            <label>Employee Status Confirmation(CN)</label>
-            <input type="file" class="costestimation step9" placeholder="costestimation">
-        </div>
-    </form>
-    <div class="mui-row bottom">
-        <!-- <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;">
+            <div class="mui-input-row">
+                <label>Name</label>
+                <input type="text" class="name" disabled>
+            </div>
+            <div class="mui-input-row">
+                <label>UserID</label>
+                <input type="text" class="userid" disabled>
+            </div>
+            <div class="mui-input-row">
+                <label>Gender</label>
+                <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
+                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                        <label>male</label>
+                        <input name="gender" class="gender" data-val="male" type="radio" checked="checked">
+                    </div>
+                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                        <label>female</label>
+                        <input name="gender" class="gender" data-val="female" type="radio">
+                    </div>
+                </div>
+            </div>
+            <div class="mui-input-row">
+                <label>Department</label>
+                <input type="text" class="department" placeholder="Department">
+            </div>
+            <div class="mui-input-row">
+                <label>Department(CN)</label>
+                <input type="text" class="departmentcn" placeholder="Department(CN)">
+            </div>
+            <div class="mui-input-row">
+                <label>Position</label>
+                <input type="text" class="position" placeholder="Position">
+            </div>
+            <div class="mui-input-row">
+                <label>Position(CN)</label>
+                <input type="text" class="positioncn" placeholder="Position(CN)">
+            </div>
+            <div class="mui-input-row singleTime">
+                <label>Onboard Time</label>
+                <input type="text" class="onboardtime oneDay" placeholder="Onboard Time">
+                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+            </div>
+            <div class="mui-input-row textarea-row">
+                <label>Comments</label>
+                <textarea class="comments" placeholder="Comments....."></textarea>
+            </div>
+            <div class="mui-input-row">
+                <label>Purpose</label>
+                <input type="text" class="purpose" placeholder="Purpose">
+            </div>
+            <div class="mui-input-row">
+                <label>Destination</label>
+                <input type="text" class="destination" placeholder="Destination">
+            </div>
+            <div class="mui-input-row singleTime">
+                <label>Start Time</label>
+                <input type="text" class="starttime oneDay" placeholder="Start Time">
+                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+            </div>
+            <div class="mui-input-row singleTime">
+                <label>End Time</label>
+                <input type="text" class="endtime oneDay" placeholder="End Time">
+                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+            </div>
+            <div class="mui-input-row singleTime">
+                <label>Date of Birth</label>
+                <input type="text" class="dateofbirth oneDay" placeholder="Date of Birth">
+                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+            </div>
+            <div class="mui-input-row">
+                <label>Nationality</label>
+                <input type="text" class="nationality" placeholder="Nationality">
+            </div>
+            <div class="mui-input-row">
+                <label>Passport No</label>
+                <input type="text" class="passportno" placeholder="Passport No">
+            </div>
+            <div class="mui-input-row">
+                <label>ETA Attachment</label>
+                <input type="file" class="etaattachment" placeholder="Passport No">
+            </div>
+            <div class="mui-input-row">
+                <label>Dispatch Letter</label>
+                <input type="file" class="dispatchletter" placeholder="Passport No">
+            </div>
+            <div class="mui-input-row">
+                <label>Agenda</label>
+                <input type="file" class="agenda" placeholder="Passport No">
+            </div>
+            <div class="mui-input-row">
+                <label>Business License(CN)</label>
+                <input type="file" class="licensecn" placeholder="Passport No">
+            </div>
+            <div class="mui-input-row">
+                <label>Incoming Conformation(EN)</label>
+                <input type="file" class="incomingconformationen" placeholder="Passport No">
+            </div>
+            <div class="mui-input-row">
+                <label>Incoming Conformation(CN)</label>
+                <input type="file" class="incomingconformationcn" placeholder="Passport No">
+            </div>
+            <div class="mui-input-row">
+                <label>Employee Status Confirmation(EN)</label>
+                <input type="file" class="employeestatusen" placeholder="Passport No">
+            </div>
+            <div class="mui-input-row">
+                <label>Employee Status Confirmation(CN)</label>
+                <input type="file" class="employeestatuscn" placeholder="Passport No">
+            </div>
+            <div class="mui-input-row step9">
+                <label>Employee Status Confirmation(CN)</label>
+                <input type="file" class="agreement step9" placeholder="agreement">
+            </div>
+            <div class="mui-input-row step9">
+                <label>Employee Status Confirmation(CN)</label>
+                <input type="file" class="nominationform step9" placeholder="nominationform">
+            </div>
+            <div class="mui-input-row step9">
+                <label>Employee Status Confirmation(CN)</label>
+                <input type="file" class="costestimation step9" placeholder="costestimation">
+            </div>
+        </form>
+        <div class="mui-row bottom">
+            <!-- <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;">
             <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
         </div>
         <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;">
             <button type="button" class="mui-btn" style="width: 90%;" id="submit">Submit</button>
         </div> -->
-        <div class="mui-col-sm-12 mui-col-xs-12 request" style="text-align: center;">
-            <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
-        </div>
-        <div class="mui-col-sm-6 mui-col-xs-6 approve hrapprove" style="text-align: center;display: none;">
-            <button type="button" class="mui-btn mui-btn-primary" id="approve" style="width: 90%;">approve</button>
-        </div>
-        <div class="mui-col-sm-6 mui-col-xs-6 hrapprove" style="text-align: center;display: none;">
-            <button type="button" class="mui-btn mui-btn-primary" id="hrreject" style="width: 90%;">reject</button>
-        </div>
-        <div class="mui-col-sm-6 mui-col-xs-6 approve" style="text-align: center;display: none;">
-            <button type="button" class="mui-btn" style="width: 90%;" id="reject">reject</button>
+            <div class="mui-col-sm-12 mui-col-xs-12 request" style="text-align: center;">
+                <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
+            </div>
+            <div class="mui-col-sm-6 mui-col-xs-6 approve hrapprove" style="text-align: center;display: none;">
+                <button type="button" class="mui-btn mui-btn-primary" id="approve" style="width: 90%;">approve</button>
+            </div>
+            <div class="mui-col-sm-6 mui-col-xs-6 hrapprove" style="text-align: center;display: none;">
+                <button type="button" class="mui-btn mui-btn-primary" id="hrreject" style="width: 90%;">reject</button>
+            </div>
+            <div class="mui-col-sm-6 mui-col-xs-6 approve" style="text-align: center;display: none;">
+                <button type="button" class="mui-btn" style="width: 90%;" id="reject">reject</button>
+            </div>
         </div>
     </div>
-
-</div>
+    <div class="modal-container">
+        <div class="reject-dialog">
+            <div class="reject-dialog-title">
+                标题
+            </div>
+            <div class="mui-input-row mui-checkbox">
+                <label>item1</label>
+                <input name="checkbox1" value="1" type="checkbox" checked>
+            </div>
+            <div class="mui-input-row mui-checkbox">
+                <label>item2</label>
+                <input name="checkbox2" value="2" type="checkbox" checked>
+            </div>
+            <div class="mui-input-row mui-checkbox">
+                <label>item3</label>
+                <input name="checkbox3" value="3" type="checkbox" checked>
+            </div>
+            <div class="mui-input-row mui-checkbox">
+                <label>item4</label>
+                <input name="checkbox4" value="4" type="checkbox" checked>
+            </div>
+            <div class="mui-input-row mui-checkbox">
+                <label>checkbox示例</label>
+                <input name="checkbox5" value="5" type="checkbox" checked>
+            </div>
+            <div class="reject-dialog-bottom">
+                <button type="button" class="mui-btn mui-btn-primary" style="width: 90%;">确认</button>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="../../js/mui/js/mui.min.js"></script>
 <script src="../../js/mui/js/mui.picker.min.js"></script>
@@ -335,7 +402,7 @@
                 //普通审批按钮展示,要根据
                 $('.bottom .approve').show();
                 //TODO 判断是否是hr审批，因为hr审批拒绝时有跳过前面审批选项操作
-                if(true){
+                if (true) {
                     $('.bottom .approve').hide();
                     $('.bottom .hrapprove').show();
                 }
