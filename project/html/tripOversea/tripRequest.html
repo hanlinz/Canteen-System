@@ -177,222 +177,194 @@
             padding-right: 20px;
             padding-top: 20px;
         }
+
+        .ignorestep {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
-    <header class="mui-bar mui-bar-nav mui-bar-transparent">
-        <h1 class="mui-title" style="color: #fff;">Canteen System</h1>
-        <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
-    </header>
-    <div class="container">
-        <form class="mui-input-group main-form">
-            <div class="mui-input-row">
-                <label>Gender</label>
-                <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
-                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
-                        <label>Trip</label>
-                        <input name="type" class="type" data-val="2" type="radio" checked="checked">
-                    </div>
-                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
-                        <label>Traning</label>
-                        <input name="type" class="type" data-val="3" type="radio">
-                    </div>
+<header class="mui-bar mui-bar-nav mui-bar-transparent">
+    <h1 class="mui-title" style="color: #fff;">Canteen System</h1>
+    <span class="back-btn"><i class="mui-icon mui-icon-undo"></i></span>
+</header>
+<div class="container">
+    <form class="mui-input-group main-form">
+        <div class="mui-input-row">
+            <label>Gender</label>
+            <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
+                <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                    <label>Trip</label>
+                    <input name="type" class="type" data-val="2" type="radio" checked="checked">
+                </div>
+                <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                    <label>Traning</label>
+                    <input name="type" class="type" data-val="3" type="radio">
                 </div>
             </div>
-            <div class="mui-input-row">
-                <label>Name</label>
-                <input type="text" class="name" disabled>
-            </div>
-            <div class="mui-input-row">
-                <label>UserID</label>
-                <input type="text" class="userid" disabled>
-            </div>
-            <div class="mui-input-row">
-                <label>Gender</label>
-                <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
-                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
-                        <label>male</label>
-                        <input name="gender" class="gender" data-val="male" type="radio" checked="checked">
-                    </div>
-                    <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
-                        <label>female</label>
-                        <input name="gender" class="gender" data-val="female" type="radio">
-                    </div>
+        </div>
+        <div class="mui-input-row">
+            <label>Name</label>
+            <input type="text" class="name" disabled>
+        </div>
+        <div class="mui-input-row">
+            <label>UserID</label>
+            <input type="text" class="userid" disabled>
+        </div>
+        <div class="mui-input-row">
+            <label>Gender</label>
+            <div style="display: inline-block;height: 100%;width: 65%;text-align: right;">
+                <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                    <label>male</label>
+                    <input name="gender" class="gender" data-val="male" type="radio" checked="checked">
+                </div>
+                <div class="mui-input-row mui-radio mui-left" style="display: inline-block;">
+                    <label>female</label>
+                    <input name="gender" class="gender" data-val="female" type="radio">
                 </div>
             </div>
-            <div class="mui-input-row">
-                <label>Department</label>
-                <input type="text" class="department" placeholder="Department">
-            </div>
-            <div class="mui-input-row">
-                <label>Department(CN)</label>
-                <input type="text" class="departmentcn" placeholder="Department(CN)">
-            </div>
-            <div class="mui-input-row">
-                <label>Position</label>
-                <input type="text" class="position" placeholder="Position">
-            </div>
-            <div class="mui-input-row">
-                <label>Position(CN)</label>
-                <input type="text" class="positioncn" placeholder="Position(CN)">
-            </div>
-            <div class="mui-input-row singleTime">
-                <label>Onboard Time</label>
-                <input type="text" class="onboardtime oneDay" placeholder="Onboard Time">
-                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-            </div>
-            <div class="mui-input-row textarea-row">
-                <label>Comments</label>
-                <textarea class="comments" placeholder="Comments....."></textarea>
-            </div>
-            <div class="mui-input-row">
-                <label>Purpose</label>
-                <input type="text" class="purpose" placeholder="Purpose">
-            </div>
-            <div class="mui-input-row">
-                <label>Destination</label>
-                <input type="text" class="destination" placeholder="Destination">
-            </div>
-            <div class="mui-input-row singleTime">
-                <label>Start Time</label>
-                <input type="text" class="starttime oneDay" placeholder="Start Time">
-                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-            </div>
-            <div class="mui-input-row singleTime">
-                <label>End Time</label>
-                <input type="text" class="endtime oneDay" placeholder="End Time">
-                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-            </div>
-            <div class="mui-input-row singleTime">
-                <label>Date of Birth</label>
-                <input type="text" class="dateofbirth oneDay" placeholder="Date of Birth">
-                <span class="mui-icon mui-icon-arrowright selectIcon"></span>
-            </div>
-            <div class="mui-input-row">
-                <label>Nationality</label>
-                <input type="text" class="nationality" placeholder="Nationality">
-            </div>
-            <div class="mui-input-row">
-                <label>Passport No</label>
-                <input type="text" class="passportno" placeholder="Passport No">
-            </div>
-            <div class="mui-input-row">
-                <label>ETA Attachment</label>
-                <input type="file" class="etaattachment" placeholder="Passport No">
-            </div>
-            <div class="mui-input-row">
-                <label>Dispatch Letter</label>
-                <input type="file" class="dispatchletter" placeholder="Passport No">
-            </div>
-            <div class="mui-input-row">
-                <label>Agenda</label>
-                <input type="file" class="agenda" placeholder="Passport No">
-            </div>
-            <div class="mui-input-row">
-                <label>Business License(CN)</label>
-                <input type="file" class="licensecn" placeholder="Passport No">
-            </div>
-            <div class="mui-input-row">
-                <label>Incoming Conformation(EN)</label>
-                <input type="file" class="incomingconformationen" placeholder="Passport No">
-            </div>
-            <div class="mui-input-row">
-                <label>Incoming Conformation(CN)</label>
-                <input type="file" class="incomingconformationcn" placeholder="Passport No">
-            </div>
-            <div class="mui-input-row">
-                <label>Employee Status Confirmation(EN)</label>
-                <input type="file" class="employeestatusen" placeholder="Passport No">
-            </div>
-            <div class="mui-input-row">
-                <label>Employee Status Confirmation(CN)</label>
-                <input type="file" class="employeestatuscn" placeholder="Passport No">
-            </div>
-            <div class="mui-input-row step9">
-                <label>Employee Status Confirmation(CN)</label>
-                <input type="file" class="agreement step9" placeholder="agreement">
-            </div>
-            <div class="mui-input-row step9">
-                <label>Employee Status Confirmation(CN)</label>
-                <input type="file" class="nominationform step9" placeholder="nominationform">
-            </div>
-            <div class="mui-input-row step9">
-                <label>Employee Status Confirmation(CN)</label>
-                <input type="file" class="costestimation step9" placeholder="costestimation">
-            </div>
-        </form>
-        <div class="mui-row bottom">
-            <!-- <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;">
+        </div>
+        <div class="mui-input-row">
+            <label>Department</label>
+            <input type="text" class="department" placeholder="Department">
+        </div>
+        <div class="mui-input-row">
+            <label>Department(CN)</label>
+            <input type="text" class="departmentcn" placeholder="Department(CN)">
+        </div>
+        <div class="mui-input-row">
+            <label>Position</label>
+            <input type="text" class="position" placeholder="Position">
+        </div>
+        <div class="mui-input-row">
+            <label>Position(CN)</label>
+            <input type="text" class="positioncn" placeholder="Position(CN)">
+        </div>
+        <div class="mui-input-row singleTime">
+            <label>Onboard Time</label>
+            <input type="text" class="onboardtime oneDay" placeholder="Onboard Time">
+            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+        </div>
+        <div class="mui-input-row textarea-row">
+            <label>Comments</label>
+            <textarea class="comments" placeholder="Comments....."></textarea>
+        </div>
+        <div class="mui-input-row">
+            <label>Purpose</label>
+            <input type="text" class="purpose" placeholder="Purpose">
+        </div>
+        <div class="mui-input-row">
+            <label>Destination</label>
+            <input type="text" class="destination" placeholder="Destination">
+        </div>
+        <div class="mui-input-row singleTime">
+            <label>Start Time</label>
+            <input type="text" class="starttime oneDay" placeholder="Start Time">
+            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+        </div>
+        <div class="mui-input-row singleTime">
+            <label>End Time</label>
+            <input type="text" class="endtime oneDay" placeholder="End Time">
+            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+        </div>
+        <div class="mui-input-row singleTime">
+            <label>Date of Birth</label>
+            <input type="text" class="dateofbirth oneDay" placeholder="Date of Birth">
+            <span class="mui-icon mui-icon-arrowright selectIcon"></span>
+        </div>
+        <div class="mui-input-row">
+            <label>Nationality</label>
+            <input type="text" class="nationality" placeholder="Nationality">
+        </div>
+        <div class="mui-input-row">
+            <label>Passport No</label>
+            <input type="text" class="passportno" placeholder="Passport No">
+        </div>
+        <div class="mui-input-row">
+            <label>ETA Attachment</label>
+            <input type="file" class="etaattachment" placeholder="Passport No">
+        </div>
+        <div class="mui-input-row">
+            <label>Dispatch Letter</label>
+            <input type="file" class="dispatchletter" placeholder="Passport No">
+        </div>
+        <div class="mui-input-row">
+            <label>Agenda</label>
+            <input type="file" class="agenda" placeholder="Passport No">
+        </div>
+        <div class="mui-input-row">
+            <label>Business License(CN)</label>
+            <input type="file" class="licensecn" placeholder="Passport No">
+        </div>
+        <div class="mui-input-row">
+            <label>Incoming Conformation(EN)</label>
+            <input type="file" class="incomingconformationen" placeholder="Passport No">
+        </div>
+        <div class="mui-input-row">
+            <label>Incoming Conformation(CN)</label>
+            <input type="file" class="incomingconformationcn" placeholder="Passport No">
+        </div>
+        <div class="mui-input-row">
+            <label>Employee Status Confirmation(EN)</label>
+            <input type="file" class="employeestatusen" placeholder="Passport No">
+        </div>
+        <div class="mui-input-row">
+            <label>Employee Status Confirmation(CN)</label>
+            <input type="file" class="employeestatuscn" placeholder="Passport No">
+        </div>
+        <div class="mui-input-row step9">
+            <label>Employee Status Confirmation(CN)</label>
+            <input type="file" class="agreement step9" placeholder="agreement">
+        </div>
+        <div class="mui-input-row step9">
+            <label>Employee Status Confirmation(CN)</label>
+            <input type="file" class="nominationform step9" placeholder="nominationform">
+        </div>
+        <div class="mui-input-row step9">
+            <label>Employee Status Confirmation(CN)</label>
+            <input type="file" class="costestimation step9" placeholder="costestimation">
+        </div>
+    </form>
+    <div class="mui-row bottom">
+        <!-- <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;">
+        <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
+    </div>
+    <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;">
+        <button type="button" class="mui-btn" style="width: 90%;" id="submit">Submit</button>
+    </div> -->
+        <div class="mui-col-sm-12 mui-col-xs-12 request" style="text-align: center;">
             <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
         </div>
-        <div class="mui-col-sm-6 mui-col-xs-6 request" style="text-align: center;">
-            <button type="button" class="mui-btn" style="width: 90%;" id="submit">Submit</button>
-        </div> -->
-            <div class="mui-col-sm-12 mui-col-xs-12 request" style="text-align: center;">
-                <button type="button" class="mui-btn mui-btn-primary" id="save" style="width: 90%;">Save</button>
-            </div>
-            <div class="mui-col-sm-6 mui-col-xs-6 approve hrapprove" style="text-align: center;display: none;">
-                <button type="button" class="mui-btn mui-btn-primary" id="approve" style="width: 90%;">approve</button>
-            </div>
-            <div class="mui-col-sm-6 mui-col-xs-6 hrapprove" style="text-align: center;display: none;">
-                <button type="button" class="mui-btn mui-btn-primary" id="hrreject" style="width: 90%;">reject</button>
-            </div>
-            <div class="mui-col-sm-6 mui-col-xs-6 approve" style="text-align: center;display: none;">
-                <button type="button" class="mui-btn" style="width: 90%;" id="reject">reject</button>
-            </div>
+        <div class="mui-col-sm-6 mui-col-xs-6 approve hrapprove" style="text-align: center;display: none;">
+            <button type="button" class="mui-btn mui-btn-primary" id="approve" style="width: 90%;">approve</button>
+        </div>
+        <div class="mui-col-sm-6 mui-col-xs-6 hrapprove" style="text-align: center;display: none;">
+            <button type="button" class="mui-btn mui-btn-primary" id="hrreject" style="width: 90%;">reject</button>
+        </div>
+        <div class="mui-col-sm-6 mui-col-xs-6 approve" style="text-align: center;display: none;">
+            <button type="button" class="mui-btn" style="width: 90%;" id="reject">reject</button>
         </div>
     </div>
-    <div class="modal-container">
-        <div class="reject-dialog">
-            <div class="reject-dialog-title">
-                标题
-            </div>
-            <div class="mui-input-row mui-checkbox">
-                <label>item1</label>
-                <input name="checkbox1" value="1" type="checkbox" checked>
-            </div>
-            <div class="mui-input-row mui-checkbox">
-                <label>item2</label>
-                <input name="checkbox2" value="2" type="checkbox" checked>
-            </div>
-            <div class="mui-input-row mui-checkbox">
-                <label>item3</label>
-                <input name="checkbox3" value="3" type="checkbox" checked>
-            </div>
-            <div class="mui-input-row mui-checkbox">
-                <label>item4</label>
-                <input name="checkbox4" value="4" type="checkbox" checked>
-            </div>
-            <div class="mui-input-row mui-checkbox">
-                <label>item5</label>
-                <input name="checkbox5" value="5" type="checkbox" checked>
-            </div>
-            <div class="mui-input-row mui-checkbox">
-                <label>item6</label>
-                <input name="checkbox1" value="6" type="checkbox" checked>
-            </div>
-            <div class="mui-input-row mui-checkbox">
-                <label>item7</label>
-                <input name="checkbox2" value="7" type="checkbox" checked>
-            </div>
-            <div class="mui-input-row mui-checkbox">
-                <label>item8</label>
-                <input name="checkbox3" value="8" type="checkbox" checked>
-            </div>
-            <div class="mui-input-row mui-checkbox">
-                <label>item9</label>
-                <input name="checkbox4" value="9" type="checkbox" checked>
-            </div>
-            <div class="mui-input-row mui-checkbox">
-                <label>item10</label>
-                <input name="checkbox5" value="10" type="checkbox" checked>
-            </div>
-            <div class="reject-dialog-bottom">
-                <button type="button" class="mui-btn mui-btn-primary" style="width: 90%;">确认</button>
-            </div>
+</div>
+<div class="modal-container ignorestep">
+    <div class="reject-dialog">
+        <div class="reject-dialog-title">
+            Select steps to ignore
+        </div>
+        <!--<div class="mui-input-row mui-checkbox">
+            <label>item1</label>
+            <input name="ignorestep" value="1" type="checkbox" checked>
+        </div>
+        <div class="mui-input-row mui-checkbox">
+            <label>item2</label>
+            <input name="ignorestep" value="2" type="checkbox" checked>
+        </div>-->
+        <div class="reject-dialog-bottom">
+            <button id="hrconfirmreject" type="button" class="mui-btn mui-btn-primary" style="width: 90%;">确认</button>
         </div>
     </div>
+</div>
 </body>
 <script src="../../js/mui/js/mui.min.js"></script>
 <script src="../../js/mui/js/mui.picker.min.js"></script>
@@ -456,6 +428,7 @@
                 type: 'GET',
                 timeout: 600000,
                 url: baseURL + '/requests/get',
+                async: true,
                 data: {
                     _dc: Date.now(),
                     userid: userid,
@@ -511,14 +484,14 @@
             var nationality = $.trim($('.nationality').val());
             var passport = $.trim($('.passport').val());
 
-            var etaattachment = $('#8_file')[0].files ? $('#8_file')[0].files[0] : null;
-            var dispatchletter = $('#8_file')[0].files[0];
-            var agenda = $('#8_file')[0].files[0];
-            var businesslicensecn = $('#8_file')[0].files[0];
-            var incomingcn = $('#8_file')[0].files[0];
-            var incomingen = $('#8_file')[0].files[0];
-            var employeecn = $('#8_file')[0].files[0];
-            var employeeen = $('#8_file')[0].files[0];
+            var etaattachment = $('.etaattachment')[0].files ? $('.etaattachment')[0].files[0] : null;
+            var dispatchletter = $('.dispatchletter')[0].files ? $('.dispatchletter')[0].files[0] : null;
+            var agenda = $('.agenda')[0].files ? $('.agenda')[0].files[0] : null;
+            var businesslicensecn = $('.licensecn')[0].files ? $('.licensecn')[0].files[0] : null;
+            var incomingcn = $('.incomingconformationen')[0].files ? $('.incomingconformationen')[0].files[0] : null;
+            var incomingen = $('.incomingconformationcn')[0].files ? $('.incomingconformationcn')[0].files[0] : null;
+            var employeecn = $('.employeestatusen')[0].files ? $('.employeestatusen')[0].files[0] : null;
+            var employeeen = $('.employeestatuscn')[0].files ? $('.employeestatuscn')[0].files[0] : null;
 
             var data = {
                 userid: userid,
@@ -549,6 +522,7 @@
                 employeecn: employeecn,
                 employeeen: employeeen,
             }
+            //TODO 那些数据项需要必填校验
             if (!name) {
                 mui.alert('Name is required', 'warning', 'Yes');
                 return false;
@@ -597,9 +571,9 @@
             };
             //TODO 第九步审批又多出来三个文件筐要填
             if (true) {
-                var agreement = $('#8_file')[0].files[0];
-                var nominationform = $('#8_file')[0].files[0];
-                var costestimation = $('#8_file')[0].files[0];
+                var agreement = $('.agreement')[0].files ? $('.agreement')[0].files[0] : null;
+                var nominationform = $('.nominationform')[0].files ? $('.nominationform')[0].files[0] : null;
+                var costestimation = $('.costestimation')[0].files ? $('.costestimation')[0].files[0] : null;
                 data.agreement = agreement;
                 data.nominationform = nominationform;
                 data.costestimation = costestimation;
@@ -618,6 +592,23 @@
             sendData(url, data);
         })
         /*HR驳回处理事件*/
+        $('#hrconfirmreject').on('click', function () {
+            //路径:/requests/oversea/reject
+            var url = "/requests/oversea/reject";
+            var arr = [];
+            $('.ignore-step[name="ignorestep"]:checked').each(function () {
+                arr.push($(this).val());
+            })
+            //TODO 封装跳过步骤的值，应该是个数组
+            var rejectSteps = "";
+            var data = {
+                userid: userid,
+                id: id,
+                rejectSteps: rejectSteps,
+            };
+            sendData(url, data);
+        })
+        /*HR驳回前的获取跳过步骤处理事件*/
         $('#hrreject').on('click', function () {
             /* 驳回时需要获取需要跳过的步骤，路径/requests/oversea/getignoresteps
              然后调用驳回路径，将跳过的步骤也带上
@@ -632,15 +623,27 @@
                 timeout: 600000,
                 url: baseURL + url,
                 data: data,
+                async: true,
                 success: function (res) {
                     if (res.success === true) {
                         var steps = res.obj;
+                        var str = '';
+                        steps.forEach(function (item) {
+                            str += `<div class="mui-input-row mui-checkbox">
+                                <label>${item.name}</label>
+                                <input name="ignorestep" value=${item.value} type="checkbox">
+                            </div>`;
+                            $(str).insertBefore('.reject-dialog-bottom');
+                            $(".ignorestep").show();
+                        })
                     } else {
                         mui.alert(res.msg, 'fail', 'Yes');
+                        $(".ignorestep").show();
                     }
                 },
                 error: function (res) {
                     mui.alert('failed to get ignore steps', 'fail', 'Yes');
+                    $(".ignorestep").show();
                 }
             })
         })
@@ -658,6 +661,7 @@
                 contentType: false,
                 processData: false,
                 data: formdata,
+                async: true,
                 success: function (res) {
                     //console.log(res)
                     mui.alert('save success', 'success', 'Yes');
@@ -671,11 +675,16 @@
         }
 
         function sendData(url, data) {
+            var formdata = new FormData();
+            for (var key in data) {
+                formdata.append(key, data[key]);
+            }
             $.ajax({
                 type: 'POST',
                 timeout: 600000,
                 url: baseURL + url,
-                data: data,
+                data: formdata,
+                async: true,
                 success: function (res) {
                     //console.log(res)
                     mui.alert('Successful treatment', 'success', 'Yes');
