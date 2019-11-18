@@ -100,6 +100,9 @@
             padding: 3px 6px;
             margin-right: 6px;
         }
+        .managerbutton{
+            display: none;
+        }
     </style>
 </head>
 
@@ -109,7 +112,7 @@
     <span class="back-btn" onclick="window.history.go(-1)"><i class="mui-icon mui-icon-undo"></i></span>
 </header>
 <div class="container">
-    <p class="top-btn-area">
+    <p class="top-btn-area managerbutton">
         <button type="button" class="mui-btn mui-btn-primary top-type" data-id="my">mine</button>
         <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined top-type" data-id="listneedapprove">
             approve
@@ -276,6 +279,10 @@
                 },
                 success: function (res) {
                     if (res.success) {
+                        //TODO 判断是否是管理员，需要进行审批操作
+                        if(true){
+                            $(".managerbutton").show();
+                        }
                         sessionStorage.setItem('tripuser', res.obj);
                     }
                 }

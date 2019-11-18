@@ -595,12 +595,15 @@
         $('#hrconfirmreject').on('click', function () {
             //路径:/requests/oversea/reject
             var url = "/requests/oversea/reject";
-            var arr = [];
-            $('.ignore-step[name="ignorestep"]:checked').each(function () {
-                arr.push($(this).val());
-            })
-            //TODO 封装跳过步骤的值，应该是个数组
+            //var arr = [];
+            // 封装跳过步骤的值，逗号隔开
             var rejectSteps = "";
+            $('.ignore-step[name="ignorestep"]:checked').each(function () {
+                rejectSteps = rejectSteps + $(this).val() + ",";
+                //arr.push($(this).val());
+            })
+            //去掉最后面多余的逗号
+            rejectSteps = rejectSteps.substring(0, rejectSteps.length - 1);
             var data = {
                 userid: userid,
                 id: id,

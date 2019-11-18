@@ -405,10 +405,11 @@
                         },
                         success: function (res) {
                             if (res.success === true) {
-                                mui.alert(res.msg, 'success', 'Yes', function () {
-                                });
-                                window.location.href = 'myRequest.html';
+                                mui.alert(" Request be" + url, 'success', 'Yes');
+                            } else {
+                                mui.alert(res.msg, 'fail', 'Yes');
                             }
+                            window.location.href = 'myRequest.html';
                         },
                         error: function (res) {
                             mui.alert(res.msg, 'warning', 'Yes', function () {
