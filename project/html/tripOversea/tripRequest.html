@@ -725,12 +725,14 @@
             $('.passportno').val(data.passport);
             //TODO 根据用户角色和请求状态判断是不是第9步审批，是需要显示三个文件需要提交
             var flag = false;
+            // 审批时不能编辑
+            // $('input').attr("readonly", true);
+            $('textarea').attr("readonly", true);
+            $("input").attr("disabled", "true");
             if (flag) {
                 $(".step9").show();
+                $(".step9").attr("disabled", false);
             }
-            // 审批时不能编辑
-            $('input').attr("readonly", true);
-            $('textarea').attr("readonly", true);
         }
     })
 
