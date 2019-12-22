@@ -153,8 +153,8 @@
             <span class="mui-icon mui-icon-arrowright selectIcon"></span>
         </div>
         <div class="mui-input-row">
-            <label>Quality</label>
-            <input type="number" class="qty" placeholder="Quality ( num only )">
+            <label>Quantity</label>
+            <input type="number" class="qty" placeholder="Quantity ( num only )">
         </div>
         <div class="mui-input-row textarea-row">
             <label>Comments</label>
@@ -358,8 +358,9 @@
                 success: function (res) {
                     if (res.success === true) {
                         mui.alert(res.msg, 'success', 'Yes', function () {
+							window.location.href = 'myRequest.html';
                         });
-                        window.location.href = 'myRequest.html';
+                        //window.location.href = 'myRequest.html';
                     } else {
                         mui.alert(res.msg, 'warning', 'Yes', function () {
                             //
